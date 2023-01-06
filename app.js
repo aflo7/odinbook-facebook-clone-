@@ -8,12 +8,9 @@ var path = require("path")
 var session = require("express-session")
 var bodyParser = require("body-parser")
 var { User, Post, Comment } = require("./models/schema.js")
-var {
-  isAuthenticated,
-  getUsersNotFollowing
-} = require("./scripts/customMiddleware.js")
 var passport = require("passport")
 var LocalStrategy = require("passport-local").Strategy
+var flash = require('express-flash')
 
 require("dotenv").config()
 
@@ -40,6 +37,12 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }))
 app.use(bodyParser.json())
+app.use(flash());
+app.use(function(req, res, next) {
+  if (!req.user)
+      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  next();
+});
 
 passport.use(
   new LocalStrategy((username, password, done) => {

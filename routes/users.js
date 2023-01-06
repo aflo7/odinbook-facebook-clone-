@@ -24,6 +24,20 @@ router.post("/follow", isAuthenticated, (req, res) => {
   })
 })
 
+router.post("/toggle-dark-mode", isAuthenticated, (req, res) => {
+  const userId = req.user._id
+  User.findById(userId, (err, foundUser) => {
+    if (err) return res.render("error")
+
+    foundUser.settings.darkMode = !foundUser.settings.darkMode
+    foundUser.save((err, result) => {
+      if (err) return res.render("error")
+
+      return res.redirect("/profile")
+    })
+  })
+})
+
 router.get(
   "/find-friends",
   isAuthenticated,
@@ -38,7 +52,6 @@ router.get(
         if (!foundUser.following || foundUser.following.length === 0) {
           res.locals.currentFriendNames = []
           return res.render("find-friends")
-
         }
 
         const namesOfPeopleYouAreFollowing = foundUser.following.map(

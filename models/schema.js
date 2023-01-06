@@ -1,3 +1,4 @@
+const { boolean } = require("mathjs")
 const mongoose = require("mongoose")
 const { Schema } = mongoose
 
@@ -5,7 +6,8 @@ const User = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   name: { type: String, required: true },
-  following: [{type: Schema.Types.ObjectId, ref: "User", required: true}]
+  following: [{type: Schema.Types.ObjectId, ref: "User", required: true}],
+  settings: {darkMode: {type: Boolean, default: false}}
 })
 
 const Post = new Schema({

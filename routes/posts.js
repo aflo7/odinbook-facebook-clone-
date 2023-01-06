@@ -8,6 +8,15 @@ var { User, Post, Comment } = require("../models/schema.js")
 var passport = require("passport")
 var { appleArticles, chatGptArticles } = require("../server/newsData.js")
 
+router.get("/:id", isAuthenticated, (req, res) => {
+  const postIdToFind = req.params.id
+  Post.findById(postIdToFind, (err, foundPost) => {
+    if (err) return res.redirect("error")
+
+    return res.render("post", { foundPost: foundPost })
+  })
+})
+
 router.post("/new", isAuthenticated, (req, res) => {
   const posterId = req.user._id
   const posterName = req.user.name

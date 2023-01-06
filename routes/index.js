@@ -8,7 +8,18 @@ var { User, Post, Comment } = require("../models/schema.js")
 var passport = require("passport")
 var { appleArticles, chatGptArticles } = require("../server/newsData.js")
 
-router.get("/home", isAuthenticated, (req, res, next) => {
+router.get("/profile", isAuthenticated, (req, res) => {
+  // update the current user session
+  req.logIn(req.user, (error) => {
+    if (error) {
+      return res.render("error")
+    }
+
+    return res.render("profile")
+  })
+})
+
+router.get("/home", isAuthenticated, (req, res) => {
   const userIdsToFind = req.user.following
   userIdsToFind.push(req.user._id)
 
@@ -27,24 +38,37 @@ router.get("/home", isAuthenticated, (req, res, next) => {
   )
 })
 
-router.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/home",
-    failureRedirect: "/"
-  })
-)
 
-router.get("/log-out", isAuthenticated, (req, res, next) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err)
+router.post("/log-in", (req, res) => {
+  passport.authenticate("local", (err, user, options) => {
+    if (err) return res.render("error")
+    if (user) {
+      // If the user exists log him in:
+      req.login(user, (error) => {
+        if (error) {
+          return res.render("error")
+        } else {
+          res.locals.loginErrorMessage = ""
+          return res.redirect("/home")
+        }
+      })
+    } else {
+      res.locals.loginErrorMessage = options.message
+      return res.render("index")
     }
-    res.redirect("/")
+  })(req, res)
+})
+
+router.get("/log-out", isAuthenticated, (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return res.render("error")
+    }
+    return res.redirect("/")
   })
 })
 
-router.post("/register", (req, res, next) => {
+router.post("/register", (req, res) => {
   console.log(req.body)
   const username = req.body.username
   const password = req.body.password
@@ -64,11 +88,11 @@ router.post("/register", (req, res, next) => {
   })
 })
 
-router.get("/register", (req, res, next) => {
+router.get("/register", (req, res) => {
   res.render("register")
 })
 
-router.get("/", function (req, res, next) {
+router.get("/", function (req, res) {
   res.render("index")
 })
 

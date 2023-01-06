@@ -15,20 +15,7 @@
 <body>
   <div class="mainwrapper">
     <div class="maincontent">
-      <nav>
-        <div class="mainnavbtn">Welcome, <%= locals.currentUser.name %>
-        </div>
-        <a href="/home">
-          <div class="mainnavbtn">Feed</div>
-        </a>
-
-        <a href="/users/find-friends">
-          <div id="findFriends" class="mainnavbtn">Find Friends</div>
-        </a>
-        <a href="/log-out">
-          <div class="mainnavbtn">Logout</div>
-        </a>
-      </nav>
+      <%- include('./partials/nav.ejs'); %>
 
       <form method="post" action="/posts/new" id="createpostform">
         <div>Create a post</div>
@@ -45,19 +32,23 @@
             <div class="poststitle">Posts</div>
             <% for (var post of locals.posts) { %>
               <div class="individual-post-wrapper">
+                <a href="/posts/<%= post._id %>">
                 <h3>
                   <%= post.title %>
                 </h3>
                 <div class="individual-post-content">
                   <%= post.content %>
                 </div>
-                <div>Created On: <%- post.date.toDateString() %></div>
-                <div>By: <%= post.posterName %>
+
+                <div class="individual-post-content">
+                  - <%= post.posterName %>
                 </div>
+                
+              </a>
               </div>
               <% } %>
                 <% } else { %>
-                  <div>No posts to show, try following new people!</div>
+                  <div class="noposts">No posts to show, try following new people!</div>
                   <% } %>
 
         </main>

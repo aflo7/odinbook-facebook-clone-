@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Profile</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../stylesheets/main.css">
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/profile.css">
+
+
+</head>
+
+<body>
+  <div class="mainwrapper">
+    <div class="maincontent">
+      <%- include('./partials/nav.ejs'); %>
+<div class="profile-wrapper">
+        <div class="profile-info">
+          <h3>Profile Info</h3>
+          <div>Full Name: <%= locals.currentUser.name %>
+          </div>
+          <div>Username: <%= locals.currentUser.username %>
+          </div>
+
+        </div>
+
+        <div class="profile-settings">
+          <h3>Profile Settings</h3>
+          <form action="/users/toggle-dark-mode" method="post">
+            <div>Darkmode: <%= locals.currentUser.settings.darkMode ? "On" : "Off" %>
+                <input class="toggle-dark-mode-input-btn" type="submit" value="Toggle Darkmode" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+  </div>
+
+</body>
+
+</html>

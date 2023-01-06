@@ -7,21 +7,24 @@
 }
 
 .all-people-wrapper {
-  width: 40%;
+  width: 50%;
 }
 
 .friends-wrapper {
-  width: 40%;
+  width: 50%;
 }
 
 .peopletitle {
   padding: 5px;
-  /* font-weight: bold; */
   font-size: 18pt;
 }
 
-.find-friends-bottom {
+.find-friends-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.followbtn {
+  padding: 5px;
 }

@@ -20,34 +20,21 @@
 
   <div class="mainwrapper">
     <div class="maincontent">
-      <nav>
-        <div class="mainnavbtn">Welcome, <%= locals.currentUser.name %>
-        </div>
+      <%- include('./partials/nav.ejs'); %>
 
-        <a href="/home">
-        <div class="mainnavbtn">Feed</div>
-      </a>
-        <a href="/users/find-friends">
-          <div id="findFriends" class="mainnavbtn">Find Friends</div>
-        </a>
-        <a href="/log-out">
-          <div class="mainnavbtn">Logout</div>
-        </a>
-      </nav>
 
-      <div class="find-friends-bottom">
+      <div class="find-friends-wrapper">
         <main class="all-people-wrapper">
+          <div class="peopletitle">All</div>
+
           <% if (locals.allUsers && locals.allUsers.length > 0) { %>
-            <div class="peopletitle">All</div>
           <% for (var person of locals.allUsers) { %>
             <div class="person-wrapper">
               <div><%= person.name %></div>
               <button class="followbtn" onclick="followUser('<%= person._id %>')">Follow +</button>
             </div>
             <% } %>
-            <% } else { %>
-              <div>No people exist </div>
-            <% }  %>
+            <% } %>
         </main>
         
         <div class="friends-wrapper">

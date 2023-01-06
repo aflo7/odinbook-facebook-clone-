@@ -1,0 +1,16 @@
+<nav>
+  <a href="/profile">
+  <div class="mainnavbtn">Welcome, <%= locals.currentUser.name %>
+  </div>
+</a>
+  <a href="/home">
+    <div class="mainnavbtn">Feed</div>
+  </a>
+
+  <a href="/users/find-friends">
+    <div id="findFriends" class="mainnavbtn">Find Friends</div>
+  </a>
+  <a href="/log-out">
+    <div class="mainnavbtn">Logout</div>
+  </a>
+</nav>
