@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Home</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="stylesheets/main.css">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="stylesheets/home.css">
+</head>
+
+<body>
+  <div class="mainwrapper">
+    <div class="maincontent">
+      <nav>
+        <div class="mainnavbtn">Welcome, <%= locals.currentUser.name %>
+        </div>
+        <a href="/home">
+          <div class="mainnavbtn">Feed</div>
+        </a>
+
+        <a href="/users/find-friends">
+          <div id="findFriends" class="mainnavbtn">Find Friends</div>
+        </a>
+        <a href="/log-out">
+          <div class="mainnavbtn">Logout</div>
+        </a>
+      </nav>
+
+      <form method="post" action="/posts/new" id="createpostform">
+        <div>Create a post</div>
+        <input type="text" name="title" id="title" placeholder="Title" required>
+        <input type="text" name="content" id="content" placeholder="Content" required>
+        <input type="submit" value="Create">
+
+      </form>
+      <div class="maincontentbottom">
+        <main id="main" class="post-wrapper">
+
+
+          <% if (locals.posts && locals.posts.length> 0) { %>
+            <div class="poststitle">Posts</div>
+            <% for (var post of locals.posts) { %>
+              <div class="individual-post-wrapper">
+                <h3>
+                  <%= post.title %>
+                </h3>
+                <div class="individual-post-content">
+                  <%= post.content %>
+                </div>
+                <div>Created On: <%- post.date.toDateString() %></div>
+                <div>By: <%= post.posterName %>
+                </div>
+              </div>
+              <% } %>
+                <% } else { %>
+                  <div>No posts to show, try following new people!</div>
+                  <% } %>
+
+        </main>
+        <div class="news-wrapper">
+          <% if(locals.newsArticles && locals.newsArticles.appleArticles.articles.length> 0) {%>
+            <div class="newstitle">News</div>
+            <% for (var applePost of locals.newsArticles.appleArticles.articles) { %>
+              <div class="individual-news-wrapper">
+                <div class="individual-news-left">
+                  <img class="news-img" src="<%= applePost.urlToImage %>" alt="<%= applePost.source.name %>" />
+
+                </div>
+
+                <div class="individual-news-right">
+                  <a href="<%= applePost.url %>">
+
+                    <div class="individual-news-title">
+                      <%= applePost.title %>
+                  </a>
+                </div>
+                <div class="individual-news-content">
+                  <%= applePost.description.substring(0, 40) %>...
+                </div>
+              </div>
+        </div>
+        <% } %>
+          <% } %>
+
+            <% if(locals.newsArticles && locals.newsArticles.chatGptArticles.articles.length> 0) {%>
+              <% for (var post of locals.newsArticles.chatGptArticles.articles) { %>
+                <div class="individual-news-wrapper">
+
+
+                  <div class="individual-news-left">
+                    <img class="news-img" src="<%= post.urlToImage %>" alt="<%= post.source.name %>" />
+
+                  </div>
+
+                  <div class="individual-news-right">
+                    <a href="<%= post.url %>">
+
+                      <div class="individual-news-title">
+                        <%= post.title %>
+                      </div>
+                    </a>
+                    <div class="individual-news-content">
+                      <%= post.description.substring(0, 40) %>...
+                    </div>
+                  </div>
+
+                </div>
+                <% } %>
+                  <% } %>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+
+</body>
+
+</html>

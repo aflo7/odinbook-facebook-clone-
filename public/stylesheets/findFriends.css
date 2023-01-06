@@ -1,0 +1,27 @@
+.person-wrapper {
+  background-color: rgb(175, 175, 175);
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  border-top: 1px solid white;
+}
+
+.all-people-wrapper {
+  width: 40%;
+}
+
+.friends-wrapper {
+  width: 40%;
+}
+
+.peopletitle {
+  padding: 5px;
+  /* font-weight: bold; */
+  font-size: 18pt;
+}
+
+.find-friends-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

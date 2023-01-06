@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Find Friends</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../stylesheets/main.css">
+  <link rel="stylesheet" href="../stylesheets/findFriends.css">
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <script>var exports = {};</script>
+  <script src="../javascripts/find-friends.js"></script>
+
+
+</head>
+
+<body>
+
+  <div class="mainwrapper">
+    <div class="maincontent">
+      <nav>
+        <div class="mainnavbtn">Welcome, <%= locals.currentUser.name %>
+        </div>
+
+        <a href="/home">
+        <div class="mainnavbtn">Feed</div>
+      </a>
+        <a href="/users/find-friends">
+          <div id="findFriends" class="mainnavbtn">Find Friends</div>
+        </a>
+        <a href="/log-out">
+          <div class="mainnavbtn">Logout</div>
+        </a>
+      </nav>
+
+      <div class="find-friends-bottom">
+        <main class="all-people-wrapper">
+          <% if (locals.allUsers && locals.allUsers.length > 0) { %>
+            <div class="peopletitle">All</div>
+          <% for (var person of locals.allUsers) { %>
+            <div class="person-wrapper">
+              <div><%= person.name %></div>
+              <button class="followbtn" onclick="followUser('<%= person._id %>')">Follow +</button>
+            </div>
+            <% } %>
+            <% } else { %>
+              <div>No people exist </div>
+            <% }  %>
+        </main>
+        
+        <div class="friends-wrapper">
+          <% if (locals.currentUser.following && locals.currentUser.following.length > 0) { %>
+            <div class="peopletitle">My Friends</div>
+          <% for (var friend of locals.currentFriendNames) { %>
+            <div  class="person-wrapper">
+              <div><%= friend %></div>
+            </div>
+            <% } %>
+            <% } else { %>
+              <div>You have no friends </div>
+            <% }  %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
