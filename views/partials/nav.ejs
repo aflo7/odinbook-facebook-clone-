@@ -1,32 +1,34 @@
 <nav style="height: 50px; display: flex; ">
   <% if (locals.currentUser.isFacebookUser && locals.currentUser.pfpUrl) { %>
-   <div style="height: 49px; width: 49px;">
-    <img alt="pfp" style="height: 49px; width: 49px;" src="<%=locals.currentUser.pfpUrl%>"/>
-   </div>
-  <% } %>
+    <div style="height: 49px; width: 49px;">
+      <img alt="pfp" style="height: 49px; width: 49px;" src="<%=locals.currentUser.pfpUrl%>" />
+    </div>
+    <% } %>
 
-  <% if (!locals.currentUser.isFacebookUser && locals.currentUser.nonFacebookUserImg) { %>
-    <div style="height: 49px; width: 49px; background-color: white;">
-      <img alt="pfp" height="49px" width="49px" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
+
+      <% if (!locals.currentUser.isFacebookUser && locals.currentUser.nonFacebookUserImg && 
+        locals.currentUser.nonFacebookUserImg !=="" && locals.currentUser.nonFacebookUserImg.data ) { %>
+        <div style="height: 49px; width: 49px; background-color: white;">
+          <img alt="pfp" height="49px" width="49px" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
       <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
-    </div>
-   <% } %>
+        </div>
+        <% } %>
 
 
 
 
-  <a href="/profile">
-    <div class="mainnavbtn" style="height: 49px; line-height: 30px;">Welcome, <%= locals.currentUser.name %>
-    </div>
-  </a>
-  <a href="/home">
-    <div class="mainnavbtn" style="height: 49px; line-height: 30px;">Feed</div>
-  </a>
+          <a href="/profile">
+            <div class="mainnavbtn" style="height: 49px; line-height: 30px;">Welcome, <%= locals.currentUser.name %>
+            </div>
+          </a>
+          <a href="/home">
+            <div class="mainnavbtn" style="height: 49px; line-height: 30px;">Feed</div>
+          </a>
 
-  <a href="/users/find-friends">
-    <div id="findFriends" class="mainnavbtn" style="height: 49px; line-height: 30px;">Find Friends</div>
-  </a>
-  <a href="/log-out">
-    <div class="mainnavbtn" style="height: 49px; line-height: 30px;" >Logout</div>
-  </a>
+          <a href="/users/find-friends">
+            <div id="findFriends" class="mainnavbtn" style="height: 49px; line-height: 30px;">Find Friends</div>
+          </a>
+          <a href="/log-out">
+            <div class="mainnavbtn" style="height: 49px; line-height: 30px;">Logout</div>
+          </a>
 </nav>

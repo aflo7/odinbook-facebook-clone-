@@ -45,19 +45,24 @@
             <!-- can only change your profile picture if you are not a facebook user -->
             <% if (!locals.currentUser.isFacebookUser) { %>
               <div>
-                <% if (locals.currentUser.nonFacebookUserImg ) { %>
-                  <div>Current profile picture:
+                <div>Current profile picture:
+
+                  <% if (locals.currentUser.nonFacebookUserImg && locals.currentUser.nonFacebookUserImg !=="" && locals.currentUser.nonFacebookUserImg.data ) { %>
+
                     <img height="50px" width="50px" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
                     <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
 
-                  </div>
-                  <% } %>
-                    <form action="/image" method="POST" enctype="multipart/form-data">
-                      <label for="image">Choose a new profile picture: </label>
-                      <input type="file" id="image" name="image" value="" required>
+                    <%} else { %>
+                      None
+                      <% }  %>
+                </div>
 
-                      <button type="submit">Submit</button>
-                    </form>
+                <form action="/image" method="POST" enctype="multipart/form-data">
+                  <label for="image">Choose a new profile picture: </label>
+                  <input type="file" id="image" name="image" value="" required>
+
+                  <button type="submit">Submit</button>
+                </form>
               </div>
               <% } %>
 
