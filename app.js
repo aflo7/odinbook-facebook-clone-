@@ -10,18 +10,25 @@ var bodyParser = require("body-parser")
 var { User, Post, Comment } = require("./models/schema.js")
 var passport = require("passport")
 var LocalStrategy = require("passport-local").Strategy
-var flash = require('express-flash')
+var FacebookStrategy = require("passport-facebook")
+
+var flash = require("express-flash")
 
 require("dotenv").config()
 
 var indexRouter = require("./routes/index")
 var usersRouter = require("./routes/users")
 var postsRouter = require("./routes/posts")
+var authRouter = require("./routes/auth")
+var imageRouter = require("./routes/image")
 
 mongoose.set("strictQuery", false)
 // Set up default mongoose connection
 const mongoDB = process.env.MONGO_URI
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoDB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 const db = mongoose.connection
 db.on("error", console.error.bind(console, "MongoDB connection error:"))
 
@@ -37,19 +44,61 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }))
 app.use(bodyParser.json())
-app.use(flash());
-app.use(function(req, res, next) {
+app.use(flash())
+app.use(function (req, res, next) {
   if (!req.user)
-      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  next();
-});
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate")
+  next()
+})
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: 707219667663613,
+      clientSecret: "c13df7de8aca08c7dd40797fc69a9cb4",
+      callbackURL: "http://localhost:5000/auth/facebook/callback",
+      profileFields: ["id", "displayName", "photos"]
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      const facebookId = profile.id
+      const name = profile.displayName
+      const pfpUrl = profile.photos[0].value
+
+      // console.log(faceBookId, name, pfpUrl)
+
+      // see if the user exists in the database...
+      User.find({ facebookId: facebookId }, function (err, foundUser) {
+        if (err) return res.render("error")
+        if (foundUser.length !== 0) return cb(null, foundUser[0])
+
+        // at this point, we determined that the user doesnt exist, proceed to create a new User.
+        const newFacebookUser = new User({
+          creationDate: new Date(),
+          username: "",
+          password: "",
+          following: [],
+          settings: { darkMode: false },
+          name: name,
+          isFacebookUser: true,
+          facebookId: facebookId,
+          pfpUrl: pfpUrl
+        })
+
+        newFacebookUser.save(function (err, newlyCreatedUser) {
+          if (err) return res.render("error")
+          return cb(null, newlyCreatedUser)
+        })
+      })
+    }
+  )
+)
 
 passport.use(
   new LocalStrategy((username, password, done) => {
     User.findOne({ username }, function (err, foundUser) {
       if (err) {
         console.log(err)
-        return res.redirect("/")
+        return res.render("error")
       }
 
       if (foundUser) {
@@ -92,6 +141,8 @@ app.use(function (req, res, next) {
 app.use("/", indexRouter)
 app.use("/users", usersRouter)
 app.use("/posts", postsRouter)
+app.use("/auth", authRouter)
+app.use("/image", imageRouter)
 
 const port = process.env.PORT || 5000
 

@@ -10,6 +10,11 @@
   <link rel="stylesheet" href="../stylesheets/main.css">
   <link rel="stylesheet" href="../stylesheets/style.css">
   <link rel="stylesheet" href="../stylesheets/profile.css">
+  <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
+    <link rel="stylesheet" href="../stylesheets/darkMode.css">
+
+    <%} %>
+
 
 
 </head>
@@ -18,24 +23,46 @@
   <div class="mainwrapper">
     <div class="maincontent">
       <%- include('./partials/nav.ejs'); %>
-<div class="profile-wrapper">
-        <div class="profile-info">
-          <h3>Profile Info</h3>
-          <div>Full Name: <%= locals.currentUser.name %>
-          </div>
-          <div>Username: <%= locals.currentUser.username %>
+        <div class="profile-wrapper">
+          <div class="profile-info">
+            <h3>Profile Info</h3>
+            <div>Full Name: <%= locals.currentUser.name %>
+            </div>
+
           </div>
 
-        </div>
+          <div class="profile-settings">
+            <h3>Profile Settings</h3>
+            <form action="/users/toggle-dark-mode" method="post">
+              <div>Darkmode: <%= locals.currentUser.settings.darkMode ? "On" : "Off" %>
 
-        <div class="profile-settings">
-          <h3>Profile Settings</h3>
-          <form action="/users/toggle-dark-mode" method="post">
-            <div>Darkmode: <%= locals.currentUser.settings.darkMode ? "On" : "Off" %>
-                <input class="toggle-dark-mode-input-btn" type="submit" value="Toggle Darkmode" />
-          </form>
+                  <input class="toggle-dark-mode-input-btn" type="submit" value="Toggle" />
+              </div>
+
+
+            </form>
+
+            <!-- can only change your profile picture if you are not a facebook user -->
+            <% if (!locals.currentUser.isFacebookUser) { %>
+              <div>
+                <% if (locals.currentUser.nonFacebookUserImg ) { %>
+                  <div>Current profile picture:
+                    <img height="50px" width="50px" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
+                    <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
+
+                  </div>
+                  <% } %>
+                    <form action="/image" method="POST" enctype="multipart/form-data">
+                      <label for="image">Choose a new profile picture: </label>
+                      <input type="file" id="image" name="image" value="" required>
+
+                      <button type="submit">Submit</button>
+                    </form>
+              </div>
+              <% } %>
+
+          </div>
         </div>
-      </div>
     </div>
   </div>
 

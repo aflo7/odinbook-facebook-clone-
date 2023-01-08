@@ -7,9 +7,12 @@
   <title>Find Friends</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../stylesheets/main.css">
   <link rel="stylesheet" href="../stylesheets/findFriends.css">
   <link rel="stylesheet" href="../stylesheets/style.css">
+  <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
+    <link rel="stylesheet" href="../stylesheets/darkMode.css">
+
+    <%} %>
   <script>var exports = {};</script>
   <script src="../javascripts/find-friends.js"></script>
 

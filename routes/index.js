@@ -14,7 +14,6 @@ router.get("/profile", isAuthenticated, (req, res) => {
     if (error) {
       return res.render("error")
     }
-
     return res.render("profile")
   })
 })
@@ -37,7 +36,6 @@ router.get("/home", isAuthenticated, (req, res) => {
     }
   )
 })
-
 
 router.post("/log-in", (req, res) => {
   passport.authenticate("local", (err, user, options) => {
@@ -73,13 +71,17 @@ router.post("/register", (req, res) => {
   const username = req.body.username
   const password = req.body.password
   const name = req.body.name
-  const following = []
 
   const newUser = new User({
+    creationDate: new Date(),
     username,
     password,
+    following: [],
+    settings: { darkMode: false },
     name,
-    following
+    isFacebookUser: false,
+    facebookId: "",
+    pfpUrl: ""
   })
 
   newUser.save(function (err, result) {

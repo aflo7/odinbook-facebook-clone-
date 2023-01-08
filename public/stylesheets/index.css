@@ -4,3 +4,13 @@
   text-align: center;
   padding: 5px;
 }
+
+.facebook-login-btn {
+  background-color: rgb(68, 143, 255);
+  color: white;
+  border: none;
+  padding: 5px;
+  border: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}

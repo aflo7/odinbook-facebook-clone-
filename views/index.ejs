@@ -8,19 +8,18 @@
   <link rel="stylesheet" href="stylesheets/style.css">
   <link rel="stylesheet" href="stylesheets/registerform.css">
   <link rel="stylesheet" href="stylesheets/index.css">
+  <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
+    <link rel="stylesheet" href="../stylesheets/darkMode.css">
 
-
-
-
-
+    <%} %>
 </head>
 
 <body>
   <div class="App">
     <% if (locals.loginErrorMessage) { %>
-  <div class="error-wrapper">Error: <%= locals.loginErrorMessage %>
-  </div>
-  <% }%> 
+      <div class="error-wrapper">Error: <%= locals.loginErrorMessage %>
+      </div>
+      <% }%>
         <div class="homescreenwrapper">
           <div class="lefthomewrapper">
             <div class="odinbooktitle">odinbook</div>
@@ -40,8 +39,12 @@
                   value="godofwar74" />
                 <input type="submit" class="loginbtn" value="Login" />
 
+                <button onclick="location.href='/auth/facebook'" type="button" class="facebook-login-btn">Login with Facebook</button>
+
                 <button onclick="location.href='/register'" type="button" class="createaccountbtn">Create new
                   account</button>
+
+
               </form>
             </div>
 
