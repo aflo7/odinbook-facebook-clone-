@@ -4,21 +4,26 @@ var cookieParser = require("cookie-parser")
 var mongoose = require("mongoose")
 var path = require("path")
 var session = require("express-session")
-const MemoryStore = require('memorystore')(session)
+const MemoryStore = require("memorystore")(session)
 var bodyParser = require("body-parser")
 var { User } = require("./models/schema.js")
 var passport = require("passport")
 var LocalStrategy = require("passport-local").Strategy
 var FacebookStrategy = require("passport-facebook")
 require("dotenv").config()
-var livereload = require("livereload");
-var connectLiveReload = require("connect-livereload");
-const liveReloadServer = livereload.createServer();
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
-});
+
+var livereload = require("livereload")
+var connectLiveReload = require("connect-livereload")
+
+let liveReloadServer = undefined
+if (process.env.NODE_ENV === "dev") {
+  liveReloadServer = livereload.createServer()
+  liveReloadServer.server.once("connection", () => {
+    setTimeout(() => {
+      liveReloadServer.refresh("/")
+    }, 100)
+  })
+}
 
 var indexRouter = require("./routes/index")
 var usersRouter = require("./routes/users")
@@ -38,25 +43,30 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"))
 
 var app = express()
 
+if (process.env.NODE_ENV === "dev") {
+app.use(connectLiveReload())
+
+}
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
 
-app.use(connectLiveReload());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
-// app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }))
-app.use(session({
-  cookie: { maxAge: 86400000 },
-  store: new MemoryStore({
-    checkPeriod: 86400000 // prune expired entries every 24h
-  }),
-  resave: false,
-  secret: process.env.SESSION_SECRET,
-  saveUninitialized: true
-}))
+
+app.use(
+  session({
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
+    resave: false,
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: true
+  })
+)
 app.use(bodyParser.json())
 app.use(function (req, res, next) {
   if (!req.user)
@@ -70,7 +80,7 @@ passport.use(
       clientID: 707219667663613,
       clientSecret: "c13df7de8aca08c7dd40797fc69a9cb4",
       // callbackURL: 'https://app4.memberssonly.xyz/auth/facebook/callback',
-      callbackURL: 'http://localhost:5000/auth/facebook/callback',
+      callbackURL: "http://localhost:5000/auth/facebook/callback",
 
       profileFields: ["id", "displayName", "photos"]
     },

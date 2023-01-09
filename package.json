@@ -1,11 +1,10 @@
 {
   "name": "odin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js -e css,js,ejs,png,jpg,json",
-    "watch": "nodemon app.js -e css,js,ejs,png,jpg,json"
+    "start": "NODE_ENV=prod node app.js",
+    "dev": "NODE_ENV=dev nodemon app.js -e css,js,ejs,png,jpg,json"
   },
   "dependencies": {
     "@types/passport": "^1.0.11",
