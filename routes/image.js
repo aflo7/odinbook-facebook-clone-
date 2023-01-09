@@ -7,16 +7,14 @@ const path = require("path")
 var multer = require("multer")
 
 function clearUploadsFolder() {
-  fs.readdir("/Users/andres/Desktop/odin/uploads/", (err, files) => {
+  fs.readdir(path.join(__dirname, "..", "uploads/"), (err, files) => {
+  // fs.readdir("/Users/andres/Desktop/odin/uploads/", (err, files) => {
     if (err) throw err
 
     for (const file of files) {
-      fs.unlink(
-        path.join("/Users/andres/Desktop/odin/uploads/", file),
-        (err) => {
-          if (err) throw err
-        }
-      )
+      fs.unlink(path.join(__dirname, "..", "uploads", file), (err) => {
+        if (err) throw err
+      })
     }
   })
 }
