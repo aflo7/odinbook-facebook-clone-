@@ -44,8 +44,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"))
 var app = express()
 
 if (process.env.NODE_ENV === "dev") {
-app.use(connectLiveReload())
-
+  app.use(connectLiveReload())
 }
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
@@ -79,8 +78,10 @@ passport.use(
     {
       clientID: 707219667663613,
       clientSecret: "c13df7de8aca08c7dd40797fc69a9cb4",
-      // callbackURL: 'https://app4.memberssonly.xyz/auth/facebook/callback',
-      callbackURL: "http://localhost:5000/auth/facebook/callback",
+      callbackURL:
+        process.env.NODE_ENV === "dev"
+          ? "http://localhost:4000/auth/facebook/callback"
+          : "https://app4.memberssonly.xyz/auth/facebook/callback",
 
       profileFields: ["id", "displayName", "photos"]
     },
