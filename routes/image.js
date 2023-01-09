@@ -23,7 +23,11 @@ var storage = multer.diskStorage({
   
   destination: (req, file, cb) => {
     // cb(null, "uploads")
-    cb(null, path.join(__dirname, 'photos/'))
+    const folderPath = __dirname+ '/photos/'
+    // create photos folder if it does not exist
+    // also necessary because git does not track empty folders
+    fs.mkdirSync(folderPath, { recursive: true })
+    cb(null, folderPath)
     
   },
   filename: (req, file, cb) => {
