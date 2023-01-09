@@ -7,18 +7,15 @@ var {
 var { User, Post, Comment } = require("../models/schema.js")
 
 router.post("/follow", isAuthenticated, (req, res) => {
-  if (!req.user._id) {
-    return res.sendStatus(400)
-  }
   User.findById(req.user._id, (err, foundUser) => {
-    if (err) return res.sendStatus(400)
+    if (err) return res.render("error")
 
     foundUser.following.push(req.body.userIdToFollow)
     foundUser.save(function (err, result) {
       if (err) {
-        return res.sendStatus(400)
+        return res.render('error')
       } else {
-        return res.sendStatus(200)
+        return res.redirect('/users/find-friends')
       }
     })
   })

@@ -7,7 +7,7 @@ const User = new Schema({
     data: Buffer,
     contentType: String
   },
-  creationDate: { type: Date },
+  creationDate: { type: Date, required: true },
   // fields for LocalStrategy login
   username: { type: String },
   password: { type: String },
@@ -18,7 +18,7 @@ const User = new Schema({
   name: { type: String, required: true, unique: true },
 
   //fields for FacebookStrategy login
-  isFacebookUser: { type: Boolean },
+  isFacebookUser: { type: Boolean, required: true },
   facebookId: { type: String },
   pfpUrl: { type: String }
 })
@@ -29,7 +29,8 @@ const Post = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   date: { type: Date, required: true },
-  comments: [{ type: Schema.Types.ObjectId, ref: "Comment", default: [] }]
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment", default: [] }],
+  likes: { type: Number, default: 0 }
 })
 
 const Comment = new Schema({

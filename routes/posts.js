@@ -1,12 +1,7 @@
 var express = require("express")
 var router = express.Router()
-var {
-  isAuthenticated,
-  getUsersNotFollowing
-} = require("../scripts/customMiddleware.js")
+var { isAuthenticated } = require("../scripts/customMiddleware.js")
 var { User, Post, Comment } = require("../models/schema.js")
-var passport = require("passport")
-var { appleArticles, chatGptArticles } = require("../server/newsData.js")
 
 router.get("/:id", isAuthenticated, (req, res) => {
   const postIdToFind = req.params.id
@@ -31,11 +26,26 @@ router.post("/new", isAuthenticated, (req, res) => {
     title,
     content,
     date,
-    comments
+    comments,
+    likes: 0
   })
-  newPost.save(function (err, result) {
+  newPost.save((err, result) => {
     if (err) return res.render("error")
     return res.redirect("/home")
+  })
+})
+
+router.post("/like", isAuthenticated, (req, res) => {
+  const postID = req.body.postID
+
+  Post.findById(postID, (err, foundPost) => {
+    if (err) return res.render("error")
+    foundPost.likes += 1
+    foundPost.save((err, result) => {
+      if (err) return res.render("error")
+
+      res.redirect("/home")
+    })
   })
 })
 

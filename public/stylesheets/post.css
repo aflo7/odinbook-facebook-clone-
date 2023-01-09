@@ -5,3 +5,9 @@
 .comment-wrapper {
   padding: 10px;
 }
+
+.likebtn {
+  padding: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}

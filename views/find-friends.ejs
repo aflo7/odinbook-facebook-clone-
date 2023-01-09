@@ -14,7 +14,7 @@
 
     <%} %>
   <script>var exports = {};</script>
-  <script src="../javascripts/find-friends.js"></script>
+  <!-- <script src="../javascripts/find-friends.js"></script> -->
 
 
 </head>
@@ -34,7 +34,11 @@
           <% for (var person of locals.allUsers) { %>
             <div class="person-wrapper">
               <div><%= person.name %></div>
-              <button class="followbtn" onclick="followUser('<%= person._id %>')">Follow +</button>
+
+              <form action="/users/follow" method="post" onsubmit="document.getElementById('follow-input').disabled = true; return true;">
+                <input type="hidden" name="userIdToFollow" value="<%= person._id %>"/>
+              <input type="submit" id="follow-input" class="followbtn" value="Follow"/>
+            </form>
             </div>
             <% } %>
             <% } %>

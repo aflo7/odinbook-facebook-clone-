@@ -67,7 +67,6 @@ router.get("/log-out", isAuthenticated, (req, res) => {
 })
 
 router.post("/register", (req, res) => {
-  console.log(req.body)
   const username = req.body.username
   const password = req.body.password
   const name = req.body.name
@@ -85,7 +84,7 @@ router.post("/register", (req, res) => {
   })
 
   newUser.save(function (err, result) {
-    if (err) return res.render("error")
+    if (err) return res.render('err')
     res.redirect("/")
   })
 })

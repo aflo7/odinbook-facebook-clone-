@@ -22,13 +22,18 @@
           <h2>
             <%= foundPost.title %>
           </h2>
-          <div>
+          <div style="margin-bottom: 20px;">
             <%= foundPost.content %>
           </div>
           <div>Created On: <%- foundPost.date.toDateString() %></div>
           <div>By: <%= foundPost.posterName %>
           </div>
         </div>
+
+        <form method="post" action="/posts/like" onsubmit="document.getElementById('likesubmitbtn').disabled = true; return true;">
+          <input type="hidden" name="postID" value="<%=foundPost._id%>"/>
+          <input id="likesubmitbtn" type="submit" value="Like this post" class="likebtn"/>
+        </form>
 
         <div class="comment-wrapper">
           No Comments

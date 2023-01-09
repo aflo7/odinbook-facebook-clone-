@@ -1,15 +1,15 @@
 <nav style="height: 50px; display: flex; ">
   <% if (locals.currentUser.isFacebookUser && locals.currentUser.pfpUrl) { %>
-    <div style="height: 49px; width: 49px;">
-      <img alt="pfp" style="height: 49px; width: 49px;" src="<%=locals.currentUser.pfpUrl%>" />
+    <div style="height: 50px; width: 50px;">
+      <img alt="pfp" style="height: 50px; width: 50px;" src="<%=locals.currentUser.pfpUrl%>" />
     </div>
     <% } %>
 
 
       <% if (!locals.currentUser.isFacebookUser && locals.currentUser.nonFacebookUserImg && 
         locals.currentUser.nonFacebookUserImg !=="" && locals.currentUser.nonFacebookUserImg.data ) { %>
-        <div style="height: 49px; width: 49px; background-color: white;">
-          <img alt="pfp" height="49px" width="49px" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
+        <div style="height: 50px; width: 50px; background-color: white;">
+          <img alt="pfp" height="50px" width="50px" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
       <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
         </div>
         <% } %>
