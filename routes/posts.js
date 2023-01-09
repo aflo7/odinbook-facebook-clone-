@@ -1,7 +1,7 @@
 var express = require("express")
 var router = express.Router()
 var { isAuthenticated } = require("../scripts/customMiddleware.js")
-var { User, Post, Comment } = require("../models/schema.js")
+var { Post } = require("../models/schema.js")
 
 router.get("/:id", isAuthenticated, (req, res) => {
   const postIdToFind = req.params.id

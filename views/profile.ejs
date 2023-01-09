@@ -7,6 +7,7 @@
   <title>Profile</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../stylesheets/main.css">
   <link rel="stylesheet" href="../stylesheets/style.css">
   <link rel="stylesheet" href="../stylesheets/profile.css">
   <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
@@ -32,12 +33,10 @@
 
           <div class="profile-settings">
             <h3>Profile Settings</h3>
-            <form action="/users/toggle-dark-mode" method="post"
-              onsubmit="document.getElementById('toggle-submit').disabled = true; return true;">
+            <form action="/users/toggle-dark-mode" method="post">
               <div>Darkmode: <%= locals.currentUser.settings.darkMode ? "On" : "Off" %>
 
-                  <input id="toggle-submit" class="toggle-dark-mode-input-btn"
-                    style="padding-left: 5px; padding-right: 5px;" type="submit" value="Toggle" />
+                  <input class="toggle-dark-mode-input-btn" type="submit" value="Toggle" />
               </div>
 
 
@@ -48,22 +47,21 @@
               <div>
                 <div>Current profile picture:
 
-                  <% if (locals.currentUser.nonFacebookUserImg && locals.currentUser.nonFacebookUserImg !=="" &&
-                    locals.currentUser.nonFacebookUserImg.data ) { %>
+                  <% if (locals.currentUser.nonFacebookUserImg && locals.currentUser.nonFacebookUserImg !=="" && locals.currentUser.nonFacebookUserImg.data ) { %>
 
                     <img height="50px" width="50px" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
                     <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
 
                     <%} else { %>
                       None
-                      <% } %>
+                      <% }  %>
                 </div>
 
-                <form action="/image" method="POST" enctype="multipart/form-data"
-                  onsubmit="document.getElementById('upload-btn').disabled = true; return true;">
+                <form action="/image" method="POST" enctype="multipart/form-data">
                   <label for="image">Choose a new profile picture: </label>
                   <input type="file" id="image" name="image" value="" required>
-                  <button id="upload-btn" style="padding-left: 5px; padding-right: 5px;" type="submit">Upload</button>
+
+                  <button type="submit">Submit</button>
                 </form>
               </div>
               <% } %>

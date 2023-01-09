@@ -1,10 +1,9 @@
 var express = require("express")
 var router = express.Router()
 var {
-  isAuthenticated,
-  getUsersNotFollowing
+  isAuthenticated
 } = require("../scripts/customMiddleware.js")
-var { User, Post, Comment } = require("../models/schema.js")
+var { User, Post } = require("../models/schema.js")
 var passport = require("passport")
 var { appleArticles, chatGptArticles } = require("../server/newsData.js")
 

@@ -4,7 +4,7 @@ var {
   isAuthenticated,
   getUsersNotFollowing
 } = require("../scripts/customMiddleware.js")
-var { User, Post, Comment } = require("../models/schema.js")
+var { User } = require("../models/schema.js")
 
 router.post("/follow", isAuthenticated, (req, res) => {
   User.findById(req.user._id, (err, foundUser) => {

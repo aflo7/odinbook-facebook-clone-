@@ -1,19 +1,14 @@
-var createError = require("http-errors")
 var express = require("express")
 var path = require("path")
 var cookieParser = require("cookie-parser")
-var logger = require("morgan")
 var mongoose = require("mongoose")
 var path = require("path")
 var session = require("express-session")
 var bodyParser = require("body-parser")
-var { User, Post, Comment } = require("./models/schema.js")
+var { User } = require("./models/schema.js")
 var passport = require("passport")
 var LocalStrategy = require("passport-local").Strategy
 var FacebookStrategy = require("passport-facebook")
-
-var flash = require("express-flash")
-
 require("dotenv").config()
 
 var indexRouter = require("./routes/index")
@@ -44,7 +39,6 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }))
 app.use(bodyParser.json())
-app.use(flash())
 app.use(function (req, res, next) {
   if (!req.user)
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate")
@@ -56,16 +50,13 @@ passport.use(
     {
       clientID: 707219667663613,
       clientSecret: "c13df7de8aca08c7dd40797fc69a9cb4",
-      callbackURL: "http://localhost:5000/auth/facebook/callback",
+      callbackURL: process.env.prodCallbackUrl,
       profileFields: ["id", "displayName", "photos"]
     },
     function (accessToken, refreshToken, profile, cb) {
       const facebookId = profile.id
       const name = profile.displayName
       const pfpUrl = profile.photos[0].value
-
-      // console.log(faceBookId, name, pfpUrl)
-
       // see if the user exists in the database...
       User.find({ facebookId: facebookId }, function (err, foundUser) {
         if (err) return res.render("error")
@@ -144,6 +135,6 @@ app.use("/posts", postsRouter)
 app.use("/auth", authRouter)
 app.use("/image", imageRouter)
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 4000
 
 app.listen(port, () => console.log(`Server started on port ${port}`))
