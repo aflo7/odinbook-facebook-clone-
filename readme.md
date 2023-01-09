@@ -1,6 +1,6 @@
 Live website: https://app4.memberssonly.xyz
 
-Facebook clone made with Node.js and MongoDB. Deployed on digitalocean
+Facebook clone made with Node.js and MongoDB, HTML JS and CSS. Deployed on digitalocean
 
 Has many features including:
 - ability to add friends, create posts
@@ -12,7 +12,8 @@ Has many features including:
 What mongoDB models did you choose?
 There are three main models: User, Post, and Comment. 
 
+Websites screenshots
 
-![alt](./website-screenshots/ss.png)
+![alt](./website-screenshots/ss2.png)
 
 ![alt](./website-screenshots/homepage.png)
