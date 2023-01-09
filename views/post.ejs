@@ -18,11 +18,11 @@
     <div class="maincontent">
       <%- include('./partials/nav.ejs'); %>
        
-        <div class="single-post">
+        <div class="single-post" style="word-wrap: break-word;">
           <h2>
             <%= foundPost.title %>
           </h2>
-          <div style="margin-bottom: 20px;">
+          <div style="margin-bottom: 20px; word-wrap: break-word;">
             <%= foundPost.content %>
           </div>
           <div>Created On: <%- foundPost.date.toDateString() %></div>

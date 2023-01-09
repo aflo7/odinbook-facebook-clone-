@@ -19,9 +19,6 @@ function clearUploadsFolder() {
   })
 }
 
-console.log("in image.js", path.join(__dirname, 'photos/'))
-
-
 var storage = multer.diskStorage({
   
   destination: (req, file, cb) => {

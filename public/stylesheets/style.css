@@ -47,6 +47,13 @@ nav {
   color: white;
 }
 
+.welcomenavbtn {
+  padding: 10px;
+  cursor: pointer;
+  background-color: rgb(64, 64, 255);
+  color: white;
+}
+
 .mainnavbtn:hover {
   background-color: rgb(98, 98, 255);
 }
@@ -60,8 +67,12 @@ nav {
   border-right: 1px solid black;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .lefthomewrapper {
+    display: none;
+  }
+
+  .welcomenavbtn {
     display: none;
   }
 }
