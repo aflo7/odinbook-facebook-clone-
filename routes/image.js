@@ -7,21 +7,26 @@ const path = require("path")
 var multer = require("multer")
 
 function clearUploadsFolder() {
-  fs.readdir(path.join(__dirname, "..", "uploads/"), (err, files) => {
+  fs.readdir(path.join(__dirname, "photos/"), (err, files) => {
   // fs.readdir("/Users/andres/Desktop/odin/uploads/", (err, files) => {
     if (err) throw err
 
     for (const file of files) {
-      fs.unlink(path.join(__dirname, "..", "uploads", file), (err) => {
+      fs.unlink(path.join(__dirname, "photos", file), (err) => {
         if (err) throw err
       })
     }
   })
 }
+
+console.log("in image.js", path.join(__dirname, 'photos/'))
+
+
 var storage = multer.diskStorage({
+  
   destination: (req, file, cb) => {
     // cb(null, "uploads")
-    cb(null, path.join(__dirname, "..", 'uploads/'))
+    cb(null, path.join(__dirname, 'photos/'))
     
   },
   filename: (req, file, cb) => {
@@ -36,7 +41,7 @@ router.post("/", isAuthenticated, upload.single("image"), (req, res, next) => {
   // console.log(__dirname)
   var img = {
     data: fs.readFileSync(
-      path.join(__dirname, "..", "uploads", req.file.filename)
+      path.join(__dirname, "photos", req.file.filename)
     ),
     contentType: "image/png"
   }
