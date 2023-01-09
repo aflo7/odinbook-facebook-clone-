@@ -50,8 +50,8 @@ passport.use(
     {
       clientID: 707219667663613,
       clientSecret: "c13df7de8aca08c7dd40797fc69a9cb4",
-      // callbackURL: 'http://app4.memberssonly.xyz/auth/facebook/callback',
-      callbackURL: 'http://localhost:5000/auth/facebook/callback',
+      callbackURL: 'http://app4.memberssonly.xyz/auth/facebook/callback',
+      // callbackURL: 'http://localhost:5000/auth/facebook/callback',
 
       profileFields: ["id", "displayName", "photos"]
     },
