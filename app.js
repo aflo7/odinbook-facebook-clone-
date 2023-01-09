@@ -12,11 +12,12 @@ var LocalStrategy = require("passport-local").Strategy
 var FacebookStrategy = require("passport-facebook")
 require("dotenv").config()
 
-var livereload = require("livereload")
-var connectLiveReload = require("connect-livereload")
-
-let liveReloadServer = undefined
+let livereload = null
+let connectLiveReload = null
+let liveReloadServer = null
 if (process.env.NODE_ENV === "dev") {
+  livereload = require("livereload")
+  connectLiveReload = require("connect-livereload")
   liveReloadServer = livereload.createServer()
   liveReloadServer.server.once("connection", () => {
     setTimeout(() => {
