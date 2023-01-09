@@ -12,7 +12,7 @@ Has many features including:
 What mongoDB models did you choose?
 There are three main models: User, Post, and Comment. 
 
-Websites screenshots
+Website screenshots
 
 ![alt](./website-screenshots/ss2.png)
 
