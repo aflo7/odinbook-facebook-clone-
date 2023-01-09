@@ -3,19 +3,22 @@ var router = express.Router()
 var { isAuthenticated } = require("../scripts/customMiddleware.js")
 var { User } = require("../models/schema.js")
 var fs = require("fs")
-const path = require("path");
+const path = require("path")
 var multer = require("multer")
 
-function clearUploadsFolder(){
+function clearUploadsFolder() {
   fs.readdir("/Users/andres/Desktop/odin/uploads/", (err, files) => {
-    if (err) throw err;
-  
+    if (err) throw err
+
     for (const file of files) {
-      fs.unlink(path.join("/Users/andres/Desktop/odin/uploads/", file), (err) => {
-        if (err) throw err;
-      });
+      fs.unlink(
+        path.join("/Users/andres/Desktop/odin/uploads/", file),
+        (err) => {
+          if (err) throw err
+        }
+      )
     }
-  });
+  })
 }
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -33,7 +36,7 @@ router.post("/", isAuthenticated, upload.single("image"), (req, res, next) => {
   // console.log(__dirname)
   var img = {
     data: fs.readFileSync(
-      path.join(__dirname, '..', `/uploads/${req.file.filename}`)
+      path.join(__dirname, "..", "uploads", req.file.filename)
     ),
     contentType: "image/png"
   }

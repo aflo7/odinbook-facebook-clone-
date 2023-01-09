@@ -45,14 +45,14 @@ app.use(function (req, res, next) {
   next()
 })
 
-// devCallbackUrl="http://localhost:5000/auth/facebook/callback"
-// prodCallbackUrl="http://app4.memberssonly.xyz/auth/facebook/callback"
 passport.use(
   new FacebookStrategy(
     {
       clientID: 707219667663613,
       clientSecret: "c13df7de8aca08c7dd40797fc69a9cb4",
-      callbackURL: 'http://app4.memberssonly.xyz/auth/facebook/callback',
+      // callbackURL: 'http://app4.memberssonly.xyz/auth/facebook/callback',
+      callbackURL: 'http://localhost:5000/auth/facebook/callback',
+
       profileFields: ["id", "displayName", "photos"]
     },
     function (accessToken, refreshToken, profile, cb) {
