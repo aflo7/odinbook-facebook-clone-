@@ -50,7 +50,7 @@ passport.use(
     {
       clientID: 707219667663613,
       clientSecret: "c13df7de8aca08c7dd40797fc69a9cb4",
-      callbackURL: process.env.prodCallbackUrl,
+      callbackURL: process.env.devCallbackUrl,
       profileFields: ["id", "displayName", "photos"]
     },
     function (accessToken, refreshToken, profile, cb) {

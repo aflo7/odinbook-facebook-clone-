@@ -30,10 +30,10 @@ var upload = multer({ storage: storage })
 
 // everything here starts with /image
 router.post("/", isAuthenticated, upload.single("image"), (req, res, next) => {
-  console.log(__dirname)
+  // console.log(__dirname)
   var img = {
     data: fs.readFileSync(
-      "/Users/andres/Desktop/odin/uploads/" + req.file.filename
+      path.join(__dirname, '..', `/uploads/${req.file.filename}`)
     ),
     contentType: "image/png"
   }
