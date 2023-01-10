@@ -77,8 +77,8 @@ app.use(function (req, res, next) {
 passport.use(
   new FacebookStrategy(
     {
-      clientID: 707219667663613,
-      clientSecret: "c13df7de8aca08c7dd40797fc69a9cb4",
+      clientID: process.env.CLIENTID,
+      clientSecret: process.env.CLIENTSECRET,
       callbackURL:
         process.env.NODE_ENV === "dev"
           ? "http://localhost:4000/auth/facebook/callback"
