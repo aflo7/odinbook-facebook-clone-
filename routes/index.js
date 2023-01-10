@@ -37,6 +37,7 @@ router.get("/home", isAuthenticated, (req, res) => {
 })
 
 router.post("/log-in", (req, res) => {
+  res.locals.registeredMsg = ""
   passport.authenticate("local", (err, user, options) => {
     if (err) return res.render("error")
     if (user) {
@@ -84,7 +85,8 @@ router.post("/register", (req, res) => {
 
   newUser.save(function (err, result) {
     if (err) return res.render('err')
-    res.redirect("/")
+    res.locals.registeredMsg = "Successfully registered!"
+    res.render("index")
   })
 })
 

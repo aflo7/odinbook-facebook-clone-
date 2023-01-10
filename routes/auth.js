@@ -7,6 +7,10 @@ router.get("/facebook", passport.authenticate("facebook"))
 
 router.get(
   "/facebook/callback",
+  function (req, res, next) {
+    res.locals.registeredMsg = ""
+    next()
+  },
   passport.authenticate("facebook", { failureRedirect: "/" }),
   function (req, res) {
     // Successful authentication, redirect home.

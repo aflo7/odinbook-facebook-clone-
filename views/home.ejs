@@ -21,12 +21,11 @@
     <div class="maincontent">
       <%- include('./partials/nav.ejs'); %>
 
-        <form method="post" action="/posts/new" id="createpostform"
-          onsubmit="document.getElementById('createpostsubmitbtn').disabled = true; return true;">
+        <form method="post" action="/posts/new" id="createpostform">
           <div style="margin-bottom: 5px;">Create a post</div>
           <input style="padding: 5px" type="text" name="title" id="title" placeholder="Title" required>
           <input style="padding: 5px" type="text" name="content" id="content" placeholder="Content" required>
-          <input style="padding: 5px;" id="createpostsubmitbtn" type="submit" value="Create">
+          <input onclick="this.form.submit(); this.disabled=true; this.value='Loading...'" style="padding: 5px;" id="createpostsubmitbtn" type="submit" value="Create">
 
         </form>
         <div class="maincontentbottom">
@@ -122,7 +121,7 @@
                           <div class="individual-news-right">
 
                             <div class="individual-news-title">
-                              <a href="<%= post.url %>">
+                              <a target="_blank" href="<%= post.url %>">
 
                                 <%= post.title %>
                               </a>

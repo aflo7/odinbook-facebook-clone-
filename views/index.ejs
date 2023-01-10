@@ -3,7 +3,6 @@
 
 <head>
   <title>Odinbook</title>
-  <link rel="stylesheet" href="stylesheets/app.css">
   <link rel="stylesheet" href="stylesheets/loginform.css">
   <link rel="stylesheet" href="stylesheets/style.css">
   <link rel="stylesheet" href="stylesheets/registerform.css">
@@ -16,6 +15,10 @@
 
 <body>
   <div class="App">
+    <% if (locals.registeredMsg) { %>
+      <div class="register-success"><%= locals.registeredMsg %></div>
+     
+    <% } %>
     <% if (locals.loginErrorMessage) { %>
       <div class="error-wrapper">Error: <%= locals.loginErrorMessage %>
       </div>
@@ -36,8 +39,8 @@
                   value=""></input>
 
                 <input type="password" name='password' required class="passwordlogininput" type="text" placeholder="Password"
-                  value="" />
-                <input type="submit" class="loginbtn" value="Login" />
+                  value="" autocomplete="on" />
+                <input onclick="this.form.submit(); this.disabled=true; this.value='Loading...'" type="submit" class="loginbtn" value="Login" />
 
                 <button onclick="location.href='/auth/facebook'" type="button" class="facebook-login-btn">Login with Facebook</button>
 
