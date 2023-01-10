@@ -7,16 +7,21 @@
   <title>Post</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../stylesheets/style.css">
   <link rel="stylesheet" href="../stylesheets/home.css">
   <link rel="stylesheet" href="../stylesheets/post.css">
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
+    <link rel="stylesheet" href="../stylesheets/darkMode.css">
+
+    <%} %>
+
 </head>
 
 <body>
   <div class="mainwrapper">
     <div class="maincontent">
       <%- include('./partials/nav.ejs'); %>
-       
+
         <div class="single-post" style="word-wrap: break-word;">
           <h2>
             <%= foundPost.title %>
@@ -30,13 +35,38 @@
         </div>
 
         <form method="post" action="/posts/like">
-          <input type="hidden" name="postID" value="<%=foundPost._id%>"/>
-          <input onclick="this.form.submit(); this.disabled=true; this.value='Loading...'" id="likesubmitbtn" type="submit" value="Like this post" class="likebtn"/>
+          <input type="hidden" name="postID" value="<%=foundPost._id%>" />
+          <input
+            onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
+            id="likesubmitbtn" type="submit" value="Like this post" class="likebtn" />
         </form>
 
         <div class="comment-wrapper">
-          No Comments
+          <% if (foundPost.comments.length===0) { %>
+            No Comments
+
+            <% } %>
+              <% foundPost.comments.forEach(comment=> { %>
+                <div class="individual-comment-wrapper">
+                  <div>
+                    <%=comment.content%>
+                  </div>
+                  <div style="color: gray; font-size: 10pt;">
+                    - <%=comment.author%>
+                  </div>
+                </div>
+
+                <% }) %>
         </div>
+        <form class="add-comment-form" action="/posts/new-comment" method="post">
+          <input type="hidden" name="postID" value="<%=foundPost._id%>">
+          <input type="hidden" name="author" value="<%=locals.currentUser.name%>">
+
+          <input style="padding:5px" type="text" name="content" placeholder="Add a comment" required>
+          <input style="padding:5px;"
+            onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
+            type="submit" value="Submit">
+        </form>
     </div>
 
 

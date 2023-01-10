@@ -36,7 +36,7 @@ const Post = new Schema({
 const Comment = new Schema({
   content: { type: String, required: true },
   author: { type: String, required: true },
-  cpid: { type: Schema.Types.ObjectId, ref: "User", required: true }
+  // cpid: { type: Schema.Types.ObjectId, ref: "User", required: true }
 })
 
 const userSchema = mongoose.model("User", User)

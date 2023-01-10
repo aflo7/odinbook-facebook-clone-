@@ -87,11 +87,8 @@ passport.use(
       profileFields: ["id", "displayName", "photos"]
     },
     function (accessToken, refreshToken, profile, cb) {
-      const facebookId = profile.id
-      const name = profile.displayName
-      const pfpUrl = profile.photos[0].value
       // see if the user exists in the database...
-      User.find({ facebookId: facebookId }, function (err, foundUser) {
+      User.find({ facebookId: profile.id }, function (err, foundUser) {
         if (err) return res.render("error")
         if (foundUser.length !== 0) return cb(null, foundUser[0])
 
@@ -102,10 +99,10 @@ passport.use(
           password: "",
           following: [],
           settings: { darkMode: false },
-          name: name,
+          name: profile.displayName,
           isFacebookUser: true,
-          facebookId: facebookId,
-          pfpUrl: pfpUrl
+          facebookId: profile.id,
+          pfpUrl: profile.photos[0].value
         })
 
         newFacebookUser.save(function (err, newlyCreatedUser) {

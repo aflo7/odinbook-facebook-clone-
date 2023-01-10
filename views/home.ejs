@@ -25,7 +25,9 @@
           <div style="margin-bottom: 5px;">Create a post</div>
           <input style="padding: 5px" type="text" name="title" id="title" placeholder="Title" required>
           <input style="padding: 5px" type="text" name="content" id="content" placeholder="Content" required>
-          <input onclick="this.form.submit(); this.disabled=true; this.value='Loading...'" style="padding: 5px;" id="createpostsubmitbtn" type="submit" value="Create">
+          <input
+            onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
+            style="padding: 5px;" id="createpostsubmitbtn" type="submit" value="Create">
 
         </form>
         <div class="maincontentbottom">
@@ -65,13 +67,18 @@
                               <% }%>
                     </div>
 
-                    <div class="individual-post-content">
-                      - <%= post.posterName %>
-                    </div>
                   </div>
                   <div class="individual-post-like-count">
-                    <%= post.likes %> likes
+                    <span>By: <%= post.posterName %>,</span>
+                    <span>
+                      <%= post.likes %> likes,
+                    </span>
+                    <span>
+                      <%= post.comments.length %> comments
+                    </span>
+
                   </div>
+
 
 
                 </div>
