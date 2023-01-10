@@ -1,8 +1,0 @@
- name: { type: String, required: true},
-
-  //fields for storing facebook profile information
-  isFacebookUser: { type: Boolean, default: false },
-  facebookId: { type: String, unique: true, default: "" },
-  pfpUrl: { type: String, default: "" }
-
-  faceBookId,name, pfpUrl

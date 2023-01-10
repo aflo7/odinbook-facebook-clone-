@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=prod node app.js",
-    "dev": "NODE_ENV=dev nodemon app.js -e css,js,ejs,png,jpg,json"
+    "dev": "NODE_ENV=dev nodemon app.js -e css,js,ejs"
   },
   "dependencies": {
     "@types/passport": "^1.0.11",
