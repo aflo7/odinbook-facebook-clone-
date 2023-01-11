@@ -1,17 +1,21 @@
 .toggle-dark-mode-input-btn {
+  padding-left: 5px;
+  padding-right: 5px;
   
 }
 
 .profile-wrapper {
+  /* padding: 10px; */
 }
 
 .profile-info {
   border-bottom: 1px solid black;
-  padding: 5px;
+  padding: 10px;
 
 }
 
 .profile-settings {
-  padding: 5px;
+  padding: 10px;
+  border-top: 1px solid white;
   
 }

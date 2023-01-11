@@ -23,11 +23,11 @@
 
         <form method="post" action="/posts/new" id="createpostform">
           <div style="margin-bottom: 5px;">Create a post</div>
-          <input style="padding: 5px" type="text" name="title" id="title" placeholder="Title" required>
-          <input style="padding: 5px" type="text" name="content" id="content" placeholder="Content" required>
+          <input style="padding-left: 5px; padding-right: 5px;" type="text" name="title" id="title" placeholder="Title" required>
+          <input style="padding-left: 5px; padding-right: 5px;" type="text" name="content" id="content" placeholder="Content" required>
           <input
             onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
-            style="padding: 5px;" id="createpostsubmitbtn" type="submit" value="Create">
+            style="padding-left: 5px; padding-right: 5px;" id="createpostsubmitbtn" type="submit" value="Create">
 
         </form>
         <div class="maincontentbottom">

@@ -7,11 +7,34 @@
 }
 
 .likebtn {
-  padding:5px;
+  padding-left:5px;
+  padding-right:5px;
+background-color: rgb(255, 87, 87);
   cursor: pointer;
   margin-left: 10px;
+  border: none;
+  color: white;
+}
+
+.likebtn:hover {
+background-color: rgb(255, 50, 50);
+
+
 }
 
 .add-comment-form {
-  padding: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+
+}
+
+.submit-comment-btn {
+  padding-left:5px; 
+  padding-right: 5px;
+  cursor: pointer;
+  background-color: rgb(0, 161, 0);
+  color: white;
+}
+.submit-comment-btn:hover {
+  background-color: green;
 }
