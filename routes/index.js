@@ -95,6 +95,10 @@ router.get("/register", (req, res) => {
 })
 
 router.get("/", function (req, res) {
+  // if session exists, go home
+  if (res.locals.currentUser) {
+    return res.redirect('/home')
+  }
   res.render("index")
 })
 

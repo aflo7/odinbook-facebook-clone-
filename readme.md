@@ -10,6 +10,7 @@ Facebook clone made with Node.js and MongoDB, HTML JS and CSS. Deployed on digit
 - username/password authentication, and facebook authentication
 - ability to like posts
 - responsive design on smaller device
+- login session persists until the server turns off, or user logs out
 
 
 ### What mongoDB models did you choose?
