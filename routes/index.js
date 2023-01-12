@@ -67,26 +67,22 @@ router.get("/log-out", isAuthenticated, (req, res) => {
 })
 
 router.post("/register", (req, res) => {
-  const username = req.body.username
-  const password = req.body.password
-  const name = req.body.name
-
   const newUser = new User({
     creationDate: new Date(),
-    username,
-    password,
+    username: req.body.username,
+    password: req.body.password,
     following: [],
     settings: { darkMode: false },
-    name,
+    name: req.body.name,
     isFacebookUser: false,
     facebookId: "",
     pfpUrl: ""
   })
 
   newUser.save(function (err, result) {
-    if (err) return res.render('err')
+    if (err) return res.status(400).render('err')
     res.locals.registeredMsg = "Successfully registered!"
-    res.render("index")
+    res.status(200).render("index")
   })
 })
 
