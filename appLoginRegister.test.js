@@ -14,42 +14,18 @@ var request = require("supertest")
 const { faker } = require("@faker-js/faker")
 
 require("dotenv").config()
-
-let livereload = null
-let connectLiveReload = null
-let liveReloadServer = null
-if (process.env.NODE_ENV === "dev") {
-  livereload = require("livereload")
-  connectLiveReload = require("connect-livereload")
-  liveReloadServer = livereload.createServer()
-  liveReloadServer.server.once("connection", () => {
-    setTimeout(() => {
-      liveReloadServer.refresh("/")
-    }, 100)
-  })
-}
+const {
+  initializeMongoServer,
+  closeMongoServer
+} = require("./server/mongoConfigTesting.js")
 
 var indexRouter = require("./routes/index")
-var usersRouter = require("./routes/users")
-var postsRouter = require("./routes/posts")
-var authRouter = require("./routes/auth")
-var imageRouter = require("./routes/image")
-
-mongoose.set("strictQuery", false)
-// Set up default mongoose connection
-const mongoDB = process.env.MONGO_URI
-mongoose.connect(mongoDB, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-const db = mongoose.connection
-db.on("error", console.error.bind(console, "MongoDB connection error:"))
+var usersRouter = require("./routes/users.js")
+var postsRouter = require("./routes/posts.js")
+var authRouter = require("./routes/auth.js")
+var imageRouter = require("./routes/image.js")
 
 var app = express()
-
-if (process.env.NODE_ENV === "dev") {
-  app.use(connectLiveReload())
-}
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
@@ -168,9 +144,13 @@ app.use("/posts", postsRouter)
 app.use("/auth", authRouter)
 app.use("/image", imageRouter)
 
-describe("login, register, upload image tests", function () {
-  afterAll(async () => {
-    await db.close()
+describe("login, register test suite", function () {
+  this.beforeAll(async () => {
+    initializeMongoServer()
+  })
+
+  this.afterAll(async () => {
+    closeMongoServer()
   })
 
   test("login", (done) => {
@@ -196,6 +176,70 @@ describe("login, register, upload image tests", function () {
       .end(done)
   })
 
-  // confirm the image upload functionality
-  // start with a normal user that has no profile photo
+  test("register, then login the same user", (done) => {
+    const username = faker.internet.userName()
+    const name = faker.name.fullName()
+    request(app)
+      .post("/register")
+      .type("form")
+      .send({
+        username: username,
+        password: "pass",
+        name: name
+      })
+      .expect(200)
+      .end(() => {
+        request(app)
+          .post("/log-in")
+          .type("form")
+          .send({ username: username, password: "pass" })
+          .expect(302)
+          .expect("Location", "/home")
+          .end(done)
+      })
+  })
+
+  test("register a user, then try logging in with the wrong password", (done) => {
+    const username = faker.internet.userName()
+    const name = faker.name.fullName()
+    request(app)
+      .post("/register")
+      .type("form")
+      .send({
+        username: username,
+        password: "pass",
+        name: name
+      })
+      .expect(200)
+      .end(() => {
+        request(app)
+          .post("/log-in")
+          .type("form")
+          .send({ username: username, password: "wrongpassword" })
+          .expect(401)
+          .end(done)
+      })
+  })
+
+  test("login with a user that does not exist", (done) => {
+    request(app)
+      .post("/log-in")
+      .type("form")
+      .send({ username: "jdjfnjnfjejeeiem", password: "ejcmjedjemjkemdjmed" })
+      .expect(401) // unauthorized
+      .end(done)
+  })
+
+  test("login, then navigate to profile page", (done) => {
+    request(app)
+      .post("/log-in")
+      .type("form")
+      .send({ username: "caleb", password: "pass" })
+      .expect(200)
+      // .end(done)
+      .end(() => {
+        request(app).get("/profile").expect(302).end(done)
+      })
+
+  })
 })

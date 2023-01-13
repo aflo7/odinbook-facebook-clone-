@@ -2,7 +2,7 @@ var { User, Post, Comment } = require("../models/schema")
 
 function isAuthenticated(req, res, next) {
   if (req.user) return next()
-  else return res.redirect("/")
+  else return res.status(403).redirect("/")
 }
 
 function getUsersNotFollowing(req, res, next) {

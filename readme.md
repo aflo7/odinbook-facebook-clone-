@@ -23,3 +23,7 @@ Facebook clone made with Node.js and MongoDB, HTML JS and CSS. Deployed on digit
 ### Dark mode
 
 ![alt](./website-screenshots/homepagev2.png)
+
+### Testing suite
+
+![alt](./website-screenshots/testing.png)

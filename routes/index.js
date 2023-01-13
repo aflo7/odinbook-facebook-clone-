@@ -11,7 +11,7 @@ router.get("/profile", isAuthenticated, (req, res) => {
   // update the current user session
   req.logIn(req.user, (error) => {
     if (error) {
-      return res.render("error")
+      return res.status(400).render("error")
     }
     return res.render("profile")
   })
@@ -39,12 +39,12 @@ router.get("/home", isAuthenticated, (req, res) => {
 router.post("/log-in", (req, res) => {
   res.locals.registeredMsg = ""
   passport.authenticate("local", (err, user, options) => {
-    if (err) return res.render("error")
+    if (err) return res.status(400).render("error")
     if (user) {
       // If the user exists log him in:
       req.login(user, (error) => {
         if (error) {
-          return res.render("error")
+          return res.status(400).render("error")
         } else {
           res.locals.loginErrorMessage = ""
           return res.redirect("/home")
@@ -52,7 +52,7 @@ router.post("/log-in", (req, res) => {
       })
     } else {
       res.locals.loginErrorMessage = options.message
-      return res.render("index")
+      return res.status(401).render("index")
     }
   })(req, res)
 })
@@ -60,7 +60,7 @@ router.post("/log-in", (req, res) => {
 router.get("/log-out", isAuthenticated, (req, res) => {
   req.logout((err) => {
     if (err) {
-      return res.render("error")
+      return res.status(400).render("error")
     }
     return res.redirect("/")
   })

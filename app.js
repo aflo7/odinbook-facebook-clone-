@@ -11,20 +11,8 @@ var passport = require("passport")
 var LocalStrategy = require("passport-local").Strategy
 var FacebookStrategy = require("passport-facebook")
 require("dotenv").config()
+require("./server/mongoConfig.js")
 
-let livereload = null
-let connectLiveReload = null
-let liveReloadServer = null
-if (process.env.NODE_ENV === "dev") {
-  livereload = require("livereload")
-  connectLiveReload = require("connect-livereload")
-  liveReloadServer = livereload.createServer()
-  liveReloadServer.server.once("connection", () => {
-    setTimeout(() => {
-      liveReloadServer.refresh("/")
-    }, 100)
-  })
-}
 
 var indexRouter = require("./routes/index")
 var usersRouter = require("./routes/users")
@@ -32,21 +20,8 @@ var postsRouter = require("./routes/posts")
 var authRouter = require("./routes/auth")
 var imageRouter = require("./routes/image")
 
-mongoose.set("strictQuery", false)
-// Set up default mongoose connection
-const mongoDB = process.env.MONGO_URI
-mongoose.connect(mongoDB, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-const db = mongoose.connection
-db.on("error", console.error.bind(console, "MongoDB connection error:"))
-
 var app = express()
 
-if (process.env.NODE_ENV === "dev") {
-  app.use(connectLiveReload())
-}
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
