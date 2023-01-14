@@ -58,7 +58,7 @@
 
                 <% }) %>
         </div>
-        <form class="add-comment-form" action="/posts/new-comment" method="post">
+        <form class="add-comment-form" action="/comment/create" method="post">
           <input type="hidden" name="postID" value="<%=foundPost._id%>">
           <input type="hidden" name="author" value="<%=locals.currentUser.name%>">
 

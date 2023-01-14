@@ -1,4 +1,4 @@
-var { User, Post, Comment } = require("../models/schema")
+var { User } = require("../models/schema")
 
 function isAuthenticated(req, res, next) {
   if (req.user) return next()

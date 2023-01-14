@@ -19,3 +19,35 @@
   border-top: 1px solid white;
   
 }
+
+.my-posts-wrapper {
+  padding: 10px;
+  border-top: 1px solid black;
+
+}
+
+.my-post {
+border: 1px solid black;
+margin-top: 5px;
+padding: 5px;
+}
+
+.my-comments-wrapper {
+  padding: 5px;
+}
+
+.individual-comment {
+  padding: 5px;
+font-size: 10pt;
+  border: 1px solid black;
+}
+
+#deleteMyPostForm {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#deleteCommentForm {
+  display: flex;
+  justify-content: flex-end;
+}

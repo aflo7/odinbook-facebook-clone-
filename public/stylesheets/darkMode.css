@@ -25,3 +25,14 @@ nav {
 #createpostform {
   border-bottom: 1px solid white !important;
 }
+.my-posts-wrapper {
+  border-top: 1px solid white;
+}
+.individual-comment {
+  border: 1px solid white;
+}
+
+.my-post {
+  border: 1px solid white;
+
+}

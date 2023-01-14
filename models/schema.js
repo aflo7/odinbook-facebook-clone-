@@ -11,7 +11,7 @@ const User = new Schema({
   // fields for LocalStrategy login
   username: { type: String },
   password: { type: String },
-  following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  following: [{ type: Schema.Types.ObjectId, ref: "User", default: [] }],
   settings: { darkMode: { type: Boolean, default: false } },
 
   // fields common to both login strategies
@@ -47,5 +47,5 @@ const commentSchema = mongoose.model("Comment", Comment)
 module.exports = {
   User: userSchema,
   Post: postSchema,
-  Comment: commentSchema
+  CommentModel: commentSchema
 }

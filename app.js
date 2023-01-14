@@ -1,7 +1,6 @@
 var express = require("express")
 var path = require("path")
 var cookieParser = require("cookie-parser")
-var mongoose = require("mongoose")
 var path = require("path")
 var session = require("express-session")
 const MemoryStore = require("memorystore")(session)
@@ -13,12 +12,12 @@ var FacebookStrategy = require("passport-facebook")
 require("dotenv").config()
 require("./server/mongoConfig.js")
 
-
 var indexRouter = require("./routes/index")
 var usersRouter = require("./routes/users")
 var postsRouter = require("./routes/posts")
 var authRouter = require("./routes/auth")
 var imageRouter = require("./routes/image")
+var commentRouter = require("./routes/comment.js")
 
 var app = express()
 
@@ -139,6 +138,7 @@ app.use("/users", usersRouter)
 app.use("/posts", postsRouter)
 app.use("/auth", authRouter)
 app.use("/image", imageRouter)
+app.use("/comment", commentRouter)
 
 const port = process.env.PORT || 4000
 
