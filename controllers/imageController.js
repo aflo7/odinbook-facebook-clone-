@@ -21,7 +21,7 @@ exports.upload_image = (req, res, next) => {
     }
     foundUser.save(function (err, result) {
       if (err) return res.render("error")
-      res.redirect("/profile")
+      return res.redirect("/profile")
     })
   })
 }

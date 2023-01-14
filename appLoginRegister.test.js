@@ -2,6 +2,8 @@ var express = require("express")
 var path = require("path")
 var cookieParser = require("cookie-parser")
 var mongoose = require("mongoose")
+const { MongoMemoryServer } = require("mongodb-memory-server")
+mongoose.set("strictQuery", false)
 var path = require("path")
 var session = require("express-session")
 const MemoryStore = require("memorystore")(session)
@@ -14,10 +16,6 @@ var request = require("supertest")
 const { faker } = require("@faker-js/faker")
 
 require("dotenv").config()
-const {
-  initializeMongoServer,
-  closeMongoServer
-} = require("./server/mongoConfigTesting.js")
 
 var indexRouter = require("./routes/index")
 var usersRouter = require("./routes/users.js")
@@ -144,22 +142,57 @@ app.use("/posts", postsRouter)
 app.use("/auth", authRouter)
 app.use("/image", imageRouter)
 
+let mongo = null
+const connectDB = async () => {
+  mongo = await MongoMemoryServer.create()
+  const uri = mongo.getUri()
+  await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+}
+
+const dropDB = async () => {
+  if (mongo) {
+    await mongoose.connection.dropDatabase()
+    await mongoose.connection.close()
+    await mongo.stop()
+  }
+}
+
+const dropCollections = async () => {
+  if (mongo) {
+    const collections = await mongoose.connection.db.collections()
+    for (let collection of collections) {
+      await collection.drop()
+    }
+  }
+}
+
 describe("login, register test suite", function () {
-  this.beforeAll(async () => {
-    initializeMongoServer()
+  this.db = null
+  this.mongoServer = null
+
+  beforeAll(async () => {
+    await connectDB()
+  })
+  afterAll(async () => {
+    await dropDB()
+  })
+  afterEach(async () => {
+    await dropCollections()
   })
 
-  this.afterAll(async () => {
-    closeMongoServer()
-  })
-
-  test("login", (done) => {
+  test("register", (done) => {
     request(app)
-      .post("/log-in")
+      .post("/register")
       .type("form")
-      .send({ username: "sam", password: "pass" })
-      .expect(302)
-      .expect("Location", "/home")
+      .send({
+        username: "sam",
+        password: "pass",
+        name: "Sam M"
+      })
+      .expect(200)
       .end(done)
   })
 
@@ -240,6 +273,52 @@ describe("login, register test suite", function () {
       .end(() => {
         request(app).get("/profile").expect(302).end(done)
       })
+  })
+})
 
+async function checkUserPhoto(username) {
+  const res = await User.find({ username: username })
+  console.log(res)
+}
+
+describe("upload profile photo", function () {
+  this.db = null
+  this.mongoServer = null
+  this.username = faker.internet.userName()
+  this.password = "pass"
+  this.name = faker.name.fullName()
+
+  beforeAll(async () => {
+    await connectDB()
+  })
+  afterAll(async () => {
+    await dropCollections()
+    await dropDB()
+  })
+
+  test("register, login, upload photo", (done) => {
+    request(app)
+      .post("/register")
+      .type("form")
+      .send({
+        username: this.username,
+        password: this.password,
+        name: this.name
+      })
+      .expect(200)
+      .end(() => {
+        request(app)
+          .post("/log-in")
+          .type("form")
+          .send({ username: this.username, password: this.password })
+          .expect(401)
+          .end(() => {
+            request(app)
+              .post("/image")
+              .attach("file", "./testing/download.jpeg")
+              .expect(302)
+              .end(done)
+          })
+      })
   })
 })
