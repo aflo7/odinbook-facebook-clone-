@@ -1,5 +1,5 @@
-const {Post, User} = require('../models/schema')
-const { appleArticles, chatGptArticles } = require('../server/newsData')
+const { Post, User } = require("../models/schema")
+const { appleArticles, chatGptArticles } = require("../server/newsData")
 exports.load_profile_page = (req, res) => {
   // update the current user session
   req.logIn(req.user, (error) => {
@@ -26,18 +26,17 @@ exports.load_home_page = (req, res) => {
   userIdsToFind.push(req.user._id)
 
   res.locals.newsArticles = { appleArticles, chatGptArticles }
-  Post.find(
-    {
-      posterId: {
-        $in: userIdsToFind
-      }
-    },
-    function (err, docs) {
+  Post.find({
+    posterId: {
+      $in: userIdsToFind
+    }
+  })
+    .sort({ _id: -1 })
+    .exec(function (err, docs) {
       if (err) return res.render("error")
       res.locals.posts = docs
       res.render("home")
-    }
-  )
+    })
 }
 
 exports.log_out = (req, res) => {

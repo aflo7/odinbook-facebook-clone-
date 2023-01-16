@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../stylesheets/darkMode.css">
 
     <%} %>
+    <script defer src="../javascripts/index.js"></script>
 </head>
 
 <body>
@@ -35,14 +36,17 @@
             <div class="loginformwrapper">
               <form method="post" action="/log-in" class="loginform">
                 <div><span style="color: blue;">Odinbook</span> Login</div>
-                <input name='username' required class="usernamelogininput" type="text" placeholder="Username"
+                <input id="loginUsernameInput" name='username' required class="usernamelogininput" type="text" placeholder="Username"
                   value=""></input>
 
-                <input type="password" name='password' required class="passwordlogininput" type="text" placeholder="Password"
+                <input id="loginPasswordInput" type="password" name='password' required class="passwordlogininput" type="text" placeholder="Password"
                   value="" autocomplete="on" />
-                <input onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}" type="submit" class="loginbtn" value="Login" />
+
+                <input onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}" type="submit" class="loginbtn" id="loginSubmitBtn" value="Login" />
 
                 <button onclick="location.href='/auth/facebook'" type="button" class="facebook-login-btn">Login with Facebook</button>
+
+                <button id="guestBtn" type="button" class="guest-btn">Browse as a guest</button>
 
                 <button onclick="location.href='/register'" type="button" class="createaccountbtn">Create new
                   account</button>

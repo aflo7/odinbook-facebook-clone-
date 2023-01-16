@@ -41,9 +41,6 @@
                   <div>
                     <h3>
                       <a href="/posts/<%= post._id %>">
-
-
-
                         <% if (post.title.length> 30) { %>
                           <%= post.title.substring(0, 30) + "..." %>
 
@@ -57,7 +54,6 @@
 
 
                     <div class="individual-post-content">
-
                       <% if (post.content.length> 30) { %>
                         <%= post.content.substring(0, 30) + "..." %>
 
