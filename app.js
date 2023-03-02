@@ -48,45 +48,45 @@ app.use(function (req, res, next) {
   next()
 })
 
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: process.env.CLIENTID,
-//       clientSecret: process.env.CLIENTSECRET,
-//       callbackURL:
-//         process.env.NODE_ENV === "dev"
-//           ? "http://localhost:4000/auth/facebook/callback"
-//           : "https://app4.memberssonly.xyz/auth/facebook/callback",
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.CLIENTID,
+      clientSecret: process.env.CLIENTSECRET,
+      callbackURL:
+        process.env.NODE_ENV === "dev"
+          ? "http://localhost:4000/auth/facebook/callback"
+          : "https://app4.memberssonly.xyz/auth/facebook/callback",
 
-//       profileFields: ["id", "displayName", "photos"]
-//     },
-//     function (accessToken, refreshToken, profile, cb) {
-//       // see if the user exists in the database...
-//       User.find({ facebookId: profile.id }, function (err, foundUser) {
-//         if (err) return res.render("error")
-//         if (foundUser.length !== 0) return cb(null, foundUser[0])
+      profileFields: ["id", "displayName", "photos"]
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      // see if the user exists in the database...
+      User.find({ facebookId: profile.id }, function (err, foundUser) {
+        if (err) return res.render("error")
+        if (foundUser.length !== 0) return cb(null, foundUser[0])
 
-//         // at this point, we determined that the user doesnt exist, proceed to create a new User.
-//         const newFacebookUser = new User({
-//           creationDate: new Date(),
-//           username: "",
-//           password: "",
-//           following: [],
-//           settings: { darkMode: false },
-//           name: profile.displayName,
-//           isFacebookUser: true,
-//           facebookId: profile.id,
-//           pfpUrl: profile.photos[0].value
-//         })
+        // at this point, we determined that the user doesnt exist, proceed to create a new User.
+        const newFacebookUser = new User({
+          creationDate: new Date(),
+          username: "",
+          password: "",
+          following: [],
+          settings: { darkMode: false },
+          name: profile.displayName,
+          isFacebookUser: true,
+          facebookId: profile.id,
+          pfpUrl: profile.photos[0].value
+        })
 
-//         newFacebookUser.save(function (err, newlyCreatedUser) {
-//           if (err) return res.render("error")
-//           return cb(null, newlyCreatedUser)
-//         })
-//       })
-//     }
-//   )
-// )
+        newFacebookUser.save(function (err, newlyCreatedUser) {
+          if (err) return res.render("error")
+          return cb(null, newlyCreatedUser)
+        })
+      })
+    }
+  )
+)
 
 passport.use(
   new LocalStrategy((username, password, done) => {
