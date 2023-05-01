@@ -1,11 +1,10 @@
-"use strict";
+"use strict"
 function followUser(userIdToFollow) {
-    const buttons = document.getElementsByClassName("followbtn");
+    const buttons = document.getElementsByClassName("followbtn")
     for (let i = 0; i < buttons.length; i++) {
-        ;
-        buttons[i].disabled = true;
+        buttons[i].disabled = true
     }
-    const data = { userIdToFollow };
+    const data = { userIdToFollow }
     fetch(`http://localhost:5000/users/follow`, {
         method: "POST",
         headers: {
@@ -15,17 +14,14 @@ function followUser(userIdToFollow) {
     }).then((response) => {
         if (response.status === 200) {
             for (let i = 0; i < buttons.length; i++) {
-                ;
-                buttons[i].disabled = false;
+                buttons[i].disabled = false
             }
-            location.reload();
-        }
-        else {
+            location.reload()
+        } else {
             for (let i = 0; i < buttons.length; i++) {
-                ;
-                buttons[i].disabled = false;
+                buttons[i].disabled = false
             }
-            alert("There was an error");
+            alert("There was an error")
         }
-    });
+    })
 }
