@@ -31,106 +31,109 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
 app.use(
-  session({
-    cookie: { maxAge: 86400000 },
-    store: new MemoryStore({
-      checkPeriod: 86400000 // prune expired entries every 24h
-    }),
-    resave: false,
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: true
-  })
+    session({
+        cookie: { maxAge: 86400000 },
+        store: new MemoryStore({
+            checkPeriod: 86400000
+        }),
+        resave: false,
+        secret: process.env.SESSION_SECRET,
+        saveUninitialized: true
+    })
 )
 app.use(bodyParser.json())
 app.use(function (req, res, next) {
-  if (!req.user)
-    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate")
-  next()
+    if (!req.user)
+        res.header(
+            "Cache-Control",
+            "private, no-cache, no-store, must-revalidate"
+        )
+    next()
 })
 
 passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.CLIENTID,
-      clientSecret: process.env.CLIENTSECRET,
-      callbackURL:
-        process.env.NODE_ENV === "dev"
-          ? "http://localhost:4000/auth/facebook/callback"
-          : "https://app4.memberssonly.xyz/auth/facebook/callback",
+    new FacebookStrategy(
+        {
+            clientID: process.env.CLIENTID,
+            clientSecret: process.env.CLIENTSECRET,
+            callbackURL:
+                process.env.NODE_ENV === "dev"
+                    ? process.env.DEV_FACEBOOK_CALLBACK_URL
+                    : process.env.PROD_FACEBOOK_CALLBACK_URL,
 
-      profileFields: ["id", "displayName", "photos"]
-    },
-    function (accessToken, refreshToken, profile, cb) {
-      // see if the user exists in the database...
-      User.find({ facebookId: profile.id }, function (err, foundUser) {
-        if (err) return res.render("error")
-        if (foundUser.length !== 0) return cb(null, foundUser[0])
+            profileFields: ["id", "displayName", "photos"]
+        },
+        function (accessToken, refreshToken, profile, cb) {
+            // see if the facebook user exists in the database...
+            User.find({ facebookId: profile.id }, function (err, foundUser) {
+                if (err) return res.render("error")
+                if (foundUser.length !== 0) return cb(null, foundUser[0])
 
-        // at this point, we determined that the user doesnt exist, proceed to create a new User.
-        const newFacebookUser = new User({
-          creationDate: new Date(),
-          username: "",
-          password: "",
-          following: [],
-          settings: { darkMode: false },
-          name: profile.displayName,
-          isFacebookUser: true,
-          facebookId: profile.id,
-          pfpUrl: profile.photos[0].value
-        })
+                // at this point, we determined that the user doesnt exist, proceed to create a new facebook User.
+                const newFacebookUser = new User({
+                    creationDate: new Date(),
+                    username: "",
+                    password: "",
+                    following: [],
+                    settings: { darkMode: false },
+                    name: profile.displayName,
+                    isFacebookUser: true,
+                    facebookId: profile.id,
+                    pfpUrl: profile.photos[0].value
+                })
 
-        newFacebookUser.save(function (err, newlyCreatedUser) {
-          if (err) return res.render("error")
-          return cb(null, newlyCreatedUser)
-        })
-      })
-    }
-  )
+                newFacebookUser.save(function (err, newlyCreatedUser) {
+                    if (err) return res.render("error")
+                    return cb(null, newlyCreatedUser)
+                })
+            })
+        }
+    )
 )
 
 passport.use(
-  new LocalStrategy((username, password, done) => {
-    User.findOne({ username }, function (err, foundUser) {
-      if (err) {
-        console.log(err)
-        return res.render("error")
-      }
+    new LocalStrategy((username, password, done) => {
+        User.findOne({ username }, function (err, foundUser) {
+            if (err) {
+                console.log(err)
+                return res.render("error")
+            }
 
-      if (foundUser) {
-        if (password == foundUser.password) {
-          return done(null, foundUser)
-        }
-        return done(null, false, { message: "Incorrect password" })
-      }
+            if (foundUser) {
+                if (password == foundUser.password) {
+                    return done(null, foundUser)
+                }
+                return done(null, false, { message: "Incorrect password" })
+            }
 
-      return done(null, false, { message: "Incorrect username" })
+            return done(null, false, { message: "Incorrect username" })
+        })
     })
-  })
 )
 
 passport.serializeUser(function (user, done) {
-  done(null, user._id)
+    done(null, user._id)
 })
 
 passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, foundUser) {
-    if (err) {
-      return done("error deserializing", false)
-    }
-    if (foundUser) {
-      return done(null, foundUser)
-    } else {
-      return done("error deserializing", false)
-    }
-  })
+    User.findById(id, function (err, foundUser) {
+        if (err) {
+            return done("error deserializing", false)
+        }
+        if (foundUser) {
+            return done(null, foundUser)
+        } else {
+            return done("error deserializing", false)
+        }
+    })
 })
 
 app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(function (req, res, next) {
-  res.locals.currentUser = req.user
-  next()
+    res.locals.currentUser = req.user
+    next()
 })
 
 app.use("/", indexRouter)
