@@ -5,7 +5,11 @@
     justify-content: space-between;
     height: 50px;
     padding: 5px;
-    border-top: 1px solid white;
+    margin: 5px;
+    margin-right: 2.5px;
+    font-size: 12pt;
+
+
 }
 
 .friend-person-wrapper {
@@ -15,12 +19,14 @@
     justify-content: space-between;
     height: 50px;
     padding: 5px;
-    border-top: 1px solid white;
+    margin: 5px;
+    margin-left: 2.5px;
+    font-size: 12pt;
 }
 
 .all-people-wrapper {
     width: 50%;
-    border-right: 1px solid white;
+    /* border-right: 1px solid white; */
 }
 
 .friends-wrapper {
@@ -29,14 +35,9 @@
 
 .peopletitle {
     padding: 5px;
-    font-size: 16pt;
-}
-
-.allpeopletitle {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    font-size: 16pt;
+    /* font-size: 16pt; */
+    font-weight: bold;
+    margin: 5px;
 }
 
 .find-friends-wrapper {
@@ -48,4 +49,6 @@
 .followbtn {
     padding-left: 5px;
     padding-right: 5px;
+    cursor: pointer;
+    /* font-size: 16pt; */
 }

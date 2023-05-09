@@ -28,11 +28,8 @@
 
       <div class="find-friends-wrapper">
         <main class="all-people-wrapper">
-          <div class="allpeopletitle">
-            <div>All</div>
-
-
-            <input type="text" id="search-box" placeholder="Search...">
+          <div style="display: flex; justify-content: space-between; margin: 5px;">
+            <input style="padding: 5px; width: 100%;" type="text" id="search-box" placeholder="Search...">
           </div>
 
 
@@ -47,7 +44,7 @@
                   <input type="hidden" name="userIdToFollow" value="<%= person._id %>" />
                   <input
                     onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
-                    type="submit" class="followbtn" value="Follow" />
+                    type="submit" class="followbtn" value="Add" />
                 </form>
               </div>
               <% } %>
@@ -56,12 +53,19 @@
 
         <div class="friends-wrapper">
           <% if (locals.currentUser.following && locals.currentUser.following.length> 0) { %>
-            <div class="peopletitle">My Friends</div>
+            <div style="margin-top: 5px; margin-left: 5px; font-weight: bold;">My Friends</div>
             <% for (var friend of locals.currentFriendNames) { %>
               <div class="friend-person-wrapper">
                 <div>
-                  <%= friend %>
+                  <%= friend.name %>
                 </div>
+
+                <form action="/users/unfollow" method="post">
+                  <input type="hidden" name="userIDToUnfollow" value="<%= friend._id %>" />
+                  <input
+                    onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
+                    type="submit" class="followbtn" value="Remove" />
+                </form>
               </div>
               <% } %>
                 <% } else { %>
