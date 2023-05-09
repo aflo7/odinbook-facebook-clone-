@@ -1,4 +1,4 @@
-[Live Website](https://app1.memberssonly.xyz)
+[Live Website](https://odinbook.memberssonly.xyz)
 
 Technologies used: Node.js, MongoDB NoSQL Database, JavaScript, HTML and CSS.
 
