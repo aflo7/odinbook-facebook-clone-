@@ -1,6 +1,6 @@
 const { Post, User } = require("../models/schema")
 const { appleArticles, chatGptArticles } = require("../server/newsData")
-const shuffle = require('../scripts/shuffle')
+const shuffle = require("../scripts/shuffle")
 
 exports.load_profile_page = (req, res) => {
     req.logIn(req.user, (error) => {
@@ -22,15 +22,12 @@ exports.load_profile_page = (req, res) => {
     })
 }
 
-
 exports.load_home_page = (req, res) => {
     const userIdsToFind = req.user.following
     userIdsToFind.push(req.user._id)
-
-    const shuffledArr1 = shuffle(appleArticles.articles)
-    const shuffledArr2 = shuffle(chatGptArticles.articles)
-
-    res.locals.newsArticles = shuffledArr1.concat(shuffledArr2) 
+    res.locals.newsArticles = shuffle(
+        appleArticles.articles.concat(chatGptArticles.articles)
+    )
 
     Post.find({
         posterId: {
