@@ -8,27 +8,26 @@
       <% if (!locals.currentUser.isFacebookUser && locals.currentUser.nonFacebookUserImg &&
         locals.currentUser.nonFacebookUserImg !=="" && locals.currentUser.nonFacebookUserImg.data ) { %>
         <div class="pfp-img-wrapper">
-          <a href="/profile">
             <img alt="pfp" class="pfp-img" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
       <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
-          </a>
+     
 
         </div>
         <% } %>
 
           <a href="/profile">
 
-            <div class="welcomenavbtn" style="height: 49px; line-height: 30px;">Welcome, <%= locals.currentUser.name %>
+            <div class="welcomenavbtn" style="height: 50px; line-height: 30px;">Welcome, <%= locals.currentUser.name %>
             </div>
           </a>
           <a href="/home">
-            <div class="mainnavbtn" style="height: 49px; line-height: 30px;">Feed</div>
+            <div class="mainnavbtn" style="height: 50px; line-height: 30px;">Feed</div>
           </a>
 
           <a href="/users/find-friends">
-            <div id="findFriends" class="mainnavbtn" style="height: 49px; line-height: 30px;">Find Friends</div>
+            <div id="findFriends" class="mainnavbtn" style="height: 50px; line-height: 30px;">Find Friends</div>
           </a>
           <a href="/log-out">
-            <div class="mainnavbtn" style="height: 49px; line-height: 30px;">Logout</div>
+            <div class="mainnavbtn" style="height: 50px; line-height: 30px;">Logout</div>
           </a>
 </nav>

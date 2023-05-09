@@ -12,6 +12,7 @@
   <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
     <link rel="stylesheet" href="../stylesheets/darkMode.css">
     <%} %>
+      <script defer src="../javascripts/search.js"></script>
 
 </head>
 
@@ -25,42 +26,50 @@
     <div class="maincontent">
 
 
-        <div class="find-friends-wrapper">
-          <main class="all-people-wrapper">
-            <div class="peopletitle">All</div>
+      <div class="find-friends-wrapper">
+        <main class="all-people-wrapper">
+          <div class="allpeopletitle">
+            <div>All</div>
 
-            <% if (locals.allUsers && locals.allUsers.length> 0) { %>
-              <% for (var person of locals.allUsers) { %>
-                <div class="person-wrapper">
-                  <div>
-                    <%= person.name %>
-                  </div>
 
-                  <form action="/users/follow" method="post">
-                    <input type="hidden" name="userIdToFollow" value="<%= person._id %>" />
-                    <input onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}" type="submit" class="followbtn" value="Follow" />
-                  </form>
-                </div>
-                <% } %>
-                  <% } %>
-          </main>
-
-          <div class="friends-wrapper">
-            <% if (locals.currentUser.following && locals.currentUser.following.length> 0) { %>
-              <div class="peopletitle">My Friends</div>
-              <% for (var friend of locals.currentFriendNames) { %>
-                <div class="person-wrapper">
-                  <div>
-                    <%= friend %>
-                  </div>
-                </div>
-                <% } %>
-                  <% } else { %>
-                    <div>You have no friends </div>
-                    <% } %>
-
+            <input type="text" id="search-box" placeholder="Search...">
           </div>
+
+
+          <% if (locals.allUsers && locals.allUsers.length> 0) { %>
+            <% for (var person of locals.allUsers) { %>
+              <div class="person-wrapper">
+                <div>
+                  <%= person.name %>
+                </div>
+
+                <form action="/users/follow" method="post">
+                  <input type="hidden" name="userIdToFollow" value="<%= person._id %>" />
+                  <input
+                    onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
+                    type="submit" class="followbtn" value="Follow" />
+                </form>
+              </div>
+              <% } %>
+                <% } %>
+        </main>
+
+        <div class="friends-wrapper">
+          <% if (locals.currentUser.following && locals.currentUser.following.length> 0) { %>
+            <div class="peopletitle">My Friends</div>
+            <% for (var friend of locals.currentFriendNames) { %>
+              <div class="friend-person-wrapper">
+                <div>
+                  <%= friend %>
+                </div>
+              </div>
+              <% } %>
+                <% } else { %>
+                  <div>You have no friends </div>
+                  <% } %>
+
         </div>
+      </div>
     </div>
   </div>
 

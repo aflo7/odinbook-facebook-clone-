@@ -6,7 +6,7 @@ function handleGuestLogin() {
         return;
     }
     const loginSubmitBtn = document.getElementById("loginSubmitBtn");
-    const loginForm = document.getElementById('loginForm');
+    const loginForm = document.getElementById("loginForm");
     if (loginSubmitBtn === null || loginForm === null) {
         return;
     }

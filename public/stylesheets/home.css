@@ -5,7 +5,6 @@
     padding: 10px;
     margin: 5px;
     display: flex;
-
     flex-direction: column;
     justify-content: space-between;
 }
@@ -18,7 +17,6 @@
 
 .individual-post-title {
     font-size: 14pt;
-
 }
 
 .individual-post-like-count {
@@ -64,7 +62,6 @@
     border-radius: 10px;
 }
 
-
 .posts-title {
     padding-left: 5px;
     padding-top: 5px;
@@ -90,7 +87,6 @@
     background-color: white;
     margin-bottom: 5px;
     font-size: 16pt;
-
 }
 
 .add-post-btn:hover {
@@ -109,4 +105,3 @@ a {
 a:hover {
     color: inherit;
 }
-

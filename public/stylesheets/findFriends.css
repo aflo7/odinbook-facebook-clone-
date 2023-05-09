@@ -1,45 +1,51 @@
 .person-wrapper {
-  background-color: rgb(64, 64, 255);
-color: white;
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  padding: 5px;
-  border-top: 1px solid white;
-}
-
-/* .right-person-wrapper {
-  background-color: rgb(64, 64, 255);
-  color: white;
+    background-color: rgb(64, 64, 255);
+    color: white;
     display: flex;
     justify-content: space-between;
+    height: 50px;
     padding: 5px;
-    padding-bottom: 16px;
     border-top: 1px solid white;
-} */
+}
+
+.friend-person-wrapper {
+    background-color: rgb(64, 64, 255);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    padding: 5px;
+    border-top: 1px solid white;
+}
 
 .all-people-wrapper {
-  width: 50%;
-  border-right: 1px solid white;
+    width: 50%;
+    border-right: 1px solid white;
 }
 
 .friends-wrapper {
-  width: 50%;
+    width: 50%;
 }
 
 .peopletitle {
-  padding: 5px;
-  font-size: 18pt;
+    padding: 5px;
+    font-size: 16pt;
+}
+
+.allpeopletitle {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: 16pt;
 }
 
 .find-friends-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .followbtn {
-  padding-left: 5px;
-  padding-right: 5px;
-
+    padding-left: 5px;
+    padding-right: 5px;
 }

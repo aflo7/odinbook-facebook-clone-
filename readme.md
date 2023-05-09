@@ -6,16 +6,16 @@ I deployed the application using a DigitalOcean droplet.
 
 ### Features:
 
--   Ability to add friends, create posts
--   Add comments to posts
--   See like count and comment count on each post
+-   Username/password login
+-   Facebook login
+-   Guest login
+-   Add a friend
+-   Create a post
+-   Comment on a post
+-   Like count on posts
 -   Profile photo upload
 -   Darkmode toggle
--   Username/password authentication/authorization
--   Facebook authentication/authorization
--   Ability to like posts
--   Login session persists
--   Displays the news on the homepage using a News API
+-   Like a post
 
 ### Node.js routes
 
@@ -99,7 +99,6 @@ I deployed the application using a DigitalOcean droplet.
     <td>/posts/:id</td>
     <td>retrieve a post with a specific ID</td>
   </tr>
-
 
   <tr>
     <td>POST</td>
