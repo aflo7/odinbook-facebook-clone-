@@ -8,7 +8,7 @@ var path = require("path")
 var session = require("express-session")
 const MemoryStore = require("memorystore")(session)
 var bodyParser = require("body-parser")
-var { User } = require("./models/schema.js")
+var { User } = require("../models/schema.js")
 var passport = require("passport")
 var LocalStrategy = require("passport-local").Strategy
 var FacebookStrategy = require("passport-facebook")
@@ -17,11 +17,11 @@ const { faker } = require("@faker-js/faker")
 
 require("dotenv").config()
 
-var indexRouter = require("./routes/index")
-var usersRouter = require("./routes/users.js")
-var postsRouter = require("./routes/posts.js")
-var authRouter = require("./routes/auth.js")
-var imageRouter = require("./routes/image.js")
+var indexRouter = require("../routes/index")
+var usersRouter = require("../routes/users.js")
+var postsRouter = require("../routes/posts.js")
+var authRouter = require("../routes/auth.js")
+var imageRouter = require("../routes/image.js")
 
 var app = express()
 // view engine setup

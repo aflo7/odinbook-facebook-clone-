@@ -120,9 +120,9 @@
                   </div>
         </main>
         <div class="news-wrapper">
-          <% if(locals.newsArticles && locals.newsArticles.appleArticles.articles.length> 0) {%>
+          <% if(locals.newsArticles && locals.newsArticles.length> 0) {%>
             <div class="newstitle">News</div>
-            <% for (var applePost of locals.newsArticles.appleArticles.articles) { %>
+            <% for (var applePost of locals.newsArticles) { %>
               <div class="individual-news-wrapper">
                 <div class="individual-news-left">
                   <img class="news-img" src="<%= applePost.urlToImage %>" alt="<%= applePost.source.name %>" />
@@ -141,6 +141,8 @@
               </div>
               <% } %>
                 <% } %>
+
+                
         </div>
       </div>
 
