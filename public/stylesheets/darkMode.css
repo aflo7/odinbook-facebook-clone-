@@ -1,38 +1,27 @@
-/* // the following styles enable darkmode */
 body {
-  color: white;
-  background-color: black;
-}
-
-nav {
-  border-bottom: 1px solid white;
+    color: white;
+    background-color: black;
 }
 
 .mainnavbtn:hover {
-  background-color: rgb(84, 78, 255);
-}
-
-.maincontent {
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-  border-bottom: 1px solid white;
-}
-
-.post-wrapper {
-  border-right: 1px solid white;
+    background-color: rgb(84, 78, 255);
 }
 
 #createpostform {
-  border-bottom: 1px solid white !important;
+    border-bottom: 1px solid white !important;
 }
 .my-posts-wrapper {
-  border-top: 1px solid white;
+    border-top: 1px solid white;
 }
 .individual-comment {
-  border: 1px solid white;
+    border: 1px solid white;
 }
 
 .my-post {
-  border: 1px solid white;
+    border: 1px solid white;
+}
 
+.add-post-btn {
+    color: white;
+    background-color: black;
 }

@@ -3,64 +3,86 @@
 
 <head>
   <title>Odinbook</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="stylesheets/loginform.css">
   <link rel="stylesheet" href="stylesheets/style.css">
   <link rel="stylesheet" href="stylesheets/registerform.css">
   <link rel="stylesheet" href="stylesheets/index.css">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+
   <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
     <link rel="stylesheet" href="../stylesheets/darkMode.css">
 
     <%} %>
-    <script defer src="../javascripts/index.js"></script>
+      <script defer src="../javascripts/index.js"></script>
 </head>
 
 <body>
   <div class="App">
     <% if (locals.registeredMsg) { %>
-      <div class="register-success"><%= locals.registeredMsg %></div>
-     
-    <% } %>
-    <% if (locals.loginErrorMessage) { %>
-      <div class="error-wrapper">Error: <%= locals.loginErrorMessage %>
+      <div class="register-success">
+        <%= locals.registeredMsg %>
       </div>
-      <% }%>
-        <div class="homescreenwrapper">
-          <div class="lefthomewrapper">
-            <div class="odinbooktitle">odinbook</div>
-            <div class="odinbookdescription">
-              Connect with friends and the world around you on Odinbook.
-            </div>
+
+      <% } %>
+        <% if (locals.loginErrorMessage) { %>
+          <div class="error-wrapper">Error: <%= locals.loginErrorMessage %>
           </div>
+          <% }%>
+            <div class="homescreenwrapper">
+              <div class="lefthomewrapper">
+                <div class="odinbooktitle">odinbook</div>
+                <div class="odinbookdescription">
+                  Connect with friends and the world around you on Odinbook.
+                </div>
+              </div>
 
-          <div class="righthomewrapper">
-            <div class="loginformwrapper">
-              <form method="post" action="/log-in" class="loginform">
-                <div><span style="color: blue;">Odinbook</span> Login</div>
-                <input id="loginUsernameInput" name='username' required class="usernamelogininput" type="text" placeholder="Username"
-                  value=""></input>
+              <div class="righthomewrapper">
+                <div class="loginformwrapper">
+                  <form method="post" action="/log-in" class="loginform" id="loginForm">
+                    <input id="loginUsernameInput" name='username' required class="usernamelogininput" type="text"
+                      placeholder="Username" value=""></input>
 
-                <input id="loginPasswordInput" type="password" name='password' required class="passwordlogininput" type="text" placeholder="Password"
-                  value="" autocomplete="on" />
+                    <input id="loginPasswordInput" type="password" required name='password' class="passwordlogininput"
+                      type="text" placeholder="Password" value="" autocomplete="on" />
 
-                <input onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}" type="submit" class="loginbtn" id="loginSubmitBtn" value="Login" />
-
-                <button onclick="location.href='/auth/facebook'" type="button" class="facebook-login-btn">Login with Facebook</button>
-
-                <button id="guestBtn" type="button" class="guest-btn">Browse as a guest</button>
-
-                <button onclick="location.href='/register'" type="button" class="createaccountbtn">Create new
-                  account</button>
+                    <input
+                      onclick="if (this.form.checkValidity()) {this.form.submit(); this.disabled=true; this.value='Loading...'}"
+                      type="submit" class="loginbtn" id="loginSubmitBtn" value="Login" />
 
 
-              </form>
+                    <button onclick="location.href='/auth/facebook'" type="button" class="facebook-login-btn">Login with
+                      Facebook</button>
+
+                    <input type="button" onclick="this.disabled=true; this.value='Loading...'" type="button"
+                      class="guest-btn" id="guestBtn" value="Guest" />
+
+
+                    <button onclick="location.href='/register'" type="button"
+                      class=" createaccountbtn">Register</button>
+
+
+                  </form>
+
+                </div>
+
+              </div>
             </div>
-
-          </div>
-        </div>
-        <div class="homescreenfooter">
-          English (US) Español Français (France) 中文(简体) العربية Português
-          (Brasil) Italiano 한국어 Deutsch हिन्दी 日本語
-        </div>
+            <div class="homescreenfooter">
+              English (US) Español Français (France) 中文(简体) العربية Português
+              (Brasil) Italiano 한국어 Deutsch हिन्दी 日本語
+            </div>
   </div>
 
 

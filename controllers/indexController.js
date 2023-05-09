@@ -2,7 +2,6 @@ const { Post, User } = require("../models/schema")
 const { appleArticles, chatGptArticles } = require("../server/newsData")
 
 exports.load_profile_page = (req, res) => {
-    // update the current user session
     req.logIn(req.user, (error) => {
         if (error) {
             return res.status(400).render("error")

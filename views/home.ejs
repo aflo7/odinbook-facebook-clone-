@@ -7,8 +7,23 @@
   <title>Home</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <link rel="stylesheet" href="stylesheets/home.css">
   <link rel="stylesheet" href="stylesheets/style.css">
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
   <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
     <link rel="stylesheet" href="../stylesheets/darkMode.css">
 
@@ -17,41 +32,61 @@
 </head>
 
 <body>
+  <div class="nav-wrapper">
+  <%- include('./partials/nav.ejs'); %>
+</div>
+
   <div class="mainwrapper">
     <div class="maincontent">
-      <%- include('./partials/nav.ejs'); %>
+        <div class="modal fade" id="createPostModal" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Create a post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="post" action="/posts/new" id="newPostForm">
+                  <div class="form-group">
+                    <input class="form-control" required name="title" id="title" placeholder="Title">
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" required name="content" id="content" placeholder="Content">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="newPostForm">Submit</button>
 
-        <form method="post" action="/posts/new" id="createpostform">
-          <div style="margin-bottom: 5px;">Create a post</div>
-          <input style="padding-left: 5px; padding-right: 5px;" type="text" name="title" id="title" placeholder="Title" required>
-          <input style="padding-left: 5px; padding-right: 5px;" type="text" name="content" id="content" placeholder="Content" required>
-          <input
-            onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
-            style="padding-left: 5px; padding-right: 5px;" id="createpostsubmitbtn" type="submit" value="Create">
+              </div>
+            </div>
+          </div>
+        </div>
 
-        </form>
+
+
         <div class="maincontentbottom">
           <main id="main" class="post-wrapper">
-
-
             <% if (locals.posts && locals.posts.length> 0) { %>
-              <div class="poststitle">Posts</div>
+              <div class="posts-title">Posts</div>
               <% for (var post of locals.posts) { %>
                 <div class="individual-post-wrapper">
                   <div>
-                    <h3>
-                      <a href="/posts/<%= post._id %>">
-                        <% if (post.title.length> 30) { %>
-                          <%= post.title.substring(0, 30) + "..." %>
+                      <div class="individual-post-title">
+                        <a href="/posts/<%= post._id %>">
+                          <% if (post.title.length> 30) { %>
+                            <%= post.title.substring(0, 30) + "..." %>
 
-                            <% } else { %>
-                              <%= post.title %>
+                              <% } else { %>
+                                <%= post.title %>
 
-                                <% }%>
-                      </a>
-
-                    </h3>
-
+                                  <% }%>
+                        </a>
+                      </div>
 
                     <div class="individual-post-content">
                       <% if (post.content.length> 30) { %>
@@ -74,15 +109,19 @@
                     </span>
 
                   </div>
-
-
-
                 </div>
                 <% } %>
                   <% } else { %>
+                    <div class="poststitle">Posts</div>
+
                     <div class="noposts">No posts to show, try following new people!</div>
                     <% } %>
 
+                      <div class="add-post-wrapper">
+                        <button type="button" data-toggle="modal" data-target="#createPostModal" class="add-post-btn">
+                          + Add a post
+                        </button>
+                      </div>
           </main>
           <div class="news-wrapper">
             <% if(locals.newsArticles && locals.newsArticles.appleArticles.articles.length> 0) {%>
@@ -91,53 +130,21 @@
                 <div class="individual-news-wrapper">
                   <div class="individual-news-left">
                     <img class="news-img" src="<%= applePost.urlToImage %>" alt="<%= applePost.source.name %>" />
-
                   </div>
 
                   <div class="individual-news-right">
-
-
                     <div class="individual-news-title">
-                      <a href="<%= applePost.url %>">
+                      <a target="_blank" href="<%= applePost.url %>">
                         <%= applePost.title %>
                       </a>
                     </div>
-
                     <div class="individual-news-content">
-                      <%= applePost.description.substring(0, 75) %>...
+                      <%= applePost.description.substring(0, 40) %>...
                     </div>
                   </div>
                 </div>
                 <% } %>
                   <% } %>
-
-                    <% if(locals.newsArticles && locals.newsArticles.chatGptArticles.articles.length> 0) {%>
-                      <% for (var post of locals.newsArticles.chatGptArticles.articles) { %>
-                        <div class="individual-news-wrapper">
-
-
-                          <div class="individual-news-left">
-                            <img class="news-img" src="<%= post.urlToImage %>" alt="<%= post.source.name %>" />
-
-                          </div>
-
-                          <div class="individual-news-right">
-
-                            <div class="individual-news-title">
-                              <a target="_blank" href="<%= post.url %>">
-
-                                <%= post.title %>
-                              </a>
-                            </div>
-
-                            <div class="individual-news-content">
-                              <%= post.description.substring(0, 75) %>...
-                            </div>
-                          </div>
-
-                        </div>
-                        <% } %>
-                          <% } %>
           </div>
         </div>
 

@@ -1,28 +1,27 @@
 const guestBtn = document.getElementById("guestBtn") as HTMLButtonElement | null
-guestBtn?.addEventListener('click', handleGuestLogin)
+guestBtn?.addEventListener("click", handleGuestLogin)
+
 function handleGuestLogin() {
-  if (guestBtn === null) {
-    return
-  }
 
-  const loginUsernameInput = document.getElementById(
-    "loginUsernameInput"
-  ) as HTMLInputElement | null
-  const loginPasswordInput = document.getElementById(
-    "loginPasswordInput"
-  ) as HTMLInputElement | null
-  const loginSubmitBtn = document.getElementById(
-    "loginSubmitBtn"
-  ) as HTMLInputElement | null
+    if (guestBtn === null) {
+        return
+    }
 
-  if (
-    loginUsernameInput === null ||
-    loginPasswordInput === null ||
-    loginSubmitBtn === null
-  ) {
-    return
-  }
-  loginUsernameInput.value = "guest"
-  loginPasswordInput.value = "pass"
-  loginSubmitBtn.click()
+    const loginSubmitBtn = document.getElementById(
+        "loginSubmitBtn"
+    ) as HTMLInputElement | null
+    const loginForm = document.getElementById('loginForm') as HTMLFormElement | null
+
+    if (
+        loginSubmitBtn === null || loginForm === null
+    ) {
+        return
+    }
+    
+    const hiddenField = document.createElement("input")
+    hiddenField.type = "hidden"
+    hiddenField.name = "guest"
+    hiddenField.value = "true"
+    loginForm.appendChild(hiddenField)
+    loginForm.submit()
 }

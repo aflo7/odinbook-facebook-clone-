@@ -13,16 +13,27 @@
   border: 5px;
   margin-top: 10px;
   cursor: pointer;
+  text-align: left;
+}
+
+.facebook-login-btn:hover {
+  background-color: rgb(30, 120, 255);
+
 }
 
 .guest-btn {
-  background-color: brown;
+  background-color: rgb(187, 67, 67);
   color: white;
   border: none;
   padding: 5px;
-  border: 5px;
   margin-top: 10px;
+  text-align: left;
   cursor: pointer;
+}
+
+.guest-btn:hover {
+  background-color: rgb(151, 20, 20);
+
 }
 
 .register-success {
