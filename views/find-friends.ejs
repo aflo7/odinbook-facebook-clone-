@@ -44,7 +44,7 @@
                   <input type="hidden" name="userIdToFollow" value="<%= person._id %>" />
                   <input
                     onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
-                    type="submit" class="followbtn" value="Add" />
+                    type="submit" class="followbtn" value="+" />
                 </form>
               </div>
               <% } %>
@@ -64,7 +64,7 @@
                   <input type="hidden" name="userIDToUnfollow" value="<%= friend._id %>" />
                   <input
                     onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
-                    type="submit" class="followbtn" value="Remove" />
+                    type="submit" class="followbtn" value="-" />
                 </form>
               </div>
               <% } %>
