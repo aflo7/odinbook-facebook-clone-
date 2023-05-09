@@ -52,10 +52,10 @@
                 <div class="loginformwrapper">
                   <form method="post" action="/log-in" class="loginform" id="loginForm">
                     <input id="loginUsernameInput" name='username' required class="usernamelogininput" type="text"
-                      placeholder="Username" value=""></input>
+                      placeholder="Username" style="margin-top: 0px;"></input>
 
                     <input id="loginPasswordInput" type="password" required name='password' class="passwordlogininput"
-                      type="text" placeholder="Password" value="" autocomplete="on" />
+                      type="text" placeholder="Password" autocomplete="on" />
 
                     <input
                       onclick="if (this.form.checkValidity()) {this.form.submit(); this.disabled=true; this.value='Loading...'}"
@@ -66,7 +66,7 @@
                       Facebook</button>
 
                     <input type="button" onclick="this.disabled=true; this.value='Loading...'" type="button"
-                      class="guest-btn" id="guestBtn" value="Guest" />
+                      class="guest-btn" id="guestBtn" value="Guest Login" />
 
 
                     <button onclick="location.href='/register'" type="button"
