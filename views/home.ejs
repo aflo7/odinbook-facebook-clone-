@@ -33,120 +33,116 @@
 
 <body>
   <div class="nav-wrapper">
-  <%- include('./partials/nav.ejs'); %>
-</div>
+    <%- include('./partials/nav.ejs'); %>
+  </div>
 
   <div class="mainwrapper">
     <div class="maincontent">
-        <div class="modal fade" id="createPostModal" tabindex="-1" role="dialog"
-          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Create a post</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form method="post" action="/posts/new" id="newPostForm">
-                  <div class="form-group">
-                    <input class="form-control" required name="title" id="title" placeholder="Title">
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" required name="content" id="content" placeholder="Content">
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="newPostForm">Submit</button>
+      <div class="modal fade" id="createPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Create a post</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="post" action="/posts/new" id="newPostForm">
+                <div class="form-group">
+                  <input class="form-control" required name="title" id="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" required name="content" id="content" placeholder="Content">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" form="newPostForm">Submit</button>
 
-              </div>
             </div>
           </div>
         </div>
+      </div>
 
 
 
-        <div class="maincontentbottom">
-          <main id="main" class="post-wrapper">
-            <% if (locals.posts && locals.posts.length> 0) { %>
-              <div class="posts-title">Posts</div>
-              <% for (var post of locals.posts) { %>
-                <div class="individual-post-wrapper">
-                  <div>
-                      <div class="individual-post-title">
-                        <a href="/posts/<%= post._id %>">
-                          <% if (post.title.length> 30) { %>
-                            <%= post.title.substring(0, 30) + "..." %>
-
-                              <% } else { %>
-                                <%= post.title %>
-
-                                  <% }%>
-                        </a>
-                      </div>
-
-                    <div class="individual-post-content">
-                      <% if (post.content.length> 30) { %>
-                        <%= post.content.substring(0, 30) + "..." %>
+      <div class="maincontentbottom">
+        <main id="main" class="post-wrapper">
+          <% if (locals.posts && locals.posts.length> 0) { %>
+            <div class="posts-title">Posts</div>
+            <% for (var post of locals.posts) { %>
+              <div class="individual-post-wrapper">
+                <div>
+                  <div class="individual-post-title">
+                    <a href="/posts/<%= post._id %>">
+                      <% if (post.title.length> 30) { %>
+                        <%= post.title.substring(0, 30) + "..." %>
 
                           <% } else { %>
-                            <%= post.content %>
+                            <%= post.title %>
 
                               <% }%>
-                    </div>
-
+                    </a>
                   </div>
-                  <div class="individual-post-like-count">
-                    <span>By: <%= post.posterName %>,</span>
-                    <span>
-                      <%= post.likes %> likes,
-                    </span>
-                    <span>
-                      <%= post.comments.length %> comments
-                    </span>
 
+                  <div class="individual-post-content">
+                    <% if (post.content.length> 30) { %>
+                      <%= post.content.substring(0, 30) + "..." %>
+
+                        <% } else { %>
+                          <%= post.content %>
+
+                            <% }%>
+                  </div>
+
+                </div>
+                <div class="individual-post-like-count">
+                  <span>By: <%= post.posterName %>,</span>
+                  <span>
+                    <%= post.likes %> likes,
+                  </span>
+                  <span>
+                    <%= post.comments.length %> comments
+                  </span>
+
+                </div>
+              </div>
+              <% } %>
+                <% } %>
+
+                  <div class="add-post-wrapper">
+                    <button type="button" data-toggle="modal" data-target="#createPostModal" class="add-post-btn">
+                      + Add post
+                    </button>
+                  </div>
+        </main>
+        <div class="news-wrapper">
+          <% if(locals.newsArticles && locals.newsArticles.appleArticles.articles.length> 0) {%>
+            <div class="newstitle">News</div>
+            <% for (var applePost of locals.newsArticles.appleArticles.articles) { %>
+              <div class="individual-news-wrapper">
+                <div class="individual-news-left">
+                  <img class="news-img" src="<%= applePost.urlToImage %>" alt="<%= applePost.source.name %>" />
+                </div>
+
+                <div class="individual-news-right">
+                  <div class="individual-news-title">
+                    <a target="_blank" href="<%= applePost.url %>">
+                      <%= applePost.title %>
+                    </a>
+                  </div>
+                  <div class="individual-news-content">
+                    <%= applePost.description.substring(0, 40) %>...
                   </div>
                 </div>
+              </div>
+              <% } %>
                 <% } %>
-                  <% } else { %>
-                    <div class="poststitle">Posts</div>
-
-                    <div class="noposts">No posts to show, try following new people!</div>
-                    <% } %>
-
-                      <div class="add-post-wrapper">
-                        <button type="button" data-toggle="modal" data-target="#createPostModal" class="add-post-btn">
-                          + Add a post
-                        </button>
-                      </div>
-          </main>
-          <div class="news-wrapper">
-            <% if(locals.newsArticles && locals.newsArticles.appleArticles.articles.length> 0) {%>
-              <div class="newstitle">News</div>
-              <% for (var applePost of locals.newsArticles.appleArticles.articles) { %>
-                <div class="individual-news-wrapper">
-                  <div class="individual-news-left">
-                    <img class="news-img" src="<%= applePost.urlToImage %>" alt="<%= applePost.source.name %>" />
-                  </div>
-
-                  <div class="individual-news-right">
-                    <div class="individual-news-title">
-                      <a target="_blank" href="<%= applePost.url %>">
-                        <%= applePost.title %>
-                      </a>
-                    </div>
-                    <div class="individual-news-content">
-                      <%= applePost.description.substring(0, 40) %>...
-                    </div>
-                  </div>
-                </div>
-                <% } %>
-                  <% } %>
-          </div>
         </div>
+      </div>
 
 
     </div>
