@@ -118,6 +118,10 @@ nav {
     background-color: rgb(64, 64, 255);
     color: white;
 }
+.welcomenavbtn:hover {
+    background-color: rgb(98, 98, 255);
+
+}
 
 .mainnavbtn:hover {
     background-color: rgb(98, 98, 255);

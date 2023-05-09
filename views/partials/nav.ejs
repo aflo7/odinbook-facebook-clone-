@@ -1,18 +1,22 @@
 <nav>
   <% if (locals.currentUser.isFacebookUser && locals.currentUser.pfpUrl) { %>
     <div class="pfp-img-wrapper">
-      <img alt="pfp" class="pfp-img"
-        src="<%=locals.currentUser.pfpUrl%>" />
+      <img alt="pfp" class="pfp-img" src="<%=locals.currentUser.pfpUrl%>" />
     </div>
     <% } %>
       <% if (!locals.currentUser.isFacebookUser && locals.currentUser.nonFacebookUserImg &&
         locals.currentUser.nonFacebookUserImg !=="" && locals.currentUser.nonFacebookUserImg.data ) { %>
+          <a href="/profile">
+
         <div class="pfp-img-wrapper">
-            <img alt="pfp" class="pfp-img" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
+
+          <img alt="pfp" class="pfp-img" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
       <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
-     
+
 
         </div>
+
+        </a>
         <% } %>
 
           <a href="/profile">
