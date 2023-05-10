@@ -9,6 +9,7 @@ I deployed the application using a DigitalOcean droplet.
 -   Username/password login
 -   Facebook login
 -   Guest login
+-   Register with login/password
 -   Add a friend
 -   Create a post
 -   Comment on a post
