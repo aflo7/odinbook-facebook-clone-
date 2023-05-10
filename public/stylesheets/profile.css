@@ -1,49 +1,53 @@
 .toggle-dark-mode-input-btn {
-  padding-left: 5px;
-  padding-right: 5px;
-  
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .profile-info {
-  border-bottom: 1px solid black;
-  padding: 10px;
-
+    border-bottom: 1px solid black;
+    padding: 10px;
 }
 
 .profile-settings {
-  padding: 10px;
-  border-top: 1px solid white;
-  
+    padding: 10px;
+    border-bottom: 1px solid black;
 }
 
 .my-posts-wrapper {
-  padding: 10px;
-  border-top: 1px solid black;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
 
+.my-posts-header {
+    font-weight: bold;
 }
 
 .my-post {
-border: 1px solid black;
-margin-top: 5px;
-padding: 5px;
+    border: 1px solid black;
+    margin-top: 5px;
+    padding: 5px;
 }
 
 .my-comments-wrapper {
-  padding: 5px;
+    padding: 5px;
 }
 
 .individual-comment {
-  padding: 5px;
-font-size: 10pt;
-  border: 1px solid black;
+    padding: 5px;
+    font-size: 10pt;
+    border: 1px solid black;
 }
 
 #deleteMyPostForm {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 #deleteCommentForm {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profile-wrapper {
+    background-color: lightgray;
 }

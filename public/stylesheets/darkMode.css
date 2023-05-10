@@ -23,5 +23,14 @@ body {
 
 .add-post-btn {
     color: white;
-    background-color: black;
+    background-color: rgb(42, 169, 42);
+}
+
+.profile-wrapper, .user-info-wrapper {
+    color: white;
+    background-color: rgb(39, 39, 39);
+
+} 
+.maincontent {
+    background-color: rgb(39, 39, 39);
 }
