@@ -113,17 +113,6 @@ nav {
     color: white;
 }
 
-.welcomenavbtn {
-    padding: 10px;
-    cursor: pointer;
-    background-color: rgb(64, 64, 255);
-    color: white;
-}
-.welcomenavbtn:hover {
-    background-color: rgb(98, 98, 255);
-
-}
-
 .mainnavbtn:hover {
     background-color: rgb(98, 98, 255);
 }
@@ -158,12 +147,6 @@ nav {
 
 
 }
-
-/* @media screen and (min-width: 900px) {
-    body {
-        font-size: 16pt;
-    }
-} */
 
 @media screen and (min-width: 1240px) {
     .maincontent {

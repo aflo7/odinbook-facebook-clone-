@@ -68,13 +68,27 @@ router.get(
                     return res.render("find-friends")
                 }
 
-                const namesOfPeopleYouAreFollowing = foundUser.following.map(
-                    (person) => person
+                const peopleYouAreFollowing = foundUser.following.map(
+                    (person) => {
+                        return { name: person.name, _id: person._id }
+                    }
                 )
-                res.locals.currentFriendNames = namesOfPeopleYouAreFollowing
-                return res.render("find-friends")
+                res.locals.currentFriendNames = peopleYouAreFollowing
+                res.render("find-friends")
             })
     }
 )
+
+router.get("/:id", isAuthenticated, (req, res, next) => {
+    User.findById(req.params.id, (err, result) => {
+        if (err) return res.render("error")
+        res.render("user", {
+            name: result.name,
+            isFacebookUser: result.isFacebookUser,
+            pfp: result.nonFacebookUserImg,
+            friendCount: result.following.length
+        })
+    })
+})
 
 module.exports = router

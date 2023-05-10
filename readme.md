@@ -126,14 +126,26 @@ I deployed the application using a DigitalOcean droplet.
 
   <tr>
     <td>POST</td>
-    <td>/toggle-dark-mode</td>
+    <td>users/toggle-dark-mode</td>
     <td>toggle dark mode on/off</td>
   </tr>
 
   <tr>
     <td>GET</td>
-    <td>/find-friends</td>
+    <td>users/find-friends</td>
     <td>get a list of the current user's friends</td>
+  </tr>
+
+  <tr>
+    <td>GET</td>
+    <td>/users/:id</td>
+    <td>renders a page which contains a users info</td>
+  </tr>
+
+  <tr>
+    <td>POST</td>
+    <td>/users/unfollow</td>
+    <td>unfriends a user</td>
   </tr>
 </table>
 

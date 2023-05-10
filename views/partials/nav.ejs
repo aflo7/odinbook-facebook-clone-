@@ -6,22 +6,19 @@
     <% } %>
       <% if (!locals.currentUser.isFacebookUser && locals.currentUser.nonFacebookUserImg &&
         locals.currentUser.nonFacebookUserImg !=="" && locals.currentUser.nonFacebookUserImg.data ) { %>
-          <a href="/profile">
+        <a href="/profile">
 
-        <div class="pfp-img-wrapper">
+          <div class="pfp-img-wrapper">
 
-          <img alt="pfp" class="pfp-img" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
+            <img alt="pfp" class="pfp-img" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,  
       <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
-
-
-        </div>
+          </div>
 
         </a>
         <% } %>
 
           <a href="/profile">
-
-            <div class="welcomenavbtn" style="height: 50px; line-height: 30px;">Welcome, <%= locals.currentUser.name %>
+            <div class="mainnavbtn" style="height: 50px; line-height: 30px;">Profile
             </div>
           </a>
           <a href="/home">

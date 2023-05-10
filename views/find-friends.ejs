@@ -37,7 +37,9 @@
             <% for (var person of locals.allUsers) { %>
               <div class="person-wrapper">
                 <div>
+                  <a href='<%= person._id %>'>
                   <%= person.name %>
+                </a>
                 </div>
 
                 <form action="/users/follow" method="post">
@@ -57,7 +59,9 @@
             <% for (var friend of locals.currentFriendNames) { %>
               <div class="friend-person-wrapper">
                 <div>
-                  <%= friend.name %>
+                  <a href='<%= friend._id %>'>
+                    <%= friend.name %>
+                  </a>
                 </div>
 
                 <form action="/users/unfollow" method="post">

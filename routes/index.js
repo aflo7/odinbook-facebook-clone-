@@ -2,7 +2,7 @@ var express = require("express")
 var router = express.Router()
 var { isAuthenticated } = require("../scripts/customMiddleware.js")
 var passport = require("passport")
-// var { appleArticles, chatGptArticles } = require("../server/newsData.js")
+
 const {
     load_profile_page,
     load_home_page,

@@ -100,7 +100,9 @@
 
                 </div>
                 <div class="individual-post-like-count">
-                  <span>By: <%= post.posterName %>,</span>
+                  <a href="/users/<%= post.posterId %>">
+                    <span>By: <%= post.posterName %>,</span>
+                  </a>
                   <span>
                     <%= post.likes %> likes,
                   </span>
@@ -142,7 +144,7 @@
               <% } %>
                 <% } %>
 
-                
+
         </div>
       </div>
 
