@@ -5,7 +5,10 @@ exports.display_post = (req, res) => {
     .populate("comments")
     .exec((err, foundPost) => {
       if (err) return res.redirect("error")
-      return res.render("post", { foundPost })
+
+      const likeCount = foundPost.likes
+      const likeText = likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`
+      return res.render("post", { foundPost, likeText })
     })
 }
 
