@@ -1,7 +1,7 @@
-var express = require("express")
-var router = express.Router()
-var { isAuthenticated } = require("../scripts/customMiddleware.js")
-var passport = require("passport")
+const express = require("express")
+const router = express.Router()
+const { isAuthenticated } = require("../scripts/customMiddleware.js")
+const passport = require("passport")
 
 const {
     load_profile_page,

@@ -27,7 +27,8 @@
       <div class="profile-wrapper">
         <div class="profile-info">
           <div style="font-weight: bold;">Profile Info</div>
-          <div>Full Name: <%= locals.currentUser.name %>
+          <div>
+            Full Name: <%= locals.currentUser.name %>
           </div>
 
         </div>
@@ -46,17 +47,15 @@
           <!-- can only change your profile picture if you are not a facebook user -->
           <% if (!locals.currentUser.isFacebookUser) { %>
             <div>
-              <div>Current profile picture:
+              <div>
+                Current profile picture:
 
-                <% if (locals.currentUser.nonFacebookUserImg && locals.currentUser.nonFacebookUserImg !=="" &&
-                  locals.currentUser.nonFacebookUserImg.data ) { %>
+                <% if (locals.currentUser.nonFacebookUserImg &&locals.currentUser.nonFacebookUserImg.data ) { %>
 
                   <img height="50px" width="50px" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,
-                    <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
+                    <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>" />
 
-                  <%} else { %>
-                    None
-                    <% } %>
+                  <%} %>
               </div>
 
               <form action="/image" method="POST" enctype="multipart/form-data">
@@ -71,63 +70,29 @@
             <% } %>
         </div>
 
-        <% if(locals.myPosts.length> 0) { %>
+        <% if (locals.myPosts.length> 0) { %>
           <div class="my-posts-wrapper">
-            <% } else { %>
-              <div>
-                <% } %>
+            <div class="my-posts-header">My Posts</div>
 
+            <% locals.myPosts.forEach(post=> { %>
 
-                  <% if (locals.myPosts.length> 0) { %>
-                    <div class="my-posts-header">My Posts</div>
+              <%- include('./partials/profile-post.ejs', {post}); %>
 
-                    <%} %>
-                      <% locals.myPosts.forEach(post=> { %>
-                        <div class="my-post">
-                          <div><span style="color: rgb(73, 79, 255); font-weight: bold;">Title:</span>
-                            <%=post.title%>
-                          </div>
-
-                          <div><span style="color: rgb(73, 79, 255); font-weight: bold;">Content:</span>
-                            <%=post.content%>
-                          </div>
-
-
-                          <div class="my-comments-wrapper">
-
-                            <% post.comments.forEach(comment=> { %>
-                              <div class="individual-comment">
-                                <span>
-                                  <span style="color: rgb(73, 79, 255);">Author:</span>
-                                  <%=comment.author%>
-                                    <span style="color: rgb(73, 79, 255);">Content:</span>
-                                    <%=comment.content%>
-                                </span>
-                                <form id="deleteCommentForm" method="post" action="/comment/delete">
-                                  <input name="commentID" type="hidden" value="<%= comment._id %>" />
-                                  <input style="padding-left: 5px; padding-right: 5px; cursor: pointer;" type="submit"
-                                    value="Delete Comment" />
-                                </form>
-                              </div>
-                              <% }) %>
-                          </div>
-
-
-                          <form method="post" action="/posts/delete" id="deleteMyPostForm">
-                            <input type="hidden" name="postID" value="<%=post._id%>" />
-                            <input style="margin-right: 5px; padding-left: 5px; padding-right: 5px; cursor: pointer;"
-                              type="submit" value="Delete Post" />
-                          </form>
-                        </div>
-                        <% }) %>
-
-              </div>
-
+                <% }) %>
           </div>
+          <%} %>
+
       </div>
 
+      <div>
 
+        <a href="/log-out" style="text-decoration: none;">
+          <p class="mainnavbtn" style="height: 50px; line-height: 30px; background-color: rgb(255, 86, 86); text-align: center;">Logout
+          </p>
+        </a>
+      </div>
     </div>
+
   </div>
 
 </body>
