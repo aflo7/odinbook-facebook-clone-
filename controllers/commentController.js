@@ -1,4 +1,4 @@
-const {CommentModel, Post} = require('../models/schema')
+const { CommentModel, Post } = require('../models/schema')
 
 exports.delete_comment = (req, res) => {
   CommentModel.findByIdAndDelete(req.body.commentID, (err, result) => {
