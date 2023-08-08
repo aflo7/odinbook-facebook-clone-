@@ -1,17 +1,17 @@
-var fs = require("fs")
+const fs = require("fs")
 const path = require("path")
 const { clearUploadsFolder } = require("../scripts/clearUploadsFolder")
 const { User } = require("../models/schema")
 
-exports.upload_image = (req, res, next) => {
-  var img = {
+exports.update_profile_photo = (req, res, next) => {
+  const img = {
     data: fs.readFileSync(
-      path.join(__dirname, "..", "routes", "photos", req.file.filename)
+      path.join(__dirname, "..", "server", "photos", req.file.filename)
     ),
     contentType: "image/png"
   }
 
-  User.findById(req.user._id, function (err, foundUser) {
+  User.findById(req.user._id, (err, foundUser) => {
     if (err) return res.render("error")
     foundUser.nonFacebookUserImg = img
     try {
