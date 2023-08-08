@@ -22,7 +22,6 @@
     "express-session": "^1.17.3",
     "helmet": "^6.0.1",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
     "memorystore": "^1.6.7",
     "mongodb-memory-server": "^8.11.0",
     "mongoose": "^6.8.2",
@@ -31,7 +30,8 @@
     "nodemon": "^2.0.20",
     "passport": "^0.6.0",
     "passport-facebook": "^3.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
