@@ -64,28 +64,34 @@ passport.use(
             profileFields: ["id", "displayName", "photos"]
         },
         function (accessToken, refreshToken, profile, cb) {
-            // see if the facebook user exists in the database...
-            User.find({ facebookId: profile.id }, function (err, foundUser) {
+            User.find({ facebookId: profile.id }, (err, result) => {
                 if (err) return res.render("error")
-                if (foundUser.length !== 0) return cb(null, foundUser[0])
+                const user = result[0]
+                if (user) {
+                    user.pfpUrl = profile.photos[0].value
+                    user.save((err, result) => {
+                        if (err) return res.render("error")
+                        return cb(null, user)
+                    })
+                } else {
+                    const facebookUser = new User({
+                        creationDate: new Date(),
+                        username: "",
+                        password: "",
+                        following: [],
+                        settings: { darkMode: false },
+                        name: profile.displayName,
+                        isFacebookUser: true,
+                        facebookId: profile.id,
+                        pfpUrl: profile.photos[0].value
+                    })
 
-                // at this point, we determined that the user doesnt exist, proceed to create a new facebook User.
-                const newFacebookUser = new User({
-                    creationDate: new Date(),
-                    username: "",
-                    password: "",
-                    following: [],
-                    settings: { darkMode: false },
-                    name: profile.displayName,
-                    isFacebookUser: true,
-                    facebookId: profile.id,
-                    pfpUrl: profile.photos[0].value
-                })
+                    facebookUser.save((err, result) => {
+                        if (err) return res.render("error")
+                        return cb(null, result)
+                    })
+                }
 
-                newFacebookUser.save(function (err, newlyCreatedUser) {
-                    if (err) return res.render("error")
-                    return cb(null, newlyCreatedUser)
-                })
             })
         }
     )
