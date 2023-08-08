@@ -99,9 +99,8 @@ passport.use(
 
 passport.use(
     new LocalStrategy((username, password, done) => {
-        User.findOne({ username }, function (err, foundUser) {
+        User.findOne({ username }, (err, foundUser) => {
             if (err) {
-                console.log(err)
                 return res.render("error")
             }
 
@@ -117,27 +116,23 @@ passport.use(
     })
 )
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
     done(null, user._id)
 })
 
-passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, foundUser) {
-        if (err) {
+passport.deserializeUser((id, done) => {
+    User.findById(id, (err, foundUser) => {
+        if (err || !foundUser) {
             return done("error deserializing", false)
         }
-        if (foundUser) {
-            return done(null, foundUser)
-        } else {
-            return done("error deserializing", false)
-        }
+        return done(null, foundUser)
     })
 })
 
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     res.locals.currentUser = req.user
     next()
 })
