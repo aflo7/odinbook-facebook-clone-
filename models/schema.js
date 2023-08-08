@@ -30,7 +30,8 @@ const Post = new Schema({
   content: { type: String, required: true },
   date: { type: Date, required: true },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment", default: [] }],
-  likes: { type: Number, default: 0 }
+  likes: { type: Number, default: 0 },
+  imageUrl: {type: String, required: false}
 })
 
 const Comment = new Schema({

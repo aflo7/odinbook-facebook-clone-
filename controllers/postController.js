@@ -20,7 +20,8 @@ exports.create_post = (req, res) => {
     content: req.body.content,
     date: new Date(),
     comments: [],
-    likes: 0
+    likes: 0,
+    imageUrl: req.body.imageUrl
   })
   newPost.save((err, result) => {
     if (err) return res.render("error")
