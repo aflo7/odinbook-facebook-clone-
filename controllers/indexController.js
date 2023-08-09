@@ -38,7 +38,6 @@ exports.load_home_page = (req, res) => {
         .exec(function (err, docs) {
             if (err) return res.render("error")
             res.locals.posts = docs
-            console.log(docs)
             res.render("home")
         })
 }

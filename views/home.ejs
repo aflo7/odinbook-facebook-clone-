@@ -51,7 +51,8 @@
 
                     <div class="individual-post-title">
                       <div style="text-decoration: underline; cursor: pointer;" data-toggle="modal"
-                        data-target="#viewPostModal" onclick="fillModal('<%=post.title%>', '<%= post.content %>', '<%= post.imageUrl %>')">
+                        data-target="#viewPostModal"
+                        onclick="fillModal('<%=post.title%>', '<%= post.content %>', '<%= post.imageUrl %>', '<%=post.posterName%>')">
                         <%= post.title %>
                       </div>
                     </div>
@@ -105,11 +106,11 @@
   </div>
 
   <script>
-    function fillModal(postTitle, postContent, imgUrl) {
-
-      console.log(imgUrl)
+    function fillModal(postTitle, postContent, imgUrl, author) {
       document.getElementById('postTitle').textContent = postTitle
       document.getElementById('postContent').textContent = postContent
+      document.getElementById('postAuthor').textContent = author
+
 
       if (imgUrl) {
         document.getElementById('postImg').style.display = 'block'
