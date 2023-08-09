@@ -1,61 +1,34 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Post</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../stylesheets/home.css">
-  <link rel="stylesheet" href="../stylesheets/post.css">
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
-    <link rel="stylesheet" href="../stylesheets/darkMode.css">
+    <div class="single-post" style="word-wrap: break-word;">
 
-    <%} %>
+      <h2>
+        <%= foundPost.title %>
+      </h2>
+      <div style="margin-bottom: 20px; word-wrap: break-word;">
+        <%= foundPost.content %>
+      </div>
 
-</head>
-
-<body>
-
-  <div class="nav-wrapper">
-    <%- include('./partials/nav.ejs'); %>
-  </div>
-  <div class="mainwrapper">
-    <div class="maincontent">
-
-
-      <div class="single-post" style="word-wrap: break-word;">
-        
-          <h2>
-            <%= foundPost.title %>
-          </h2>
-          <div style="margin-bottom: 20px; word-wrap: break-word;">
-            <%= foundPost.content %>
+      <% if (foundPost.imageUrl) { %>
+        <div>
+          <img class="post-img" style="height: 200px; width: auto;" src="<%= foundPost.imageUrl %>" alt="img" />
+        </div>
+        <% } %>
+          <div>
+            Created On: <%- foundPost.date.toDateString() %>
           </div>
+          <div>
+            By: <%= foundPost.posterName %>
+          </div>
+          <div>
+            <%= likeText %>
+          </div>
+          <form method="post" action="/posts/like">
+            <input type="hidden" name="postID" value="<%=foundPost._id%>" />
+            <input
+              onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
+              id="likesubmitbtn" type="submit" value="Like this post" class="likebtn" />
+          </form>
 
-          <% if (foundPost.imageUrl) { %>
-            <div>
-              <img class="post-img" style="height: 200px; width: auto;" src="<%= foundPost.imageUrl %>" alt="img" />
-            </div>
-            <% } %>
-              <div>
-                Created On: <%- foundPost.date.toDateString() %>
-              </div>
-              <div>
-                By: <%= foundPost.posterName %>
-              </div>
-              <div>
-                <%= likeText %>
-              </div>
-              <form method="post" action="/posts/like">
-                <input type="hidden" name="postID" value="<%=foundPost._id%>" />
-                <input
-                  onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
-                  id="likesubmitbtn" type="submit" value="Like this post" class="likebtn" />
-              </form>
-      
 
 
 
@@ -87,15 +60,4 @@
               onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
               type="submit" value="Submit">
           </form>
-     
-      </div>
-
     </div>
-
-
-  </div>
-  </div>
-
-</body>
-
-</html>

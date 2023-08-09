@@ -1,16 +1,16 @@
 var { Post } = require("../models/schema")
 
-exports.display_post = (req, res) => {
-  Post.findById(req.params.id)
-    .populate("comments")
-    .exec((err, foundPost) => {
-      if (err) return res.redirect("error")
+// exports.display_post = (req, res) => {
+//   Post.findById(req.params.id)
+//     .populate("comments")
+//     .exec((err, foundPost) => {
+//       if (err) return res.redirect("error")
 
-      const likeCount = foundPost.likes
-      const likeText = likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`
-      return res.render("post", { foundPost, likeText })
-    })
-}
+//       const likeCount = foundPost.likes
+//       const likeText = likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`
+//       return res.render("post", { foundPost, likeText })
+//     })
+// }
 
 exports.create_post = (req, res) => {
   const newPost = new Post({

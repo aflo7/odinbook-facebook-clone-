@@ -3,7 +3,7 @@ var router = express.Router()
 var { isAuthenticated } = require("../scripts/customMiddleware.js")
 const { display_post, create_post, like_post, delete_post } = require("../controllers/postController.js")
 
-router.get("/:id", isAuthenticated, display_post)
+// router.get("/:id", isAuthenticated, display_post)
 
 router.post("/new", isAuthenticated, create_post)
 
