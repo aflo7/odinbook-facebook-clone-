@@ -1,9 +1,8 @@
 .single-post {
-    padding: 10px;
-}
-
-.comment-wrapper {
-    padding: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
 }
 
 .likebtn {
@@ -11,8 +10,8 @@
     padding-right: 5px;
     background-color: rgb(255, 87, 87);
     cursor: pointer;
-    margin-left: 10px;
-    border: none;
+    /* margin-left: 10px; */
+    /* border: none; */
     color: white;
 }
 
@@ -21,8 +20,8 @@
 }
 
 .add-comment-form {
-    padding-left: 10px;
-    padding-bottom: 10px;
+    /* padding-left: 10px; */
+    /* padding-bottom: 10px; */
 }
 
 .submit-comment-btn {
