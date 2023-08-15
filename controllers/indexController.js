@@ -34,7 +34,7 @@ exports.load_home_page = (req, res) => {
             $in: userIdsToFind
         }
     })
-        .sort({ _id: -1 }).populate('comments')
+        .sort({ _id: -1 })
         .exec(function (err, docs) {
             if (err) return res.render("error")
             res.locals.posts = docs
