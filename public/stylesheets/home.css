@@ -5,11 +5,15 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    cursor: pointer;
+}
+
+.individual-post-wrapper:hover {
+    outline: 2px solid black;
 }
 
 .individual-post-content {
     color: rgb(164, 164, 164);
-    font-size: 12pt;
     overflow-wrap: break-word;
 }
 
@@ -18,15 +22,12 @@
 }
 
 .individual-post-title {
-    font-size: 14pt;
-    font-weight: bold;
     overflow-wrap: break-word;
     
 }
 
 .individual-post-like-count {
     color: rgb(164, 164, 164);
-    font-size: 10pt;
     display: flex;
     justify-content: right;
     gap: 10px;
@@ -94,7 +95,7 @@
     border: none;
     width: fit-content;
     background-color: white;
-    padding: 10px;
+    padding: 5px;
     font-size: 16pt;
     background-color: rgb(16, 165, 50);
     color: white;
@@ -103,7 +104,7 @@
 }
 
 .add-post-btn:hover {
-    background-color: rgb(46, 215, 85);
+    outline: 2px solid black;
 }
 
 .add-post-wrapper {

@@ -45,12 +45,12 @@
             <div class="posts-title">Posts</div>
             <% if (locals.posts && locals.posts.length> 0) { %>
               <% for (var post of locals.posts) { %>
-                <div class="individual-post-wrapper">
-                 
+
+                <a href="/posts/<%= post._id %>" class="individual-post-wrapper">
+             
+
                     <div class="individual-post-title">
-                      <a href="/posts/<%= post._id %>">
-                        <%= post.title %>
-                      </a>
+                      <%= post.title %>
                     </div>
                     <div class="individual-post-content">
                       <%= post.content %>
@@ -61,29 +61,28 @@
                         <img class="post-img" src="<%= post.imageUrl %>" alt="img" />
                       </div>
                       <% } %>
-                  <div class="individual-post-like-count">
-                    <div>
-                      <a href="/users/<%= post.posterId %>">
-                        <span>
-                          <%= post.posterName %>
-                        </span>
-                      </a>
-                    </div>
-                    <div>
+                        <div class="individual-post-like-count">
+                          
+                          <div>
+                            <%= post.posterName %>
+                          </div>
+                          <div>
 
-                      <span>
-                        <%= post.likes %> likes
-                      </span>
-                    </div>
-                    <div>
+                            <span>
+                              <%= post.likes %> likes
+                            </span>
+                          </div>
+                          <div>
 
-                      <span>
-                        <%= post.comments.length %> comments
-                      </span>
-                    </div>
+                            <span>
+                              <%= post.comments.length %> comments
+                            </span>
+                          </div>
 
-                  </div>
-                </div>
+                        </div>
+                   
+                    </a>
+
                 <% } %>
                   <% } %>
 

@@ -1,27 +1,26 @@
 <nav>
-  <div style="display: flex; gap: 20px; align-items: center;">
+  <div style="display: flex; gap: 10px;">
     <a href="/home">
-      <div class="mainnavbtn" >Feed</div>
+      <div class="mainnavbtn">Feed</div>
     </a>
 
     <a href="/users/find-friends">
-      <div id="findFriends" class="mainnavbtn" >Find Friends</div>
+      <div id="findFriends" class="mainnavbtn">Find Friends</div>
     </a>
   </div>
 
 
-  <% if (locals.currentUser.isFacebookUser) { %>
-    <a href="/profile">
-        <img alt="pfp" class="pfp-img" src="<%=locals.currentUser.pfpUrl%>" />
-    
-    </a>
+  <a href="/profile" class="profile-flex-group">
+    <% if (locals.currentUser.isFacebookUser) { %>
+      <img alt="pfp" class="pfp-img" src="<%=locals.currentUser.pfpUrl%>" />
+      <% } else { %>
+        <img alt="pfp" class="pfp-img" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,  
+          <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>"/>
+        <% } %>
+        <div>
 
-    <% } else { %>
-      <a href="/profile">
-          <img alt="pfp" class="pfp-img" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,  
-              <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
-     
-      </a>
-      <% } %>
+          <%= locals.currentUser.name %>
+        </div>
+  </a>
 
 </nav>

@@ -34,3 +34,12 @@ body {
 .maincontent {
     background-color: rgb(39, 39, 39);
 }
+
+
+.individual-post-wrapper:hover {
+    outline: 2px solid white;
+}
+
+.add-post-btn:hover {
+    outline: 2px solid white;
+}
