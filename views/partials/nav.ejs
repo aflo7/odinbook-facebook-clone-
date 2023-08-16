@@ -1,6 +1,5 @@
-<nav style="display: flex; justify-content: space-between;">
-  <div style="display: flex;">
-
+<nav>
+  <div style="display: flex; gap: 20px; align-items: center;">
     <a href="/home">
       <div class="mainnavbtn" >Feed</div>
     </a>
@@ -13,17 +12,15 @@
 
   <% if (locals.currentUser.isFacebookUser) { %>
     <a href="/profile">
-      <div class="pfp-img-wrapper">
         <img alt="pfp" class="pfp-img" src="<%=locals.currentUser.pfpUrl%>" />
-      </div>
+    
     </a>
 
     <% } else { %>
       <a href="/profile">
-        <div class="pfp-img-wrapper">
           <img alt="pfp" class="pfp-img" src="data:image/<%=locals.currentUser.nonFacebookUserImg.contentType%>;base64,  
               <%=locals.currentUser.nonFacebookUserImg.data.toString('base64')%>">
-        </div>
+     
       </a>
       <% } %>
 

@@ -56,17 +56,11 @@
                       <%= post.content %>
                     </div>
 
-
                     <% if (post.imageUrl) { %>
                       <div>
                         <img class="post-img" src="<%= post.imageUrl %>" alt="img" />
                       </div>
                       <% } %>
-             
-
-
-
-
                   <div class="individual-post-like-count">
                     <div>
                       <a href="/users/<%= post.posterId %>">
@@ -107,24 +101,6 @@
 
     </div>
   </div>
-
-  <script>
-    function fillModal(postTitle, postContent, imgUrl) {
-
-      console.log(imgUrl)
-      document.getElementById('postTitle').textContent = postTitle
-      document.getElementById('postContent').textContent = postContent
-
-      if (imgUrl) {
-        document.getElementById('postImg').style.display = 'block'
-        document.getElementById('postImg').src = imgUrl
-      } else {
-        document.getElementById('postImg').style.display = 'none'
-        document.getElementById('postImg').src = ""
-      }
-    }
-  </script>
-
 </body>
 
 </html>

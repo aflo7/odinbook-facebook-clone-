@@ -3,10 +3,9 @@
     color: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 50px;
-    padding: 5px;
-    margin: 5px;
-    margin-right: 2.5px;
+    padding: 0px 10px;
     font-size: 12pt;
 
 
@@ -17,31 +16,30 @@
     color: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 50px;
-    padding: 5px;
-    margin: 5px;
-    margin-left: 2.5px;
+    padding: 0px 10px;
     font-size: 12pt;
 }
 
-.all-people-wrapper {
+.all-people-wrapper, .friends-wrapper {
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.friends-wrapper {
-    width: 50%;
-}
 
 .peopletitle {
-    padding: 5px;
+    /* padding: 5px; */
     font-weight: bold;
-    margin: 5px;
+    /* margin: 5px; */
 }
 
 .find-friends-wrapper {
+    padding: 10px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    gap: 10px;
 }
 
 .followbtn {

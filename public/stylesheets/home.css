@@ -1,8 +1,7 @@
 .individual-post-wrapper {
     background-color: rgb(64, 64, 255);
     color: white;
-    padding: 20px;
-    /* margin: 5px; */
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -34,7 +33,7 @@
 }
 
 .individual-news-wrapper {
-    padding: 20px;
+    padding: 10px;
     display: flex;
     gap: 20px;
     background-color: rgb(131, 131, 131);
@@ -52,11 +51,10 @@
 }
 
 .news-wrapper {
-    width: 40%;
+    width: 30%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    /* padding: 0px 10px; */
+    gap: 10px;
 
 }
 
@@ -77,28 +75,26 @@
 }
 
 .posts-title {
-    padding-top: 5px;
+    /* padding-top: 5px; */
     font-weight: bold;
     font-size: 16pt;
 }
 
 .newstitle {
-    padding-top: 5px;
+    /* padding-top: 5px; */
     font-size: 16pt;
     font-weight: bold;
 }
 
 .noposts {
-    padding: 5px;
+    padding: 10px;
 }
 
 .add-post-btn {
     border: none;
     width: fit-content;
     background-color: white;
-    margin: 5px;
-    margin-top: 0px;
-    padding: 5px;
+    padding: 10px;
     font-size: 16pt;
     background-color: rgb(16, 165, 50);
     color: white;
@@ -108,8 +104,6 @@
 
 .add-post-btn:hover {
     background-color: rgb(46, 215, 85);
-
-
 }
 
 .add-post-wrapper {

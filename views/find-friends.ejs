@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../stylesheets/findFriends.css">
   <link rel="stylesheet" href="../stylesheets/style.css">
+
   <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
     <link rel="stylesheet" href="../stylesheets/darkMode.css">
     <%} %>
@@ -28,18 +29,15 @@
 
       <div class="find-friends-wrapper">
         <main class="all-people-wrapper">
-          <div style="display: flex; justify-content: space-between; margin: 5px;">
-            <input style="padding: 5px; width: 100%;" type="text" id="search-box" placeholder="Search...">
-          </div>
-
+          <input style=" width: 100%; border: none;" type="text" id="search-box" placeholder="Search all...">
 
           <% if (locals.allUsers && locals.allUsers.length> 0) { %>
             <% for (var person of locals.allUsers) { %>
               <div class="person-wrapper">
                 <div>
                   <a href='<%= person._id %>'>
-                  <%= person.name %>
-                </a>
+                    <%= person.name %>
+                  </a>
                 </div>
 
                 <form action="/users/follow" method="post">
@@ -55,7 +53,7 @@
 
         <div class="friends-wrapper">
           <% if (locals.currentUser.following && locals.currentUser.following.length> 0) { %>
-            <div style="margin-top: 5px; margin-left: 5px; font-weight: bold;">My Friends</div>
+            <div style="font-weight: bold;">My Friends</div>
             <% for (var friend of locals.currentFriendNames) { %>
               <div class="friend-person-wrapper">
                 <div>
