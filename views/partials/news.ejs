@@ -2,6 +2,7 @@
   <% if(locals.newsArticles && locals.newsArticles.length> 0) {%>
     <div class="newstitle">News</div>
     <% for (var applePost of locals.newsArticles) { %>
+      <a target="_blank" href="<%= applePost.url %>">
       <div class="individual-news-wrapper">
         <div class="individual-news-left">
           <img class="news-img" src="<%= applePost.urlToImage %>" alt="<%= applePost.source.name %>" />
@@ -9,17 +10,16 @@
 
         <div class="individual-news-right">
           <div class="individual-news-title">
-            <a target="_blank" href="<%= applePost.url %>">
-              <%= applePost.title %>
-            </a>
+
+            <%= applePost.title %>
+
           </div>
           <div class="individual-news-content">
             <%= applePost.description %>...
           </div>
         </div>
       </div>
+    </a>
       <% } %>
         <% } %>
-
-
 </div>
