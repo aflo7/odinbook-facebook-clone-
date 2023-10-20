@@ -1,6 +1,6 @@
 [Live Website](https://odinbook.memberssonly.xyz)
 
-Technologies used: Node.js, MongoDB NoSQL Database, JavaScript, HTML and CSS.
+Technologies used: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
 
 I deployed the application using a DigitalOcean droplet.
 
