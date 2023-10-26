@@ -2,7 +2,7 @@
 
 Technologies used: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
 
-I deployed the application using a DigitalOcean droplet.
+I deployed the application using Amazon EC2
 
 ### Features:
 
