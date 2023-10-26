@@ -1,4 +1,4 @@
-[Live Website](https://odinbook.memberssonly.xyz)
+[Live Website](http://54.88.215.42:4000/)
 
 Technologies used: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
 
