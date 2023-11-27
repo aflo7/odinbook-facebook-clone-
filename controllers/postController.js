@@ -1,16 +1,17 @@
-var { Post } = require("../models/schema")
+var { Post } = require('../models/schema');
 
 exports.display_post = (req, res) => {
   Post.findById(req.params.id)
-    .populate("comments")
+    .populate('comments')
     .exec((err, foundPost) => {
-      if (err) return res.redirect("error")
+      if (err) return res.redirect('error');
 
-      const likeCount = foundPost.likes
-      const likeText = likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`
-      return res.render("post", { foundPost, likeText })
-    })
-}
+      const likeCount = foundPost.likes;
+      const likeText =
+        likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`;
+      return res.render('post', { foundPost, likeText });
+    });
+};
 
 exports.create_post = (req, res) => {
   const newPost = new Post({
@@ -22,31 +23,31 @@ exports.create_post = (req, res) => {
     comments: [],
     likes: 0,
     imageUrl: req.body.imageUrl
-  })
+  });
   newPost.save((err, result) => {
-    if (err) return res.render("error")
-    return res.redirect("/home")
-  })
-}
+    if (err) return res.render('error');
+    return res.redirect('/home');
+  });
+};
 
 exports.like_post = (req, res) => {
   Post.findById(req.body.postID, (err, foundPost) => {
-    if (err) return res.render("error")
-    foundPost.likes += 1
+    if (err) return res.render('error');
+    foundPost.likes += 1;
     foundPost.save((err, result) => {
-      if (err) return res.render("error")
+      if (err) return res.render('error');
 
-      res.redirect("/home")
-    })
-  })
-}
+      res.redirect('/home');
+    });
+  });
+};
 
 exports.delete_post = (req, res) => {
   Post.findByIdAndDelete(req.body.postID, (err, result) => {
     if (err) {
-      return res.render("error")
+      return res.render('error');
     }
 
-    res.redirect("/profile")
-  })
-}
+    res.redirect('/profile');
+  });
+};
