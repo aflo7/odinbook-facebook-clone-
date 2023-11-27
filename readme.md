@@ -1,4 +1,4 @@
-[Live Website](http://54.88.215.42:4000/)
+[Live Website]()
 
 Technologies used: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
 
