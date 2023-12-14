@@ -17,17 +17,41 @@ router.get('/articles', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  console.log(req.body);
-  const jwtSecretKey = 'theSecret';
+  if (req.body.username === 'guest' && req.body.password === 'pass') {
+    const jwtSecretKey = 'theSecret';
 
-  const data = {
-    time: Date(),
-    userId: 12
-  };
+    const data = {
+      time: Date(),
+      userId: 12
+    };
 
-  const token = jwt.sign(data, jwtSecretKey);
+    const token = jwt.sign(data, jwtSecretKey);
 
-  res.json({ token });
+    return res.json({ token });
+  }
+  res.sendStatus(401);
+});
+
+const authenticateToken = (req, res, next) => {
+  const token = req.header('Authorization');
+  console.log('auth', token)
+
+  if (!token) {
+    return res.sendStatus(401);
+  }
+
+  jwt.verify(token, 'theSecret', (err, user) => {
+    if (err) {
+      return res.sendStatus(403);
+    }
+
+    req.user = user;
+    next();
+  });
+};
+
+router.get('/protected-resource', authenticateToken, (req, res) => {
+  res.json({ message: 'here is the protected resources' });
 });
 
 module.exports = router;
