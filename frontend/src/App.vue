@@ -1,5 +1,6 @@
 <script setup>
 import axios from 'axios';
+import './css/styles.css';
 </script>
 
 <template>
@@ -10,8 +11,11 @@ import axios from 'axios';
   </form>
 
   <form @submit.prevent="getProtectedResource()" style="border: 2px solid red">
-    <!-- <input type="text" placeholder="" -->
     <button type="submit">Get the protected resource</button>
+  </form>
+
+  <form @submit.prevent="logout()">
+    <button type="submit">Logout</button>
   </form>
 </template>
 
@@ -25,18 +29,17 @@ export default {
   },
   methods: {
     submit() {
-      // console.log(this.username, this.password);
       axios
         .post('http://localhost:4000/api/login', {
           username: this.username,
           password: this.password
         })
         .then(function (response) {
-          // console.log(response.data.token);
           localStorage.setItem('token', response.data.token);
         })
         .catch(function (error) {
           console.log(error);
+          alert('incorrect credentials');
         });
     },
     getProtectedResource() {
@@ -49,11 +52,15 @@ export default {
         .then(function (response) {
           console.log(response.data);
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch((error) => {
+          localStorage.removeItem('token');
         });
+    },
+    logout() {
+      localStorage.removeItem('token');
     }
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+</style>

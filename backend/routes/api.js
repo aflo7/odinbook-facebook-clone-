@@ -18,14 +18,12 @@ router.get('/articles', (req, res) => {
 
 router.post('/login', (req, res) => {
   if (req.body.username === 'guest' && req.body.password === 'pass') {
-    const jwtSecretKey = 'theSecret';
-
     const data = {
       time: Date(),
       userId: 12
     };
 
-    const token = jwt.sign(data, jwtSecretKey);
+    const token = jwt.sign(data, process.env.JWTSECRETKEY);
 
     return res.json({ token });
   }
@@ -34,13 +32,12 @@ router.post('/login', (req, res) => {
 
 const authenticateToken = (req, res, next) => {
   const token = req.header('Authorization');
-  console.log('auth', token)
 
   if (!token) {
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, 'theSecret', (err, user) => {
+  jwt.verify(token, process.env.JWTSECRETKEY, (err, user) => {
     if (err) {
       return res.sendStatus(403);
     }
