@@ -23,9 +23,7 @@ var commentRouter = require('./routes/comment.js');
 
 var app = express();
 
-//localhost:5173/
-
-http: var corsOptions = {
+const corsOptions = {
   origin: ['http://localhost:5173', 'http://localhost:4000'],
   optionsSuccessStatus: 200 // For legacy browser support
 };
