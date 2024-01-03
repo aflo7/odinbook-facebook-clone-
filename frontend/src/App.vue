@@ -8,7 +8,7 @@ import './css/App.css';
     <nav>
       <div style="display: flex; align-items: center; gap: 10px">
         <img src="./assets/odinlogo2.jpeg" height="40px" />
-        <div>Odinbook</div>
+    
       </div>
       <form @submit.prevent="logout()">
         <button type="submit">Logout</button>
@@ -121,7 +121,7 @@ export default {
           this.password = '';
           this.loggedIn = true;
           localStorage.setItem('token', response.data.token);
-
+console.log(response)
           this.getPosts();
         })
         .catch((error) => {
