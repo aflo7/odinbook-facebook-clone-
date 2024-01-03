@@ -1,6 +1,5 @@
 <script setup>
 import axios from 'axios';
-import './css/styles.css';
 import './css/App.css';
 </script>
 
@@ -18,14 +17,28 @@ import './css/App.css';
     <div class="main-wrapper">
       <main>
         <div class="mindWrapper">
-          <div class="mindWrapperTop">
+          <form class="mindWrapperTop" @submit.prevent="createPost">
             <div>PFP</div>
-            <input
-              class="mindTextBox"
-              type="text"
-              placeholder="What's on your mind, Andres?"
-            />
-          </div>
+            <div
+              class="postSubmitFormWrapper"
+              style="display: flex; flex-direction: column; gap: 10px"
+            >
+              <input
+                class="mindTextBox"
+                type="text"
+                placeholder="Enter title"
+                v-model="mindTitle"
+              />
+
+              <input
+                class="mindTextBox"
+                type="text"
+                placeholder="Enter content"
+                v-model="mindText"
+              />
+            </div>
+            <button type="submit">Submit</button>
+          </form>
           <hr />
           <div class="mindWrapperBottom">
             <div>Live video</div>
@@ -64,11 +77,39 @@ export default {
     return {
       username: '',
       password: '',
+      mindTitle: '',
+      mindText: '',
       loggedIn: false,
       posts: null
     };
   },
   methods: {
+    createPost() {
+      axios
+        .post(
+          'http://localhost:4000/api/create-post',
+          {
+            token: localStorage.getItem('token'),
+            title: this.mindTitle,
+            content: this.mindText
+          },
+          {
+            headers: {
+              Authorization: localStorage.getItem('token')
+            }
+          }
+        )
+        .then((response) => {
+          this.mindTitle = '';
+          this.mindText = '';
+          console.log(response);
+        })
+        .catch((error) => {
+          this.mindTitle = '';
+          this.mindText = '';
+          console.log(error);
+        });
+    },
     login() {
       axios
         .post('http://localhost:4000/api/login', {

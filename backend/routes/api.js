@@ -57,7 +57,7 @@ router.post('/home', (req, res) => {
 router.post('/login', (req, res) => {
   User.findOne({ username: req.body.username }, (err, foundUser) => {
     if (err) {
-      return res.json({ message: 'error' });
+      return res.status(400).json({ message: 'error' });
     }
 
     if (foundUser) {
@@ -66,15 +66,38 @@ router.post('/login', (req, res) => {
         const token = jwt.sign(foundUserId, process.env.JWTSECRETKEY);
         return res.json({ token });
       }
-      return res.json({ message: 'Incorrect password' });
+      return res.status(400).json({ message: 'Incorrect password' });
     }
 
-    return res.json({ message: 'Incorrect username' });
+    return res.status(400).json({ message: 'Incorrect username' });
   });
 });
 
 router.get('/protected-resource', authenticateToken, (req, res) => {
   return res.json({ message: 'here is the protected resources' });
+});
+
+router.post('/create-post', authenticateToken, (req, res) => {
+  var currentUserId = jwt.verify(req.body.token, process.env.JWTSECRETKEY);
+
+  User.findById(currentUserId, (err, result) => {
+    if (err) return res.sendStatus(400);
+
+    const newPost = new Post({
+      posterId: result._id,
+      posterName: result.name,
+      title: req.body.title ? req.body.title : "",
+      content: req.body.content ? req.body.content : "",
+      date: new Date(),
+      comments: [],
+      likes: 0,
+      imageUrl: req.body.imageUrl ? req.body.imageUrl : ''
+    });
+    newPost.save((err, result) => {
+      if (err) return res.sendStatus(400);
+      return res.json(result);
+    });
+  });
 });
 
 module.exports = router;
