@@ -49,8 +49,8 @@ import './css/App.css';
   </div>
   <form
     v-else
-    @submit.prevent="submit"
-    style="display: flex; flex-direction: column; gap: 10px; margin: 20px;"
+    @submit.prevent="login"
+    style="display: flex; flex-direction: column; gap: 10px; margin: 20px"
   >
     <input type="text" placeholder="Username" v-model="username" />
     <input type="text" placeholder="Password" v-model="password" />
@@ -69,46 +69,32 @@ export default {
     };
   },
   methods: {
-    submit() {
+    login() {
       axios
         .post('http://localhost:4000/api/login', {
           username: this.username,
           password: this.password
         })
         .then((response) => {
-          this.username = ""
-          this.password = ""
+          this.username = '';
+          this.password = '';
           this.loggedIn = true;
           localStorage.setItem('token', response.data.token);
 
-          this.loadHomePage();
+          this.getPosts();
         })
         .catch((error) => {
-          this.username = ""
-          this.password = ""
+          this.username = '';
+          this.password = '';
           console.log(error);
         });
     },
-    getProtectedResource() {
-      axios
-        .get('http://localhost:4000/api/protected-resource', {
-          headers: {
-            Authorization: localStorage.getItem('token')
-          }
-        })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          this.loggedIn = false;
-          localStorage.removeItem('token');
-        });
-    },
+
     logout() {
       this.loggedIn = false;
       localStorage.removeItem('token');
     },
-    loadHomePage() {
+    getPosts() {
       axios
         .post(
           'http://localhost:4000/api/home',
