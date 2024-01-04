@@ -1,0 +1,15 @@
+
+
+body {
+  margin: 0;
+  font-family: Verdana, sans-serif;
+}
+
+html {
+  background-color: rgb(240, 242, 245);
+  
+}
+
+button {
+  cursor: pointer;
+}

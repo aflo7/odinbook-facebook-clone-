@@ -1,0 +1,278 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+/*
+    2. Remove default margin
+  */
+* {
+    margin: 0;
+}
+/*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Open Sans", sans-serif;
+}
+/*
+    5. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+/*
+    6. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+/*
+    7. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+.error-wrapper {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+
+.facebook-login-btn {
+    background-color: rgb(68, 143, 255);
+    color: white;
+    border: none;
+    padding: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.facebook-login-btn:hover {
+    background-color: rgb(30, 120, 255);
+}
+
+.guest-btn {
+    background-color: rgb(187, 67, 67);
+    color: white;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    cursor: pointer;
+    border: none;
+}
+
+.guest-btn:hover {
+    background-color: rgb(151, 20, 20);
+}
+
+.register-success {
+    background-color: rgb(21, 255, 0);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 5px;
+}
+html,
+body {
+    height: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+nav {
+    background-color: rgb(64, 64, 255);
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    align-items: center;
+}
+
+.hidden {
+    color: transparent;
+}
+
+.pfp-img {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+}
+
+.homescreenwrapper {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(74, 125, 255);
+    height: 700px;
+}
+
+.odinbooktitle {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 36pt;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.odinbookdescription {
+    font-size: 16pt;
+    color: rgb(202, 202, 202);
+
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.lefthomewrapper {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.righthomewrapper {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.homescreenfooter {
+    text-align: center;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 5px;
+    color: rgb(139, 139, 139);
+}
+
+.maincontent {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+}
+
+.mainnavbtn {
+    cursor: pointer;
+    background-color: rgb(64, 64, 255);
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.mainnavbtn:hover {
+    background-color: rgb(98, 98, 255);
+}
+
+.maincontentbottom {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.post-wrapper {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+a {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.profile-flex-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    padding: 5px;
+}
+
+.profile-flex-group:hover {
+    outline: 1px solid white;
+}
+
+
+@media screen and (max-width: 1240px) {
+    .lefthomewrapper {
+        display: none;
+    }
+}
+@media screen and (max-width: 700px) {
+    .welcomenavbtn {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .news-wrapper {
+        display: none;
+    }
+    .post-wrapper {
+        width: 100%;
+    }
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(64, 64, 255);
+}
+
+nav {
+    width: 1240px;
+}
+
+@media screen and (min-width: 1240px) {
+    .maincontent {
+        width: 1240px;
+    }
+
+    .mainwrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    nav {
+        width: 100%;
+    }
+   
+}

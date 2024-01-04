@@ -1,0 +1,98 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+}
+
+main {
+  overflow: hidden;
+}
+
+.postSubmitFormWrapper {
+  border-radius: 5px;
+  flex: 1;
+  border: none;
+  padding: 10px;
+}
+
+.mindTextBox {
+  border-radius: 5px;
+  background-color: rgb(240, 242, 245);
+  border: none;
+  padding: 10px;
+}
+
+.mindWrapperTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mindWrapperBottom {
+  display: flex;
+}
+
+.mindWrapperBottom > div {
+  flex: 1;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: lightgray;
+}
+
+.mindWrapperBottom > div:hover {
+  cursor: pointer;
+  background-color: rgb(240, 242, 245);
+}
+
+.mindWrapper {
+  padding: 15px;
+  margin: 20px 0px;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+}
+
+.post {
+  margin: 20px 0px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+}
+
+.login-btn {
+  background-color: lightgreen;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 700px) {
+  main {
+    width: 700px;
+    margin: 0 auto;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .mindWrapper,
+  .post {
+    border-radius: 5px;
+  }
+}

@@ -1,0 +1,45 @@
+body {
+    color: white;
+    background-color: black;
+}
+
+.mainnavbtn:hover {
+    background-color: rgb(84, 78, 255);
+}
+
+#createpostform {
+    border-bottom: 1px solid white !important;
+}
+.my-posts-wrapper {
+    border-top: 1px solid white;
+}
+.individual-comment {
+    border: 1px solid white;
+}
+
+.my-post {
+    border: 1px solid white;
+}
+
+.add-post-btn {
+    color: white;
+    background-color: rgb(42, 169, 42);
+}
+
+.profile-wrapper, .user-info-wrapper {
+    color: white;
+    background-color: rgb(39, 39, 39);
+
+} 
+.maincontent {
+    background-color: rgb(39, 39, 39);
+}
+
+
+.individual-post-wrapper:hover {
+    outline: 2px solid white;
+}
+
+.add-post-btn:hover {
+    outline: 2px solid white;
+}

@@ -1,8 +1,8 @@
 [Live Website]()
 
-Technologies used: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
+Tech used for version 1: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
 
-I deployed the application using Amazon EC2
+Tech used for Version 2: Vue frontend, Express backend.
 
 ### Features:
 
@@ -18,7 +18,7 @@ I deployed the application using Amazon EC2
 -   Darkmode toggle
 -   Like a post
 
-### Node.js routes
+### Express routes
 
 <table>
   <tr>
@@ -150,18 +150,34 @@ I deployed the application using Amazon EC2
   </tr>
 </table>
 
-### MongoDB Database Organization
+### Mongo Database Organization
 
 -   There are three main database models: User, Post, and Comment.
 
-### Website screenshots
+### Version 1 Application screenshots
 
-![alt](./website-screenshots/indexv2.png)
+![alt](./expressApp/website-screenshots/indexv2.png)
 
-### Dark mode
+### Version 1 Dark mode
 
-![alt](./website-screenshots/homepagev2.png)
+![alt](./expressApp/website-screenshots/homepagev2.png)
 
-### Testing suite
+### Version 1 Testing suite
 
-![alt](./website-screenshots/testing.png)
+![alt](./expressApp/website-screenshots/testing.png)
+
+### Version 2 Mobile Frontend Screenshots
+
+<img src="./ss1.png" alt="version2mobilefrontend" style="height:600px;"/>
+
+### Version 2 Mobile Frontend Screenshots: Login Screen
+
+<img src="./ss3.png" alt="version2mobilefrontend" style="height:600px;"/>
+
+
+### Version 2 Desktop Frontend Screenshots
+
+![alt](./ss2.png)
+
+
+

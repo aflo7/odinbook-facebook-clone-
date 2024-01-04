@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Find Friends</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../stylesheets/findFriends.css">
+  <link rel="stylesheet" href="../stylesheets/style.css">
+
+  <% if (locals.currentUser && locals.currentUser.settings.darkMode) { %>
+    <link rel="stylesheet" href="../stylesheets/darkMode.css">
+    <%} %>
+      <script defer src="../javascripts/search.js"></script>
+
+</head>
+
+<body>
+
+  <div class="nav-wrapper">
+    <%- include('./partials/nav.ejs'); %>
+  </div>
+
+  <div class="mainwrapper">
+    <div class="maincontent">
+
+
+      <div class="find-friends-wrapper">
+        <main class="all-people-wrapper">
+          <input style=" width: 100%; border: none;" type="text" id="search-box" placeholder="Search all...">
+
+          <% if (locals.allUsers && locals.allUsers.length> 0) { %>
+            <% for (var person of locals.allUsers) { %>
+              <div class="person-wrapper">
+                <div>
+                  <a href='<%= person._id %>'>
+                    <%= person.name %>
+                  </a>
+                </div>
+
+                <form action="/users/follow" method="post">
+                  <input type="hidden" name="userIdToFollow" value="<%= person._id %>" />
+                  <input
+                    onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
+                    type="submit" class="followbtn" value="Add" />
+                </form>
+              </div>
+              <% } %>
+                <% } %>
+        </main>
+
+        <div class="friends-wrapper">
+          <% if (locals.currentUser.following && locals.currentUser.following.length> 0) { %>
+            <div style="font-weight: bold;">My Friends</div>
+            <% for (var friend of locals.currentFriendNames) { %>
+              <div class="friend-person-wrapper">
+                <div>
+                  <a href='<%= friend._id %>'>
+                    <%= friend.name %>
+                  </a>
+                </div>
+
+                <form action="/users/unfollow" method="post">
+                  <input type="hidden" name="userIDToUnfollow" value="<%= friend._id %>" />
+                  <input
+                    onclick="if(this.form.checkValidity()){this.form.submit(); this.disabled=true; this.value='Loading...'}"
+                    type="submit" class="followbtn" value="Remove" />
+                </form>
+              </div>
+              <% } %>
+                <% } else { %>
+                  <div>You have no friends </div>
+                  <% } %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
