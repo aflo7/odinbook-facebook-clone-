@@ -21,21 +21,10 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-router.get('/', (req, res) => {
-  res.json({
-    message: 'Welcome to the API'
-  });
-});
+router.get('/home', (req, res) => {
+  const token = req.header('Authorization');
+  var currentUserId = jwt.verify(token, process.env.JWTSECRETKEY);
 
-router.get('/articles', (req, res) => {
-  res.json({
-    appleArticles,
-    chatGptArticles
-  });
-});
-
-router.post('/home', (req, res) => {
-  var currentUserId = jwt.verify(req.body.token, process.env.JWTSECRETKEY);
   User.findById(currentUserId, (err, result) => {
     if (err) return res.render('error');
     const userIdsToFind = result.following;
@@ -49,12 +38,13 @@ router.post('/home', (req, res) => {
       .sort({ _id: -1 })
       .exec((err, result) => {
         if (err) return res.json({ message: 'error' });
-        return res.json({ posts: result });
+        return res.json({ posts: result, appleArticles, chatGptArticles });
       });
   });
 });
 
 router.post('/login', (req, res) => {
+  
   User.findOne({ username: req.body.username }, (err, foundUser) => {
     if (err) {
       return res.status(400).json({ message: 'error' });
@@ -86,8 +76,8 @@ router.post('/create-post', authenticateToken, (req, res) => {
     const newPost = new Post({
       posterId: result._id,
       posterName: result.name,
-      title: req.body.title ? req.body.title : "",
-      content: req.body.content ? req.body.content : "",
+      title: req.body.title ? req.body.title : '',
+      content: req.body.content ? req.body.content : '',
       date: new Date(),
       comments: [],
       likes: 0,

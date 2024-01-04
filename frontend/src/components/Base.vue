@@ -212,13 +212,15 @@ export default {
   justify-content: center;
   height: 100vh;
   background-color: white;
-  border-radius: 5px;
+ 
 }
 
 .loading-screen-wrapper > div {
   display: flex;
   align-items: center;
   gap: 10px;
+
+  
 }
 
 .login-form {
@@ -237,5 +239,8 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
 }
 </style>

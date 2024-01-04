@@ -170,6 +170,11 @@ Tech used for Version 2: Vue frontend, Express backend.
 
 <img src="./ss1.png" alt="version2mobilefrontend" style="height:600px;"/>
 
+### Version 2 Mobile Frontend Screenshots: Login Screen
+
+<img src="./ss3.png" alt="version2mobilefrontend" style="height:600px;"/>
+
+
 ### Version 2 Desktop Frontend Screenshots
 
 ![alt](./ss2.png)
