@@ -76,6 +76,13 @@ hr {
   box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
 }
 
+.login-btn {
+  background-color: lightgreen;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 @media screen and (min-width: 700px) {
   main {
     width: 700px;
