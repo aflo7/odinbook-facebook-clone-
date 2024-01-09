@@ -1,16 +1,10 @@
 <script setup>
-import Base from './components/Base.vue';
 </script>
 
 <template>
-  
-  <Base/>
+  <router-view />
 </template>
 
-<script>
+<script></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>
