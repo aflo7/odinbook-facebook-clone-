@@ -3,12 +3,16 @@ import { store } from '../store';
 import axios from 'axios';
 import '../css/Home.css';
 import router from '../router';
-
+import { IoHome } from 'react-icons/io5';
+import { IoNewspaperSharp } from 'react-icons/io5';
+import newsPaperSvg from '../assets/Newspaper.svg';
+import Posts from './Posts.vue'
+import News from './News.vue'
 
 const logout = () => {
   store.loggedIn = false;
   localStorage.removeItem('token');
-  router.push("/")
+  router.push('/');
 };
 
 const createPost = () => {
@@ -51,14 +55,21 @@ const getThePosts = () => {
       }
     )
     .then((response) => {
-      console.log(response);
+      // console.log(response.data.appleArticles);
+      // console.log(response.data.chatGptArticles);
+
       store.posts = response.data.posts;
+      store.appleArticles = response.data.appleArticles.articles;
+      store.chatArticles = response.data.chatGptArticles.articles;
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
+const changeSelectedTab = (tab) => {
+  store.selectedTab = tab;
+};
 
 getThePosts();
 </script>
@@ -66,67 +77,70 @@ getThePosts();
 <template>
   <div>
     <nav>
-      <div style="display: flex; align-items: center; gap: 10px">
-        <img src="../assets/odinlogo2.jpeg" height="50px" />
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 20px;
+        "
+      >
+        <img src="../assets/odinlogo2.jpeg" height="40px" />
       </div>
-      <form @submit.prevent="logout">
-        <button type="submit">Logout</button>
+      <div class="tab-wrapper">
+        <div
+          v-if="store.selectedTab === 'home'"
+          style="border-bottom: 2px solid black"
+        >
+          <img src="../assets/Home.svg" width="40px" />
+        </div>
+
+        <div v-else @click="changeSelectedTab('home')">
+          <img src="../assets/Home.svg" width="40px" />
+        </div>
+        <div
+          v-if="store.selectedTab === 'news'"
+          style="border-bottom: 2px solid black"
+        >
+          <img src="../assets/Newspaper.svg" width="40px" />
+        </div>
+        <div v-else @click="changeSelectedTab('news')">
+          <img src="../assets/Newspaper.svg" width="40px" />
+        </div>
+      </div>
+      <form @submit.prevent="logout" style="padding: 10px 20px">
+        <button type="submit" class="logout-btn">Logout</button>
       </form>
     </nav>
     <div class="main-wrapper">
       <main>
-        <div class="mindWrapper">
-          <form class="mindWrapperTop" @submit.prevent="createPost">
-            <div
-              class="postSubmitFormWrapper"
-              style="display: flex; flex-direction: column; gap: 10px"
-            >
-              <input
-                class="mindTextBox"
-                type="text"
-                placeholder="Enter title"
-                v-model="store.mindTitle"
-              />
-
-              <input
-                class="mindTextBox"
-                type="text"
-                placeholder="Enter content"
-                v-model="store.mindText"
-              />
-            </div>
-            <button type="submit">Submit</button>
-          </form>
-          <hr />
-          <div class="mindWrapperBottom">
-            <div>Live video</div>
-            <div>Photo/video</div>
-            <div>Feeling/activity</div>
-          </div>
-        </div>
-
-        <div
-          v-if="store.posts && store.posts.length > 0"
-        >
-          <div
-            v-for="(post, index) in store.posts"
-            :key="index"
-            class="post"
-          >
-            <div>
-              {{ post.content }}
-            </div>
-            <div>
-              {{ post.posterName }}
-            </div>
-            <div>
-              {{ new Date(post.date).toLocaleString('en-US') }}
-            </div>
-          </div>
-        </div>
+        <Posts v-if="store.selectedTab === 'home'"/>
+        <News v-else />
       </main>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.submit-btn {
+  background-color: lightgreen;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.submit-btn:hover {
+  background-color: rgb(103, 208, 103);
+}
+
+.logout-btn {
+  background-color: rgb(238, 144, 144);
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  background-color: rgb(208, 127, 127);
+}
+</style>

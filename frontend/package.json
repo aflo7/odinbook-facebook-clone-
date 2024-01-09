@@ -14,6 +14,7 @@
     "bootstrap-icons-vue": "^1.11.1",
     "bootstrap-vue": "^2.23.1",
     "oh-vue-icons": "^1.0.0-rc3",
+    "react-icons": "^4.12.0",
     "vue": "^3.4.4",
     "vue-router": "^4.0.13"
   },

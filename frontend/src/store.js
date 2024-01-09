@@ -9,5 +9,8 @@ export const store = reactive({
   isLoading: false,
   posts: [],
   mindTitle: "",
-  mindText: ""
+  mindText: "",
+  selectedTab: "home",
+  appleArticles: [],
+  chatArticles: []
 });

@@ -69,6 +69,12 @@ function login() {
   border-radius: 5px;
 }
 
+.login-btn:hover {
+
+  background-color: rgb(103, 208, 103)
+
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
