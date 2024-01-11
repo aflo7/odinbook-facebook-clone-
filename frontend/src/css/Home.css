@@ -2,11 +2,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 10px 20px; */
+  padding: 10px;
   background-color: white;
+  background-color: rgb(65, 127, 228);
   -webkit-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
   -moz-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
   box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  color: white;
 }
 
 main {
@@ -80,13 +82,11 @@ hr {
   display: flex;
 }
 
-.tab-wrapper > div{
- padding: 10px 20px;
- border-bottom: 2px solid white;
- cursor: pointer;
-
+.tab-wrapper > div {
+  padding: 10px 40px;
+  border-bottom: 2px solid rgb(65, 127, 228);
+  cursor: pointer;
 }
-
 
 @media screen and (min-width: 700px) {
   main {

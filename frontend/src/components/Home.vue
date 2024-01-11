@@ -6,8 +6,8 @@ import router from '../router';
 import { IoHome } from 'react-icons/io5';
 import { IoNewspaperSharp } from 'react-icons/io5';
 import newsPaperSvg from '../assets/Newspaper.svg';
-import Posts from './Posts.vue'
-import News from './News.vue'
+import Posts from './Posts.vue';
+import News from './News.vue';
 
 const logout = () => {
   store.loggedIn = false;
@@ -77,44 +77,42 @@ getThePosts();
 <template>
   <div>
     <nav>
-      <div
-        style="
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px 20px;
-        "
-      >
-        <img src="../assets/odinlogo2.jpeg" height="40px" />
+      <div style="display: flex; align-items: center;">
+        <img src="../assets/odinlogo2.gif" height="40px" />
       </div>
       <div class="tab-wrapper">
         <div
           v-if="store.selectedTab === 'home'"
           style="border-bottom: 2px solid black"
         >
-          <img src="../assets/Home.svg" width="40px" />
+          <!-- <img src="../assets/Home.svg" height="40px" />
+           -->
+          Home
         </div>
 
         <div v-else @click="changeSelectedTab('home')">
-          <img src="../assets/Home.svg" width="40px" />
+          <!-- <img src="../assets/Home.svg" height="40px" /> -->
+          Home
         </div>
         <div
           v-if="store.selectedTab === 'news'"
           style="border-bottom: 2px solid black"
         >
-          <img src="../assets/Newspaper.svg" width="40px" />
+          <!-- <img src="../assets/Newspaper.svg" height="40px" /> -->
+          News
         </div>
         <div v-else @click="changeSelectedTab('news')">
-          <img src="../assets/Newspaper.svg" width="40px" />
+          <!-- <img src="../assets/Newspaper.svg" height="40px" /> -->
+          News
         </div>
       </div>
-      <form @submit.prevent="logout" style="padding: 10px 20px">
+      <form @submit.prevent="logout">
         <button type="submit" class="logout-btn">Logout</button>
       </form>
     </nav>
     <div class="main-wrapper">
       <main>
-        <Posts v-if="store.selectedTab === 'home'"/>
+        <Posts v-if="store.selectedTab === 'home'" />
         <News v-else />
       </main>
     </div>
@@ -122,22 +120,12 @@ getThePosts();
 </template>
 
 <style scoped>
-.submit-btn {
-  background-color: lightgreen;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.submit-btn:hover {
-  background-color: rgb(103, 208, 103);
-}
-
 .logout-btn {
   background-color: rgb(238, 144, 144);
   border: none;
   padding: 10px;
   border-radius: 5px;
+  color: black;
 }
 
 .logout-btn:hover {

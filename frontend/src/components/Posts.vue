@@ -3,7 +3,6 @@ import { store } from '../store';
 </script>
 
 <template>
-  Posts
 
   <div class="mindWrapper">
     <form class="mindWrapperTop" @submit.prevent="createPost">
@@ -50,4 +49,17 @@ import { store } from '../store';
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.submit-btn {
+  background-color: lightgreen;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.submit-btn:hover {
+  background-color: rgb(103, 208, 103);
+}
+
+</style>

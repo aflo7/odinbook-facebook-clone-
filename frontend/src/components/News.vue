@@ -1,7 +1,5 @@
 <script setup>
 import { store } from '../store';
-
-console.log(store.appleArticles);
 </script>
 
 <template>
