@@ -14,7 +14,7 @@ function login() {
       store.username = '';
       store.password = '';
       store.loggedIn = true;
-      console.log(response);
+      store.loggedInUserName = response.data.user
       localStorage.setItem('token', response.data.token);
       router.push('/home');
     })

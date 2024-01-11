@@ -54,7 +54,7 @@ router.post('/login', (req, res) => {
       if (req.body.password == foundUser.password) {
         const foundUserId = foundUser._id.toJSON();
         const token = jwt.sign(foundUserId, process.env.JWTSECRETKEY);
-        return res.json({ token });
+        return res.json({ token, user: foundUser.name });
       }
       return res.status(400).json({ message: 'Incorrect password' });
     }

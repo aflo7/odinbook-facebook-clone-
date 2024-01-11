@@ -1,11 +1,7 @@
 <script setup>
 import { store } from '../store';
 import axios from 'axios';
-import '../css/Home.css';
 import router from '../router';
-import { IoHome } from 'react-icons/io5';
-import { IoNewspaperSharp } from 'react-icons/io5';
-import newsPaperSvg from '../assets/Newspaper.svg';
 import Posts from './Posts.vue';
 import News from './News.vue';
 
@@ -13,34 +9,6 @@ const logout = () => {
   store.loggedIn = false;
   localStorage.removeItem('token');
   router.push('/');
-};
-
-const createPost = () => {
-  axios
-    .post(
-      'http://localhost:4000/api/create-post',
-      {
-        token: localStorage.getItem('token'),
-        title: store.mindTitle,
-        content: store.mindText
-      },
-      {
-        headers: {
-          Authorization: localStorage.getItem('token')
-        }
-      }
-    )
-    .then((response) => {
-      store.mindTitle = '';
-      store.mindText = '';
-      console.log(response.data);
-      store.posts.unshift(response.data);
-    })
-    .catch((error) => {
-      store.mindTitle = '';
-      store.mindText = '';
-      console.log(error);
-    });
 };
 
 const getThePosts = () => {
@@ -72,13 +40,16 @@ const changeSelectedTab = (tab) => {
 };
 
 getThePosts();
+console.log(store.loggedInUserName);
 </script>
 
 <template>
   <div>
     <nav>
-      <div style="display: flex; align-items: center;">
-        <img src="../assets/odinlogo2.gif" height="40px" />
+      <!-- <div class="odinbook-text-wrapper" style="display: flex; align-items: center;"> -->
+      <div class="odinbook-text-wrapper">
+        <!-- <img src="../assets/odinlogo2.gif" height="40px" /> -->
+        Odinbook
       </div>
       <div class="tab-wrapper">
         <div
@@ -106,7 +77,13 @@ getThePosts();
           News
         </div>
       </div>
-      <form @submit.prevent="logout">
+      <form
+        @submit.prevent="logout"
+        style="display: flex; align-items: center; gap: 10px"
+      >
+        <div class="logged-in-user-name-wrapper">
+          {{ store.loggedInUserName }}
+        </div>
         <button type="submit" class="logout-btn">Logout</button>
       </form>
     </nav>
@@ -130,5 +107,54 @@ getThePosts();
 
 .logout-btn:hover {
   background-color: rgb(208, 127, 127);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  background-color: rgb(65, 127, 228);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  color: white;
+}
+
+.tab-wrapper {
+  display: flex;
+}
+
+.tab-wrapper > div {
+  padding: 10px 40px;
+  border-bottom: 2px solid rgb(65, 127, 228);
+  cursor: pointer;
+}
+
+.logged-in-user-name-wrapper {
+  display: none;
+}
+
+.odinbook-text-wrapper {
+  display: none;
+}
+
+@media screen and (min-width: 700px) {
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .logged-in-user-name-wrapper {
+    display: block;
+  }
+
+  .odinbook-text-wrapper {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>

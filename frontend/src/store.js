@@ -12,5 +12,6 @@ export const store = reactive({
   mindText: "",
   selectedTab: "home",
   appleArticles: [],
-  chatArticles: []
+  chatArticles: [],
+  loggedInUserName: ""
 });
