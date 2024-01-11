@@ -29,11 +29,9 @@ const createPost = () => {
       console.log(error);
     });
 };
-
 </script>
 
 <template>
-
   <div class="mindWrapper">
     <form class="mindWrapperTop" @submit.prevent="createPost">
       <div
@@ -80,7 +78,6 @@ const createPost = () => {
 </template>
 
 <style scoped>
-
 .submit-btn {
   background-color: lightgreen;
   border: none;
@@ -91,7 +88,6 @@ const createPost = () => {
 .submit-btn:hover {
   background-color: rgb(103, 208, 103);
 }
-
 
 main {
   overflow: hidden;
@@ -160,14 +156,10 @@ hr {
   box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
 }
 
-
-
-
 @media screen and (min-width: 700px) {
   .mindWrapper,
   .post {
     border-radius: 5px;
   }
 }
-
 </style>

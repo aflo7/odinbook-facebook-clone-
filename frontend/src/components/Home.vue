@@ -113,7 +113,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 20px;
   background-color: white;
   background-color: rgb(65, 127, 228);
   -webkit-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
@@ -142,7 +142,7 @@ nav {
 
 @media screen and (min-width: 700px) {
   main {
-    max-width: 1000px;
+    max-width: 700px;
     margin: 0 auto;
     padding-left: 5px;
     padding-right: 5px;

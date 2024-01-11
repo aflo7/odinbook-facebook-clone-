@@ -31,10 +31,8 @@ import { store } from '../store';
   width: 40px;
   background-size: cover;
   border-radius: 5px;
-  /* border: 1px solid black; */
 }
 .article {
-  /* border: 2px solid black; */
   padding: 10px;
   margin: 20px 0px;
   border-radius: 5px;

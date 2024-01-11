@@ -14,7 +14,7 @@ function login() {
       store.username = '';
       store.password = '';
       store.loggedIn = true;
-      store.loggedInUserName = response.data.user
+      store.loggedInUserName = response.data.user;
       localStorage.setItem('token', response.data.token);
       router.push('/home');
     })
@@ -27,9 +27,9 @@ function login() {
 </script>
 
 <template>
-  <div style="background-color: white" class="login-form-wrapper">
+  <div class="login-form-wrapper">
     <div style="display: flex; align-items: center; gap: 10px">
-      <img src="../assets/odinlogo2.jpeg" style="height: 80px" />
+      <img src="../assets/odinlogo2.jpeg" style="height: 60px" />
       <h1>Odinbook</h1>
     </div>
 
@@ -52,7 +52,7 @@ function login() {
           border: none;
           background-color: rgb(240, 242, 245);
         "
-        type="text"
+        type="password"
         placeholder="Password"
         v-model="store.password"
       />
@@ -70,9 +70,7 @@ function login() {
 }
 
 .login-btn:hover {
-
-  background-color: rgb(103, 208, 103)
-
+  background-color: rgb(103, 208, 103);
 }
 
 .login-form {
@@ -83,8 +81,8 @@ function login() {
 }
 
 .login-form-wrapper {
-  padding: 20px;
-  margin: 20px;
+  padding: 10px;
+  margin: 10px;
   border-radius: 5px;
   background-color: white;
   display: flex;
