@@ -1,4 +1,4 @@
-[Live Website]()
+[Live Website](http://54.88.215.42:4000/)
 
 Tech used for version 1: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
 

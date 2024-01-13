@@ -23,9 +23,6 @@ const getThePosts = () => {
       }
     )
     .then((response) => {
-      // console.log(response.data.appleArticles);
-      // console.log(response.data.chatGptArticles);
-
       store.posts = response.data.posts;
       store.appleArticles = response.data.appleArticles.articles;
       store.chatArticles = response.data.chatGptArticles.articles;
@@ -40,7 +37,6 @@ const changeSelectedTab = (tab) => {
 };
 
 getThePosts();
-console.log(store.loggedInUserName);
 </script>
 
 <template>
