@@ -11,15 +11,19 @@ const authenticateToken = (req, res, next) => {
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, process.env.JWTSECRETKEY, (err, user) => {
+  jwt.verify(token, process.env.JWTSECRETKEY, (err, userID) => {
     if (err) {
       return res.sendStatus(403);
     }
 
-    req.user = user;
+    req.user = userID;
     next();
   });
 };
+
+router.get('/verify-token', authenticateToken, (req, res) => {
+return res.sendStatus(200)
+})
 
 router.get('/home', (req, res) => {
   const token = req.header('Authorization');

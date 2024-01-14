@@ -3,6 +3,7 @@ import { store } from './store.js';
 
 import Login from './components/Login.vue';
 import Home from './components/Home.vue'
+import NotFound from './components/NotFound.vue'
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
       }
       return { name: 'Login' };
     }
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound
   }
 ];
 

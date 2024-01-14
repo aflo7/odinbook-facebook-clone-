@@ -94,3 +94,31 @@ function login() {
   box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
 }
 </style>
+
+<script>
+export default {
+  mounted() {
+    this.checkToken();
+  },
+
+  methods: {
+    checkToken() {
+      const theToken = localStorage.getItem('token');
+      if (theToken) {
+        axios
+          .get('http://localhost:4000/api/protected-resource', {
+            headers: { Authorization: theToken }
+          })
+          .then(function (response) {
+            console.log(response);
+            store.loggedIn = true;
+            router.push('/home');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }
+  }
+};
+</script>
