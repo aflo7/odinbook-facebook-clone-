@@ -27,10 +27,13 @@ function login() {
 </script>
 
 <template>
+  <div class="outer">
+
   <div class="login-form-wrapper">
-    <div style="display: flex; align-items: center; gap: 10px">
-      <img src="../assets/odinlogo2.jpeg" style="height: 60px" />
-      <h1>Odinbook</h1>
+    <div style="display: flex; flex-direction: column; color: white; padding: 10px;">
+      <!-- <img src="../assets/odinlogo2.jpeg" style="height: 50px" /> -->
+      <h1>odinbook</h1>
+      <p>Connect with friends and the world around you on Facebook.</p>
     </div>
 
     <form class="login-form" @submit.prevent="login">
@@ -59,9 +62,26 @@ function login() {
       <button type="submit" class="login-btn">Login</button>
     </form>
   </div>
+
+</div>
 </template>
 
 <style scoped>
+
+.outer {
+  background-color: rgb(65, 127, 228);
+  height: 100vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 100px;
+
+
+}
+
+h1 {
+  margin: 0;
+  font-weight: normal;
+}
 .login-btn {
   background-color: lightgreen;
   border: none;
@@ -77,22 +97,26 @@ function login() {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%;
-}
-
-.login-form-wrapper {
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
   -moz-box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
   box-shadow: 0px 0px 5px 0px rgba(171, 171, 171, 0.75);
+  padding: 10px;
+  border-radius: 5px;
 }
+
+.login-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+
+
+
+
 </style>
 
 <script>
