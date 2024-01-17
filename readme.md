@@ -1,8 +1,6 @@
-[Live Website]()
+[Live Application Here](http://54.88.215.42:4000/)
 
-Tech used for version 1: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
-
-Tech used for Version 2: Vue frontend, Express backend.
+Technologies used: Node.js, Express Mongo Database, JavaScript, HTML and CSS.
 
 ### Features:
 
@@ -89,11 +87,6 @@ Tech used for Version 2: Vue frontend, Express backend.
     <td>renders the register page with register form</td>
   </tr>
 
-  <tr>
-    <td>GET</td>
-    <td>/</td>
-    <td>renders the homepage</td>
-  </tr>
 
   <tr>
     <td>GET</td>
@@ -156,23 +149,14 @@ Tech used for Version 2: Vue frontend, Express backend.
 
 ### Version 1 Application screenshots
 
-![alt](./expressApp/website-screenshots/indexv2.png)
+![alt](./website-screenshots/odin-homepage.png)
 
 ### Version 1 Dark mode
 
-![alt](./expressApp/website-screenshots/homepagev2.png)
+![alt](./website-screenshots/homepagev2.png)
 
 ### Version 1 Testing suite
 
-![alt](./expressApp/website-screenshots/testing.png)
-
-### Version 2 Mobile Frontend Screenshots
-
-<img src="./ss1.png" alt="version2mobilefrontend" style="height:600px;"/>
-
-### Version 2 Desktop Frontend Screenshots
-
-![alt](./ss2.png)
-
+![alt](./website-screenshots/testing.png)
 
 
