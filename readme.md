@@ -1,4 +1,4 @@
-[Live Website](http://54.88.215.42:4000/)
+[Live Website]()
 
 Tech used for version 1: Node.js, Express MongoDB NoSQL Database, JavaScript, HTML and CSS.
 
@@ -169,11 +169,6 @@ Tech used for Version 2: Vue frontend, Express backend.
 ### Version 2 Mobile Frontend Screenshots
 
 <img src="./ss1.png" alt="version2mobilefrontend" style="height:600px;"/>
-
-### Version 2 Mobile Frontend Screenshots: Login Screen
-
-<img src="./ss3.png" alt="version2mobilefrontend" style="height:600px;"/>
-
 
 ### Version 2 Desktop Frontend Screenshots
 
