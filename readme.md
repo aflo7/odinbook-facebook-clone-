@@ -1,4 +1,4 @@
-[Live Application Here](http://54.88.215.42:4000/)
+See the site here http://54.88.215.42:4000/
 
 Technologies used: Node.js, Express Mongo Database, JavaScript, HTML and CSS.
 
