@@ -1,6 +1,6 @@
 See the application here http://54.88.215.42:4000/
 
-Technologies used: Node.js, Express Mongo Database, JavaScript, HTML and CSS.
+Technologies used: Node.js, Express, Mongo Database, JavaScript, HTML ,CSS, and Jest Testing Framework
 
 ### Features:
 
