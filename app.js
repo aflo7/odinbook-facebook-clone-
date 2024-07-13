@@ -53,10 +53,10 @@ passport.use(
     {
       clientID: process.env.CLIENTID,
       clientSecret: process.env.CLIENTSECRET,
-      callbackURL:
-        process.env.NODE_ENV === 'dev'
-          ? process.env.DEV_FACEBOOK_CALLBACK_URL
-          : process.env.PROD_FACEBOOK_CALLBACK_URL,
+      callbackURL: process.env.DEV_FACEBOOK_CALLBACK_URL,
+        // process.env.NODE_ENV === 'dev'
+        //   ? process.env.DEV_FACEBOOK_CALLBACK_URL
+        //   : process.env.PROD_FACEBOOK_CALLBACK_URL,
 
       profileFields: ['id', 'displayName', 'photos']
     },
