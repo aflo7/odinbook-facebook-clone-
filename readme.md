@@ -1,6 +1,6 @@
-See the application here:
+See the application here: http://54.166.8.11:4000/
 
-Node version: 22.1.0gg
+Node version: v22.1.0
 Technologies used: Node.js, Express, Mongo Database, JavaScript, HTML ,CSS, and Jest Testing Framework
 
 ### Features:
